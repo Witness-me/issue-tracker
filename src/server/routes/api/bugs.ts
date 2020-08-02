@@ -1,3 +1,4 @@
+export {};
 const express = require("express");
 const mongodb = require("mongodb");
 
@@ -5,13 +6,13 @@ const mongodb = require("mongodb");
 const router = express.Router();
 
 // Get bugs
-router.get("/", async (req, res) => {
+router.get("/", async (req: any, res: any) => {
   const bugs = await loadBugsCollection();
   res.send(await bugs.find({}).toArray());
 });
 
 // Add bugs
-router.post("/", async (req, res) => {
+router.post("/", async (req: any, res: any) => {
   const bugs = await loadBugsCollection();
   await bugs.insertOne({
     title: req.body.title,
@@ -21,7 +22,7 @@ router.post("/", async (req, res) => {
 });
 
 // Delete bugs
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", async (req: any, res: any) => {
   const bugs = await loadBugsCollection();
   await bugs.deleteOne({ _id: new mongodb.ObjectID(req.params.id) });
   res.status(200).send();
