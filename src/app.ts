@@ -3,6 +3,7 @@ dotenv.config({ path: `${__dirname}/../.env` });
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
+import { connectDb } from "./models";
 
 const app = express();
 
@@ -12,55 +13,26 @@ app.use(bodyParser.json()); // the function listens for req.on(‘data’) and c
 app.use(cors({ origin: "*" }));
 
 const port = process.env.PORT || 5000;
-app.listen(port, () => {
-  console.log("server running on port " + port);
+
+connectDb().then(async () => {
+  app.listen(port, () => {
+    console.log("server running on port " + port);
+  });
 });
 
-const mongoose = require("mongoose");
-// Connect to mongoose
-mongoose.connect(
-  "mongodb+srv://vlad:vlad@cluster0.0ibp3.gcp.mongodb.net/bug-tracker-DB?retryWrites=true&w=majority",
-  {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  }
-);
+module.exports = app;
 
-const logConnection = () => {
-  mongoose.connection
-    .once("open", () => {
-      console.log("successfully connected to DB");
-    })
-    .on("error", (err) => {
-      console.log("Error occured: ", err);
-    });
-};
-logConnection();
-
-const router = express.Router();
-
-// router.use("/", async (req: any, res: any) => {
-//   const bugs = await mongoose.connection();
-//   res.send(await bugs.find({}).toArray());
-// });
-// router.post("/ninjas", (req, res) => {
-//   console.log(req.body);
-//   res.send({ type: "POST" });
+// const mongoose = require("mongoose");
+// // Connect to mongoose
+// mongoose.connect(process.env.MONGO, {
+//   useNewUrlParser: true,
+//   useUnifiedTopology: true,
 // });
 
-const mongodb = require("mongodb");
+// const db = mongoose.connection;
+// db.on("error", (error) => console.error(error));
+// db.once("open", () => console.log("connected to database"));
 
-async function loadBugsCollection() {
-  const client = await mongodb.MongoClient.connect(
-    "mongodb+srv://vlad:vlad@cluster0.0ibp3.gcp.mongodb.net/bug-tracker-DB?retryWrites=true&w=majority",
-    { useNewUrlParser: true, useUnifiedTopology: true }
-  );
-  console.log("DB");
-  return client.db("bug-tracker-DB").collection("bugs");
-}
-module.exports = router;
-
-router.get("/", async (req: any, res: any) => {
-  const bugs = await loadBugsCollection();
-  res.send(await bugs.find({}).toArray());
-});
+// const bugs = require("./server/routes/api/bugs");
+// //const app = import("../app");
+// app.use("/", bugs);
