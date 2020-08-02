@@ -1,4 +1,3 @@
-const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const bugSchema = new Schema({
@@ -10,6 +9,5 @@ const bugSchema = new Schema({
   deadline: Date,
   isExpired: Boolean,
 });
-
 const Bug = mongoose.model("bug", bugSchema);
 module.exports = Bug;
