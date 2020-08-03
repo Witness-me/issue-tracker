@@ -10,11 +10,12 @@ const bugSchema = new mongoose.Schema({
   isExpired: Boolean,
 });
 const Bug = mongoose.model("bug", bugSchema);
-module.exports = { Bug };
 
 // Get bugs
-export async function getBugs() {
-  console.log("getting bugs");
-  const allBugs = await Bug.find({});
+async function getBugs() {
+  console.log("getting bugs...");
+  const allBugs = await Bug.find();
   return allBugs;
 }
+
+module.exports = { getBugs };
