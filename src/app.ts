@@ -3,6 +3,8 @@ dotenv.config({ path: `${__dirname}/../.env` });
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
+const routes = require("./controllers/bugs");
+const router = require("./controllers/bugs");
 import { connectDb } from "./models";
 
 const app = express();
@@ -11,6 +13,8 @@ const app = express();
 // when app.use() is called with a function as it’s only argument, it’ll match every request and will act as middleware
 app.use(bodyParser.json()); // the function listens for req.on(‘data’) and constructs req.body from the chunks of data it gets
 app.use(cors({ origin: "*" }));
+//app.use("/api", routes);
+// app.use("/", routes);
 
 const port = process.env.PORT || 5000;
 
@@ -22,17 +26,5 @@ connectDb().then(async () => {
 
 module.exports = app;
 
-// const mongoose = require("mongoose");
-// // Connect to mongoose
-// mongoose.connect(process.env.MONGO, {
-//   useNewUrlParser: true,
-//   useUnifiedTopology: true,
-// });
-
-// const db = mongoose.connection;
-// db.on("error", (error) => console.error(error));
-// db.once("open", () => console.log("connected to database"));
-
-// const bugs = require("./server/routes/api/bugs");
-// //const app = import("../app");
-// app.use("/", bugs);
+const bugs = require("./server/routes/api/bugs");
+app.use("api/bugs", bugs);

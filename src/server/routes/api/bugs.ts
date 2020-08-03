@@ -7,6 +7,7 @@ const router = express.Router();
 
 // Get bugs
 router.get("/", async (req: any, res: any) => {
+  console.log("getting");
   const bugs = await loadBugsCollection();
   res.send(await bugs.find({}).toArray());
 });

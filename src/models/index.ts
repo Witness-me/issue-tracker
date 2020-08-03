@@ -10,9 +10,8 @@ const connectDb = () => {
 };
 
 const db = mongoose.connection;
-db.on("error", (error) => console.error(error));
 db.once("open", () => console.log("connected to database!"));
 
-const bugs = require("../server/routes/api/bugs");
-const app = import("../app");
-app.use("/", bugs);
+// const bugs = require("../server/routes/api/bugs");
+// const app = import("../app");
+// app.use("/", bugs);
