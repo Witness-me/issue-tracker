@@ -1,4 +1,5 @@
 import * as mongoose from "mongoose";
+import { Request, Response } from "express";
 
 // Create Bug schema
 const bugSchema = new mongoose.Schema({
@@ -21,14 +22,14 @@ export async function getAllBugs() {
 }
 
 // Find bugs by parameter
-export async function getBugs(req: any) {
+export async function getBugs(req: Request) {
   console.log("getting bugs...");
   const bugsFound = await Bug.find(req);
   return bugsFound;
 }
 
 // Add bug
-export async function addBug(req: any) {
+export async function addBug(req: Request) {
   console.log("adding bug...");
   let entry = await new Bug({
     title: req.body.title,
@@ -43,7 +44,7 @@ export async function addBug(req: any) {
 }
 
 // Update bug
-export async function updateBug(req: any) {
+export async function updateBug(req: Request) {
   console.log("updating bug...");
   const filter = { _id: req.params.id };
   const update = req.body;
