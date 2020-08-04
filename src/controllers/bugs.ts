@@ -1,4 +1,10 @@
-import { getBugs, addBug, deleteEntry, updateBug } from "../models/bugs";
+import {
+  getBugs,
+  getAllBugs,
+  addBug,
+  deleteEntry,
+  updateBug,
+} from "../models/bugs";
 const express = require("express");
 const router = express.Router();
 console.log("controller started");
@@ -6,8 +12,15 @@ console.log("controller started");
 // Get all bugs
 router.get("/all", async (req: any, res: any) => {
   console.log("get request...");
-  const allBugs = await getBugs();
+  const allBugs = await getAllBugs();
   res.send(allBugs);
+});
+
+// Find bugs by any parameter
+router.get("/", async (req: any, res: any) => {
+  console.log("get request...");
+  const bugsFound = await getBugs(req.body);
+  res.send(bugsFound);
 });
 
 // Add bug

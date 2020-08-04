@@ -14,10 +14,17 @@ const bugSchema = new mongoose.Schema({
 const Bug = mongoose.model("bug", bugSchema);
 
 // Get all bugs
-export async function getBugs() {
+export async function getAllBugs() {
   console.log("getting bugs...");
   const allBugs = await Bug.find({});
   return allBugs;
+}
+
+// Find bugs by parameter
+export async function getBugs(req: any) {
+  console.log("getting bugs...");
+  const bugsFound = await Bug.find(req);
+  return bugsFound;
 }
 
 // Add bug
