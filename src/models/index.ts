@@ -6,6 +6,7 @@ const connectDb = () => {
   return mongoose.connect(process.env.MONGO, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
+    useFindAndModify: false,
   });
 };
 
