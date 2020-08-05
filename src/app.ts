@@ -1,4 +1,4 @@
-import * as dotenv from "dotenv";
+const dotenv = require("dotenv");
 dotenv.config({ path: `${__dirname}/../.env` });
 const express = require("express");
 const bodyParser = require("body-parser");
@@ -21,9 +21,4 @@ connectDb().then(async () => {
   });
 });
 
-// module.exports = app;
-app.use("/test", routes);
-
-// const bugs = require("./server/routes/api/bugs");
-// // any route that goes to the URL will be directed to posts
-// app.use("/api/bugs", bugs);
+app.use("/api", routes);
