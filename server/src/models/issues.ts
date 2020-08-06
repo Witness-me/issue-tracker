@@ -56,6 +56,11 @@ export async function updateIssue(req: Request) {
 // Delete issue
 export async function deleteIssue(id: String) {
   console.log("deleting issue...");
-  const result = await Issue.findOneAndDelete({ _id: id });
-  if (!result) throw new Error(`Failed to find an entry for deleting`);
+  await Issue.findOneAndDelete({ _id: id });
+}
+
+// Delete all
+export async function deleteAll() {
+  console.log("deleteng all issues...");
+  await Issue.deleteMany({});
 }

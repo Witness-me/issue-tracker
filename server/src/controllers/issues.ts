@@ -4,6 +4,7 @@ import {
   addIssue,
   deleteIssue,
   updateIssue,
+  deleteAll,
 } from "../models/issues";
 const express = require("express");
 import { Request, Response } from "express";
@@ -39,9 +40,16 @@ router.put("/:id", async (req: Request, res: Response) => {
 });
 
 // Delete issue by ID
-router.delete("/:id", async (req: Request, res: Response) => {
+router.delete("/delete/:id", async (req: Request, res: Response) => {
   console.log("delete request...");
   await deleteIssue(req.params.id);
+  res.status(200).send();
+});
+
+// Delete all issues
+router.delete("/deleteall", async (req: Request, res: Response) => {
+  console.log("delete request...");
+  await deleteAll();
   res.status(200).send();
 });
 
