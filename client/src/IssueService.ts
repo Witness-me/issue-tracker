@@ -2,17 +2,17 @@ import axios from "axios";
 
 const url = "http://localhost:5000/api/";
 
-class BugService {
-  // Get bugs
-  static getBugs() {
+class IssueService {
+  // Get issues
+  static getIssues() {
     return new Promise(async (res, rej) => {
       try {
         const result = await axios.get(url);
         const data = result.data;
         res(
-          data.map((bug: any) => ({
-            ...bug,
-            createdAt: new Date(bug.createdAt),
+          data.map((issue: any) => ({
+            ...issue,
+            createdAt: new Date(issue.createdAt),
           }))
         );
       } catch (err) {
@@ -21,14 +21,14 @@ class BugService {
     });
   }
 
-  // Create bug
-  static addBug(text: any) {
+  // Create issue
+  static addIssue(text: any) {
     return axios.post(url, { text });
   }
 
-  // Delete bug
-  static deleteBug(id: String) {
+  // Delete issue
+  static deleteIssue(id: string) {
     return axios.delete(`${url}${id}`);
   }
 }
-export default BugService;
+export default IssueService;

@@ -1,17 +1,17 @@
 <template>
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png" />
-    <Dashboard />
+    <AllIssues />
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
-import Dashboard from "./components/Dashboard.vue";
+import AllIssues from "./components/AllIssues.vue";
 
 @Component({
   components: {
-    Dashboard
+    AllIssues
   }
 })
 export default class App extends Vue {}
