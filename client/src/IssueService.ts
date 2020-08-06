@@ -4,11 +4,11 @@ const url = "http://localhost:5000/api/";
 
 class IssueService {
   // Get issues
-  static getIssues() {
-    return new Promise(async (res, rej) => {
+  static getIssues = async () => {
+    const result = await axios.get(url);
+    const data = result.data;
+    return new Promise((res, rej) => {
       try {
-        const result = await axios.get(url);
-        const data = result.data;
         res(
           data.map((issue: any) => ({
             ...issue,
@@ -19,7 +19,7 @@ class IssueService {
         rej(err);
       }
     });
-  }
+  };
 
   // Create issue
   static addIssue(text: any) {
