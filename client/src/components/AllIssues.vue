@@ -1,7 +1,13 @@
 <template>
   <div class="container">
     <h1>All our issues</h1>
-    <!-- issue here -->
+    <!-- input form -->
+    <div class="create-issue">
+      <label for="create-issue">Enter your issue...</label>
+      <input type="text" id="create-issue" v-model="title" placeholder="Create an issue" />
+      <button v-on:click="createIssue">Post!</button>
+    </div>
+    <!-- issues go here -->
     <hr />
     <p class="error" v-if="error">{{ error }}</p>
     <div class="issues-container">
@@ -13,8 +19,8 @@
         v-bind:key="issue._id"
       >
         {{
-          `${issue.createdAt.getDate()}/
-        ${issue.createdAt.getMonth() + 1}/
+        `${issue.createdAt.getDate()} /
+        ${issue.createdAt.getMonth() + 1} /
         ${issue.createdAt.getFullYear()}`
         }}
         <p class="title">{{ issue.title }}</p>
@@ -23,7 +29,7 @@
   </div>
 </template>
 
-<script lang="ts">
+<script>
 import IssueService from "../IssueService";
 export default {
   name: "AllIssues",
@@ -31,7 +37,7 @@ export default {
     return {
       issues: [],
       error: "",
-      text: ""
+      title: ""
     };
   },
   async created() {
@@ -42,6 +48,12 @@ export default {
       console.log("issues " + this.issues);
     } catch (err) {
       this.error = err.message;
+    }
+  },
+  methods: {
+    async createIssue() {
+      await IssueService.addIssue(this.title);
+      this.issues = await IssueService.getIssues();
     }
   }
 };
@@ -79,7 +91,7 @@ div.created-at {
   font-size: 13px;
 }
 
-p.text {
+p.title {
   font-size: 22px;
   font-weight: 700;
   margin-bottom: 0;
