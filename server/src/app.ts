@@ -3,7 +3,7 @@ dotenv.config({ path: `${__dirname}/../.env` });
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
-const routes = require("./controllers/bugs");
+const routes = require("./controllers/issues");
 import { connectDb } from "./models";
 
 const app = express();
