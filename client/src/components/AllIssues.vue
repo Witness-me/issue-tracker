@@ -3,17 +3,27 @@
     <h1>All our issues</h1>
     <!-- input form -->
     <div class="create-issue">
-      <label for="create-title">Title</label>
-      <input type="text" id="create-title" v-model="title" placeholder="Insert issue's title..." />
-      <label for="create-comments">Comments</label>
-      <input
-        type="text"
-        id="create-comments"
-        v-model="comments"
-        placeholder="Insert your comments..."
-      />
+      <!-- title -->
+      <label for="title">Title</label>
+      <input type="text" id="title" v-model="title" placeholder="Insert issue's title..." />
+      <br />
+      <!-- status -->
+      <input type="radio" id="to-do" value="To do" v-model="status" />
+      <label for="to-do">To do</label>
+
+      <input type="radio" id="in-progress" value="In progress" v-model="status" />
+      <label for="in-progress">In progress</label>
+
+      <input type="radio" id="done" value="Done" v-model="status" />
+      <label for="done">Done</label>
+      <br />
+      <!-- comments -->
+      <label for="comments">Comments</label>
+      <input type="text" id="comments" v-model="comments" placeholder="Insert your comments..." />
+      <br />
       <button v-on:click="createIssue">Post!</button>
     </div>
+
     <!-- issues go here -->
     <hr />
     <p class="error" v-if="error">{{ error }}</p>
@@ -31,6 +41,7 @@
         ${issue.createdAt.getFullYear()}`
         }}
         <p class="title">{{ issue.title }}</p>
+        <p class="status">{{ issue.status }}</p>
         <p class="comments">{{ issue.comments }}</p>
       </div>
     </div>
@@ -45,8 +56,11 @@ export default {
     return {
       issues: [],
       error: "",
-      title: "",
-      comments: ""
+      issueProps: {
+        title: "",
+        status: "To do",
+        comments: ""
+      }
     };
   },
   async created() {
@@ -54,15 +68,16 @@ export default {
     try {
       // make request to backend through the issue service with axios
       this.issues = await IssueService.getIssues();
-      console.log("issues " + this.issues);
     } catch (err) {
       this.error = err.message;
     }
   },
   methods: {
     async createIssue() {
-      await IssueService.addIssue(this.title, this.comments);
+      console.log(this.issueProps);
+      await IssueService.addIssue(this.title, this.comments, this.status);
       this.issues = await IssueService.getIssues();
+      console.log(this.issueProps);
     }
   }
 };
