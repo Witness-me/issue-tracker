@@ -41,8 +41,8 @@ class IssueService {
   // }
 
   // Create issue
-  static addIssue(title: any) {
-    return axios.post(url, { title });
+  static addIssue(title: string, comments: string) {
+    return axios.post(url, { title, comments });
   }
 
   // Delete issue

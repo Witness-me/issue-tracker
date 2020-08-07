@@ -3,8 +3,15 @@
     <h1>All our issues</h1>
     <!-- input form -->
     <div class="create-issue">
-      <label for="create-issue">Enter your issue...</label>
-      <input type="text" id="create-issue" v-model="title" placeholder="Create an issue" />
+      <label for="create-title">Title</label>
+      <input type="text" id="create-title" v-model="title" placeholder="Insert issue's title..." />
+      <label for="create-comments">Comments</label>
+      <input
+        type="text"
+        id="create-comments"
+        v-model="comments"
+        placeholder="Insert your comments..."
+      />
       <button v-on:click="createIssue">Post!</button>
     </div>
     <!-- issues go here -->
@@ -24,6 +31,7 @@
         ${issue.createdAt.getFullYear()}`
         }}
         <p class="title">{{ issue.title }}</p>
+        <p class="comments">{{ issue.comments }}</p>
       </div>
     </div>
   </div>
@@ -37,7 +45,8 @@ export default {
     return {
       issues: [],
       error: "",
-      title: ""
+      title: "",
+      comments: ""
     };
   },
   async created() {
@@ -52,7 +61,7 @@ export default {
   },
   methods: {
     async createIssue() {
-      await IssueService.addIssue(this.title);
+      await IssueService.addIssue(this.title, this.comments);
       this.issues = await IssueService.getIssues();
     }
   }
