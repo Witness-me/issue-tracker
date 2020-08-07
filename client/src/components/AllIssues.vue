@@ -44,6 +44,7 @@ eslint-disable
         v-bind:item="issue"
         v-bind:index="index"
         v-bind:key="issue._id"
+        v-on:dblclick="deleteIssue(issue._id)"
       >
         {{
         `${issue.createdAt.getDate()}/${issue.createdAt.getMonth() + 1}/${issue.createdAt.getFullYear()}`
@@ -83,7 +84,6 @@ export default {
   },
   methods: {
     async createIssue() {
-      console.log(this.issueProps);
       await IssueService.addIssue(
         this.title,
         this.status,
@@ -91,7 +91,10 @@ export default {
         this.priority
       );
       this.issues = await IssueService.getIssues();
-      console.log(this.issueProps);
+    },
+    async deleteIssue(id) {
+      await IssueService.deleteIssue(id);
+      this.issues = await IssueService.getIssues();
     }
   }
 };

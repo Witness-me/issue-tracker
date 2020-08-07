@@ -33,7 +33,7 @@ class IssueService {
 
   // Delete issue
   static deleteIssue(id: string) {
-    return axios.delete(`${url}${id}`);
+    return axios.delete(`${url}delete/${id}`);
   }
 }
 export default IssueService;
