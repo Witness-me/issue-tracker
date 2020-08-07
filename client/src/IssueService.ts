@@ -21,28 +21,14 @@ class IssueService {
     });
   };
 
-  // Old code that resulted in error
-
-  // static getIssues() {
-  //   return new Promise(async (res, rej) => {
-  //     try {
-  //       const result = await axios.get(url);
-  //       const data = result.data;
-  //       res(
-  //         data.map((issue: any) => ({
-  //           ...issue,
-  //           createdAt: new Date(issue.createdAt),
-  //         }))
-  //       );
-  //     } catch (err) {
-  //       rej(err);
-  //     }
-  //   });
-  // }
-
   // Create issue
-  static addIssue(title: string, comments: string, status: string) {
-    return axios.post(url, { title, comments, status });
+  static addIssue(
+    title: string,
+    status: string,
+    comments: string,
+    priority: string
+  ) {
+    return axios.post(url, { title, comments, status, priority });
   }
 
   // Delete issue

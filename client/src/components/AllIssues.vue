@@ -1,3 +1,4 @@
+eslint-disable
 <template>
   <div class="container">
     <h1>All our issues</h1>
@@ -19,8 +20,17 @@
       <br />
       <!-- comments -->
       <label for="comments">Comments</label>
-      <input type="text" id="comments" v-model="comments" placeholder="Insert your comments..." />
+      <textarea type="text" id="comments" v-model="comments" placeholder="Insert your comments..." />
       <br />
+      <!-- prioriy -->
+      <label for="priority">Priority</label>
+      <select v-model="priority" id="priority">
+        <option value="High">High</option>
+        <option value="Medium">Medium</option>
+        <option value="Low">Low</option>
+      </select>
+      <br />
+      <!-- button -->
       <button v-on:click="createIssue">Post!</button>
     </div>
 
@@ -36,13 +46,12 @@
         v-bind:key="issue._id"
       >
         {{
-        `${issue.createdAt.getDate()} /
-        ${issue.createdAt.getMonth() + 1} /
-        ${issue.createdAt.getFullYear()}`
+        `${issue.createdAt.getDate()}/${issue.createdAt.getMonth() + 1}/${issue.createdAt.getFullYear()}`
         }}
         <p class="title">{{ issue.title }}</p>
-        <p class="status">{{ issue.status }}</p>
-        <p class="comments">{{ issue.comments }}</p>
+        <p class="status">Status: {{ issue.status }}</p>
+        <p class="comments">Comments: {{ issue.comments }}</p>
+        <p class="priority">Priority: {{ issue.priority }}</p>
       </div>
     </div>
   </div>
@@ -56,11 +65,11 @@ export default {
     return {
       issues: [],
       error: "",
-      issueProps: {
-        title: "",
-        status: "To do",
-        comments: ""
-      }
+
+      title: "",
+      status: "To do",
+      comments: "",
+      priority: "Medium"
     };
   },
   async created() {
@@ -75,7 +84,12 @@ export default {
   methods: {
     async createIssue() {
       console.log(this.issueProps);
-      await IssueService.addIssue(this.title, this.comments, this.status);
+      await IssueService.addIssue(
+        this.title,
+        this.status,
+        this.comments,
+        this.priority
+      );
       this.issues = await IssueService.getIssues();
       console.log(this.issueProps);
     }

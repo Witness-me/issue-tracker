@@ -4,11 +4,11 @@ import { Request } from "express";
 // Create Issue schema
 const issueSchema = new mongoose.Schema({
   title: { type: String, required: [true, "Issue title is required"] },
-  status: { type: String }, //, required: [true, "Choose the issue's status"]
+  status: { type: String, required: [true, "Choose the issue's status"] },
   createdAt: Date,
   updatedAt: Date,
   comments: String,
-  priority: { type: String }, // , required: [true, "Propertyty should be stated"]
+  priority: { type: String, required: [true, "Propertyty should be stated"] },
   // screenshot: Image,
   deadline: Date,
 });
