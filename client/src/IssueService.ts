@@ -1,24 +1,16 @@
 import axios from "axios";
 
-const url = "http://localhost:5000/api/";
+const url = process.env.VUE_APP_API;
 
 class IssueService {
   // Get issues
   static getIssues = async () => {
     const result = await axios.get(url);
     const data = result.data;
-    return new Promise((res, rej) => {
-      try {
-        res(
-          data.map((issue: any) => ({
-            ...issue,
-            createdAt: new Date(issue.createdAt),
-          }))
-        );
-      } catch (err) {
-        rej(err);
-      }
-    });
+    return data.map((issue: any) => ({
+      ...issue,
+      createdAt: new Date(issue.createdAt),
+    }));
   };
 
   // Create issue
