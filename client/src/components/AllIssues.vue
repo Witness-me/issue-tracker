@@ -59,7 +59,8 @@ eslint-disable
 </template>
 
 <script>
-import IssueService from "../IssueService";
+import * as api from "@/utils/api";
+//import IssueService from "../IssueService";
 export default {
   name: "AllIssues",
   data() {
@@ -77,24 +78,19 @@ export default {
     // method runs authomatically when component is created
     try {
       // make request to backend through the issue service with axios
-      this.issues = await IssueService.getIssues();
+      this.issues = await api.getIssues();
     } catch (err) {
       this.error = err.message;
     }
   },
   methods: {
     async createIssue() {
-      await IssueService.addIssue(
-        this.title,
-        this.status,
-        this.comments,
-        this.priority
-      );
-      this.issues = await IssueService.getIssues();
+      await api.addIssue(this.title, this.status, this.comments, this.priority);
+      this.issues = await api.getIssues();
     },
     async deleteIssue(id) {
-      await IssueService.deleteIssue(id);
-      this.issues = await IssueService.getIssues();
+      await api.deleteIssue(id);
+      this.issues = await api.getIssues();
     }
   }
 };
