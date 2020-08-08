@@ -46,9 +46,7 @@ eslint-disable
         v-bind:key="issue._id"
         v-on:dblclick="deleteIssue(issue._id)"
       >
-        {{
-        `${issue.createdAt.getDate()}/${issue.createdAt.getMonth() + 1}/${issue.createdAt.getFullYear()}`
-        }}
+        {{ getStringFromDate(issue.createdAt) }}
         <p class="title">{{ issue.title }}</p>
         <p class="status">Status: {{ issue.status }}</p>
         <p class="comments">Comments: {{ issue.comments }}</p>
@@ -60,7 +58,6 @@ eslint-disable
 
 <script>
 import * as api from "@/utils/api";
-//import IssueService from "../IssueService";
 export default {
   name: "AllIssues",
   data() {
@@ -91,6 +88,13 @@ export default {
     async deleteIssue(id) {
       await api.deleteIssue(id);
       this.issues = await api.getIssues();
+    },
+    getStringFromDate(date) {
+      return `${date.getDate() < 10 ? `0${date.getDate()}` : date.getDate()}-${
+        date.getMonth() + 1 < 10
+          ? `0${date.getMonth() + 1}`
+          : date.getMonth() + 1
+      }-${date.getFullYear()}`;
     }
   }
 };
