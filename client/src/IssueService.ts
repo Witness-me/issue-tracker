@@ -28,4 +28,5 @@ class IssueService {
     return axios.delete(`${url}delete/${id}`);
   }
 }
+
 export default IssueService;
