@@ -44,13 +44,14 @@ eslint-disable
         v-bind:item="issue"
         v-bind:index="index"
         v-bind:key="issue._id"
-        v-on:dblclick="deleteIssue(issue._id)"
       >
         {{ getStringFromDate(issue.createdAt) }}
         <p class="title">{{ issue.title }}</p>
         <p class="status">Status: {{ issue.status }}</p>
         <p class="comments">Comments: {{ issue.comments }}</p>
         <p class="priority">Priority: {{ issue.priority }}</p>
+        <br />
+        <button v-on:click="deleteIssue(issue._id)">Delete issue</button>
       </div>
     </div>
   </div>
