@@ -5,6 +5,7 @@
     <hr />
     <p class="error" v-if="error">{{ error }}</p>
     <div class="issues-container">
+      <button v-on:click="refreshIssues()">Refresh</button>
       <div
         class="issue"
         v-for="(issue, index) in issues"
@@ -34,6 +35,7 @@ export default {
       error: "",
     };
   },
+
   async created() {
     // method runs authomatically when component is created
     try {
@@ -42,9 +44,6 @@ export default {
     } catch (err) {
       this.error = err.message;
     }
-  },
-  async refreshIssues() {
-    this.issues = await api.getIssues();
   },
   methods: {
     async deleteIssue(id) {
