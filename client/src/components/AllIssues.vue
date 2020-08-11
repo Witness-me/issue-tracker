@@ -8,12 +8,13 @@
       <button v-on:click="refreshIssues()">Refresh</button>
       <div
         class="issue"
-        v-for="(issue, index) in issues"
-        v-bind:item="issue"
-        v-bind:index="index"
+        v-for="(issue, index) in this.$store.state.issues"
         v-bind:key="issue._id"
+        v-bind:issue="issue"
+        v-bind:index="index"
       >
         {{ getStringFromDate(issue.createdAt) }}
+        <p class="index">{{ `Issue #${index + 1}` }}</p>
         <p class="title">{{ issue.title }}</p>
         <p class="status">Status: {{ issue.status }}</p>
         <p class="comments">Comments: {{ issue.comments }}</p>
@@ -31,16 +32,16 @@ export default {
   name: "AllIssues",
   data() {
     return {
-      issues: [],
       error: "",
+      //issues: [],
     };
   },
-
   async created() {
     // method runs authomatically when component is created
     try {
       // make request to backend through the issue service with axios
-      this.issues = await api.getIssues();
+      //this.issues = await api.getIssues();
+      await this.$store.dispatch("getAllIssues");
     } catch (err) {
       this.error = err.message;
     }
@@ -48,10 +49,10 @@ export default {
   methods: {
     async deleteIssue(id) {
       await api.deleteIssue(id);
-      this.issues = await api.getIssues();
+      this.refreshIssues();
     },
     async refreshIssues() {
-      this.issues = await api.getIssues();
+      await this.$store.dispatch("getAllIssues");
     },
     getStringFromDate(date) {
       return `${date.getDate() < 10 ? `0${date.getDate()}` : date.getDate()}-${

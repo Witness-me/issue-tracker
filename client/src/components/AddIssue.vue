@@ -66,7 +66,11 @@ export default {
   methods: {
     async createIssue() {
       await api.addIssue(this.title, this.status, this.comments, this.priority);
-      await allIssues.refreshIssues();
+      await this.$store.dispatch("getAllIssues");
+    },
+    increment() {
+      this.$store.commit("increment");
+      console.log(this.$store.state.count);
     },
   },
 };
