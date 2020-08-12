@@ -33,15 +33,12 @@ export default {
   data() {
     return {
       error: ""
-      //issues: [],
     };
   },
   async created() {
     // method runs authomatically when component is created
     try {
       // make request to backend through the issue service with axios
-      //this.issues = await api.getIssues();
-      // this.$store.commit("logMessage");
       await this.$store.dispatch("getAllIssues");
     } catch (err) {
       this.error = err.message;
@@ -50,9 +47,6 @@ export default {
   methods: {
     async deleteIssue(id) {
       await api.deleteIssue(id);
-      this.refreshIssues();
-    },
-    async refreshIssues() {
       await this.$store.dispatch("getAllIssues");
     },
     getStringFromDate(date) {

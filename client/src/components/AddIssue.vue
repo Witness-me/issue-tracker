@@ -37,7 +37,6 @@
 
 <script>
 import * as api from "@/utils/api";
-import allIssues from "@/components/AllIssues.vue";
 export default {
   name: "AddIssue",
   data() {

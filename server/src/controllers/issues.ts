@@ -13,14 +13,14 @@ console.log("controller started");
 
 // Get all issues
 router.get("/all", async (req: Request, res: Response) => {
-  console.log("get request...");
+  console.log("get request all...");
   const allIssues = await getAllIssues();
   res.send(allIssues);
 });
 
 // Find issues by any parameter
 router.get("/", async (req: Request, res: Response) => {
-  console.log("get request...");
+  console.log("get request finding...");
   const issuesFound = await getIssues(req.body);
   res.send(issuesFound);
 });

@@ -8,7 +8,7 @@ const issueSchema = new mongoose.Schema({
   createdAt: Date,
   updatedAt: Date,
   comments: String,
-  priority: { type: String, required: [true, "Propertyty should be stated"] },
+  priority: { type: String, required: [true, "Priority should be stated"] },
   // screenshot: Image,
   deadline: Date,
 });
@@ -22,6 +22,7 @@ export async function getAllIssues() {
 }
 
 // Find issues by parameter
+// not used for now
 export async function getIssues(req: Request) {
   console.log("getting issues...");
   const issueFound = await Issue.find(req);

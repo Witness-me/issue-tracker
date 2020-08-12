@@ -14,17 +14,18 @@ const store = new Vuex.Store({
     issues: [],
   },
   mutations: {
-    // getAllIssues() {
-    //   return this.$getIssues();
-    // },
-    // logMessage() {
-    //   this.$log;
-    // },
+    watchIssues(state) {
+      console.log(state.issues);
+      // state.issues = await api.getIssues();
+    },
   },
   actions: {
     async getAllIssues() {
       this.state.issues = await api.getIssues();
-      //this.$getIssues();
+    },
+    async deleteIssue(id: any) {
+      await api.deleteIssue(id);
+      await this.dispatch("getAllIssues");
     },
   },
   getters: {},
