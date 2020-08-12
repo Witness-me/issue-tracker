@@ -5,23 +5,13 @@
     <div class="create-issue">
       <!-- title -->
       <label for="title">Title</label>
-      <input
-        type="text"
-        id="title"
-        v-model="title"
-        placeholder="Insert issue's title..."
-      />
+      <input type="text" id="title" v-model="title" placeholder="Insert issue's title..." />
       <br />
       <!-- status -->
       <input type="radio" id="to-do" value="To do" v-model="status" />
       <label for="to-do">To do</label>
 
-      <input
-        type="radio"
-        id="in-progress"
-        value="In progress"
-        v-model="status"
-      />
+      <input type="radio" id="in-progress" value="In progress" v-model="status" />
       <label for="in-progress">In progress</label>
 
       <input type="radio" id="done" value="Done" v-model="status" />
@@ -29,12 +19,7 @@
       <br />
       <!-- comments -->
       <label for="comments">Comments</label>
-      <textarea
-        type="text"
-        id="comments"
-        v-model="comments"
-        placeholder="Insert your comments..."
-      />
+      <textarea type="text" id="comments" v-model="comments" placeholder="Insert your comments..." />
       <br />
       <!-- prioriy -->
       <label for="priority">Priority</label>
@@ -60,19 +45,15 @@ export default {
       title: "",
       status: "To do",
       comments: "",
-      priority: "Medium",
+      priority: "Medium"
     };
   },
   methods: {
     async createIssue() {
       await api.addIssue(this.title, this.status, this.comments, this.priority);
       await this.$store.dispatch("getAllIssues");
-    },
-    increment() {
-      this.$store.commit("increment");
-      console.log(this.$store.state.count);
-    },
-  },
+    }
+  }
 };
 </script>
 

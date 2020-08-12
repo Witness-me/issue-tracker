@@ -32,7 +32,7 @@ export default {
   name: "AllIssues",
   data() {
     return {
-      error: "",
+      error: ""
       //issues: [],
     };
   },
@@ -41,6 +41,7 @@ export default {
     try {
       // make request to backend through the issue service with axios
       //this.issues = await api.getIssues();
+      // this.$store.commit("logMessage");
       await this.$store.dispatch("getAllIssues");
     } catch (err) {
       this.error = err.message;
@@ -60,8 +61,8 @@ export default {
           ? `0${date.getMonth() + 1}`
           : date.getMonth() + 1
       }-${date.getFullYear()}`;
-    },
-  },
+    }
+  }
 };
 </script>
 

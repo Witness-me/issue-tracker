@@ -1,9 +1,15 @@
-import axios from "axios";
+// import axios from "axios";
+// const instance = axios.create({
+//   baseURL: process.env.VUE_APP_API,
+// });
 
-const url = process.env.VUE_APP_API;
+const axios = require("axios").create({
+  baseURL: process.env.VUE_APP_API,
+});
 
+// Get issues
 export async function getIssues() {
-  const result = await axios.get(url);
+  const result = await axios.get("");
   const data = result.data;
   return data.map((issue: any) => ({
     ...issue,
@@ -18,10 +24,10 @@ export async function addIssue(
   comments: string,
   priority: string
 ) {
-  return axios.post(url, { title, comments, status, priority });
+  return axios.post("", { title, comments, status, priority });
 }
 
 // Delete issue
 export async function deleteIssue(id: string) {
-  return axios.delete(`${url}delete/${id}`);
+  return axios.delete(`delete/${id}`);
 }
