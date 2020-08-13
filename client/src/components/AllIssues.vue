@@ -35,6 +35,12 @@ export default {
       error: ""
     };
   },
+  computed: {
+    allIssues() {
+      const result = api.getIssues();
+      return result;
+    }
+  },
   async created() {
     // method runs authomatically when component is created
     try {
