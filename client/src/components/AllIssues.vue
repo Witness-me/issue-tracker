@@ -6,9 +6,10 @@
     <p class="error" v-if="error">{{ error }}</p>
     <div class="issues-container">
       <button v-on:click="refreshIssues()">Refresh</button>
+      <p class="count">{{ `You have ${issuesCount} issues in total` }}</p>
       <div
         class="issue"
-        v-for="(issue, index) in this.$store.state.issues"
+        v-for="(issue, index) in allIssues"
         v-bind:key="issue._id"
         v-bind:issue="issue"
         v-bind:index="index"
@@ -28,32 +29,16 @@
 
 <script>
 import * as api from "@/utils/api";
+import { mapGetters, mapActions } from "vuex";
 export default {
   name: "AllIssues",
-  data() {
-    return {
-      error: ""
-    };
-  },
-  computed: {
-    allIssues() {
-      const result = api.getIssues();
-      return result;
-    }
-  },
-  async created() {
-    // method runs authomatically when component is created
-    try {
-      // make request to backend through the issue service with axios
-      await this.$store.dispatch("getAllIssues");
-    } catch (err) {
-      this.error = err.message;
-    }
-  },
+  computed: mapGetters(["allIssues", "issuesCount"]),
+  //return this.$store.getters.allIssues;
   methods: {
+    ...mapActions(["getAllIssues"]),
     async deleteIssue(id) {
       await api.deleteIssue(id);
-      await this.$store.dispatch("getAllIssues");
+      this.getAllIssues();
     },
     getStringFromDate(date) {
       return `${date.getDate() < 10 ? `0${date.getDate()}` : date.getDate()}-${
@@ -62,6 +47,9 @@ export default {
           : date.getMonth() + 1
       }-${date.getFullYear()}`;
     }
+  },
+  async mounted() {
+    this.getAllIssues();
   }
 };
 </script>

@@ -12,19 +12,27 @@ export default new Vuex.Store({
     issues: [],
   },
   mutations: {
-    watchIssues(state) {
-      console.log(state.issues);
-      // state.issues = await api.getIssues();
+    updateIssues(state, issues) {
+      state.issues = issues;
     },
   },
   actions: {
-    async getAllIssues() {
-      this.state.issues = await api.getIssues();
+    async getAllIssues(ctx) {
+      //this.state.issues = await api.getIssues();
+      const issues = await api.getIssues();
+      ctx.commit("updateIssues", issues);
     },
     async deleteIssue(id: any) {
       await api.deleteIssue(id);
       await this.dispatch("getAllIssues");
     },
   },
-  getters: {},
+  getters: {
+    allIssues(state) {
+      return state.issues;
+    },
+    issuesCount(state) {
+      return state.issues.length;
+    },
+  },
 });
