@@ -50,6 +50,9 @@ export default {
   methods: {
     async createIssue() {
       await api.addIssue(this.title, this.status, this.comments, this.priority);
+      this.title = this.comments = "";
+      this.status = "To do";
+      this.priority = "Medium";
       await this.$store.dispatch("getAllIssues");
     }
   }

@@ -3,7 +3,6 @@
     <h1>All our issues</h1>
     <!-- issues go here -->
     <hr />
-    <p class="error" v-if="error">{{ error }}</p>
     <div class="issues-container">
       <button v-on:click="refreshIssues()">Refresh</button>
       <p class="count">{{ `You have ${issuesCount} issues in total` }}</p>
@@ -35,11 +34,7 @@ export default {
   computed: mapGetters(["allIssues", "issuesCount"]),
   //return this.$store.getters.allIssues;
   methods: {
-    ...mapActions(["getAllIssues"]),
-    async deleteIssue(id) {
-      await api.deleteIssue(id);
-      this.getAllIssues();
-    },
+    ...mapActions(["getAllIssues", "deleteIssue"]),
     getStringFromDate(date) {
       return `${date.getDate() < 10 ? `0${date.getDate()}` : date.getDate()}-${
         date.getMonth() + 1 < 10

@@ -15,6 +15,13 @@ export default new Vuex.Store({
     updateIssues(state, issues) {
       state.issues = issues;
     },
+    // getStringFromDate(date: any) {
+    //   return `${date.getDate() < 10 ? `0${date.getDate()}` : date.getDate()}-${
+    //     date.getMonth() + 1 < 10
+    //       ? `0${date.getMonth() + 1}`
+    //       : date.getMonth() + 1
+    //   }-${date.getFullYear()}`;
+    // },
   },
   actions: {
     async getAllIssues(ctx) {
@@ -22,7 +29,7 @@ export default new Vuex.Store({
       const issues = await api.getIssues();
       ctx.commit("updateIssues", issues);
     },
-    async deleteIssue(id: any) {
+    async deleteIssue(ctx, id: string) {
       await api.deleteIssue(id);
       await this.dispatch("getAllIssues");
     },
