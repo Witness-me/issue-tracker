@@ -4,7 +4,7 @@
     <!-- issues go here -->
     <hr />
     <div class="issues-container">
-      <button v-on:click="refreshIssues()">Refresh</button>
+      <!-- <button v-on:click="refreshIssues()">Refresh</button> -->
       <p class="count">{{ `You have ${issuesCount} issues in total` }}</p>
       <div
         class="issue"
@@ -27,12 +27,11 @@
 </template>
 
 <script>
-import * as api from "@/utils/api";
+//import * as api from "@/utils/api";
 import { mapGetters, mapActions } from "vuex";
 export default {
   name: "AllIssues",
   computed: mapGetters(["allIssues", "issuesCount"]),
-  //return this.$store.getters.allIssues;
   methods: {
     ...mapActions(["getAllIssues", "deleteIssue"]),
     getStringFromDate(date) {

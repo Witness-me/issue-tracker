@@ -30,7 +30,7 @@
       </select>
       <br />
       <!-- button -->
-      <button v-on:click="createIssue">Post!</button>
+      <button v-on:click="addIssue">Post!</button>
     </div>
   </div>
 </template>
@@ -48,7 +48,7 @@ export default {
     };
   },
   methods: {
-    async createIssue() {
+    async addIssue() {
       await api.addIssue(this.title, this.status, this.comments, this.priority);
       this.title = this.comments = "";
       this.status = "To do";
