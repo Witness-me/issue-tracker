@@ -11,7 +11,7 @@
             <p>{{ getStringFromDate(issue.createdAt) }}</p>
             <p class="title">{{ issue.title }}</p>
             <p class="status">Status: {{ issue.status }}</p>
-            <p class="comments">Comments: {{ issue.comments }}</p>
+            <p class="comments" v-if="issue.comments">Comments: {{ issue.comments }}</p>
             <p class="priority">Priority: {{ issue.priority }}</p>
             <button class="delete-issue-button" v-on:click="deleteIssue(issue._id)">Delete</button>
           </div>
@@ -25,7 +25,7 @@
             <p>{{ getStringFromDate(issue.createdAt) }}</p>
             <p class="title">{{ issue.title }}</p>
             <p class="status">Status: {{ issue.status }}</p>
-            <p class="comments">Comments: {{ issue.comments }}</p>
+            <p class="comments" v-if="issue.comments">Comments: {{ issue.comments }}</p>
             <p class="priority">Priority: {{ issue.priority }}</p>
             <button class="delete-issue-button" v-on:click="deleteIssue(issue._id)">Delete</button>
           </div>
@@ -39,7 +39,7 @@
             <p>{{ getStringFromDate(issue.createdAt) }}</p>
             <p class="title">{{ issue.title }}</p>
             <p class="status">Status: {{ issue.status }}</p>
-            <p class="comments">Comments: {{ issue.comments }}</p>
+            <p class="comments" v-if="issue.comments">Comments: {{ issue.comments }}</p>
             <p class="priority">Priority: {{ issue.priority }}</p>
             <button class="delete-issue-button" v-on:click="deleteIssue(issue._id)">Delete</button>
           </div>
@@ -110,10 +110,8 @@ export default {
 }
 .section-point {
   background: olivedrab;
-  border-bottom: 1px solid red;
 }
 
 .delete-issue-button {
-  margin-bottom: 20px;
 }
 </style>

@@ -17,7 +17,7 @@
         <p class="index">{{ `Issue #${index + 1}` }}</p>
         <p class="title">{{ issue.title }}</p>
         <p class="status">Status: {{ issue.status }}</p>
-        <p class="comments">Comments: {{ issue.comments }}</p>
+        <p class="comments" v-if="issue.comments">Comments: {{ issue.comments }}</p>
         <p class="priority">Priority: {{ issue.priority }}</p>
         <br />
         <button v-on:click="deleteIssue(issue._id)">Delete</button>
