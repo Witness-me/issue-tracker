@@ -7,15 +7,13 @@
       <section class="dashboard-section">
         <h3 class="section-header">To do</h3>
         <div class="section-insides">
-          <div class="section-point" v-for="issue in allIssues" v-bind:key="issue._id">
-            <template v-if="issue.status === 'To do'">
-              {{ getStringFromDate(issue.createdAt) }}
-              <p class="title">{{ issue.title }}</p>
-              <p class="status">Status: {{ issue.status }}</p>
-              <p class="comments">Comments: {{ issue.comments }}</p>
-              <p class="priority">Priority: {{ issue.priority }}</p>
-              <button class="delete-issue-button" v-on:click="deleteIssue(issue._id)">Delete</button>
-            </template>
+          <div class="section-point" v-for="issue in statusToDo" v-bind:key="issue._id">
+            <p>{{ getStringFromDate(issue.createdAt) }}</p>
+            <p class="title">{{ issue.title }}</p>
+            <p class="status">Status: {{ issue.status }}</p>
+            <p class="comments">Comments: {{ issue.comments }}</p>
+            <p class="priority">Priority: {{ issue.priority }}</p>
+            <button class="delete-issue-button" v-on:click="deleteIssue(issue._id)">Delete</button>
           </div>
         </div>
       </section>
@@ -23,14 +21,13 @@
       <section class="dashboard-section">
         <h3 class="section-header">In progress</h3>
         <div class="section-insides">
-          <div class="section-point" v-for="issue in allIssues" v-bind:key="issue._id">
-            <template v-if="issue.status === 'In progress'">
-              {{ getStringFromDate(issue.createdAt) }}
-              <p class="title">{{ issue.title }}</p>
-              <p class="status">Status: {{ issue.status }}</p>
-              <p class="comments">Comments: {{ issue.comments }}</p>
-              <p class="priority">Priority: {{ issue.priority }}</p>
-            </template>
+          <div class="section-point" v-for="issue in statusInProgress" v-bind:key="issue._id">
+            <p>{{ getStringFromDate(issue.createdAt) }}</p>
+            <p class="title">{{ issue.title }}</p>
+            <p class="status">Status: {{ issue.status }}</p>
+            <p class="comments">Comments: {{ issue.comments }}</p>
+            <p class="priority">Priority: {{ issue.priority }}</p>
+            <button class="delete-issue-button" v-on:click="deleteIssue(issue._id)">Delete</button>
           </div>
         </div>
       </section>
@@ -38,14 +35,13 @@
       <section class="dashboard-section">
         <h3 class="section-header">Done</h3>
         <div class="section-insides">
-          <div class="section-point" v-for="issue in allIssues" v-bind:key="issue._id">
-            <template v-if="issue.status === 'Done'">
-              {{ getStringFromDate(issue.createdAt) }}
-              <p class="title">{{ issue.title }}</p>
-              <p class="status">Status: {{ issue.status }}</p>
-              <p class="comments">Comments: {{ issue.comments }}</p>
-              <p class="priority">Priority: {{ issue.priority }}</p>
-            </template>
+          <div class="section-point" v-for="issue in statusDone" v-bind:key="issue._id">
+            <p>{{ getStringFromDate(issue.createdAt) }}</p>
+            <p class="title">{{ issue.title }}</p>
+            <p class="status">Status: {{ issue.status }}</p>
+            <p class="comments">Comments: {{ issue.comments }}</p>
+            <p class="priority">Priority: {{ issue.priority }}</p>
+            <button class="delete-issue-button" v-on:click="deleteIssue(issue._id)">Delete</button>
           </div>
         </div>
       </section>
@@ -61,7 +57,16 @@ export default {
     return {};
   },
   computed: {
-    ...mapGetters(["allIssues", "issuesCount"])
+    ...mapGetters(["allIssues", "issuesCount"]),
+    statusToDo() {
+      return this.allIssues.filter(issue => issue.status === "To do");
+    },
+    statusInProgress() {
+      return this.allIssues.filter(issue => issue.status === "In progress");
+    },
+    statusDone() {
+      return this.allIssues.filter(issue => issue.status === "Done");
+    }
   },
   methods: {
     ...mapActions(["getAllIssues", "deleteIssue"]),
@@ -105,7 +110,7 @@ export default {
 }
 .section-point {
   background: olivedrab;
-  /* border-bottom: 1px solid red; */
+  border-bottom: 1px solid red;
 }
 
 .delete-issue-button {
