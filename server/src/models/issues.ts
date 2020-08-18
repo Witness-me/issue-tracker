@@ -9,7 +9,6 @@ const issueSchema = new mongoose.Schema({
   updatedAt: Date,
   comments: String,
   priority: { type: String, required: [true, "Priority should be stated"] },
-  // screenshot: Image,
   deadline: Date,
 });
 const Issue = mongoose.model("issue", issueSchema);
