@@ -1,12 +1,15 @@
 <template>
   <div class="container">
+    <hr />
     <h1>All issues</h1>
     <!-- issues go here -->
     <AddIssue />
     <hr />
     <div class="issues-container">
       <!-- <button v-on:click="refreshIssues()">Refresh</button> -->
-      <p class="count">{{ `You have ${issuesCount} issues in total` }}</p>
+      <p class="count">
+        {{ `You have ${issuesCount} issues in total` }}
+      </p>
       <div
         class="issue"
         v-for="(issue, index) in allIssues"
@@ -18,9 +21,10 @@
         <p class="index">{{ `Issue #${issuesCount - index}` }}</p>
         <p class="title">{{ issue.title }}</p>
         <p class="status">Status: {{ issue.status }}</p>
-        <p class="comments" v-if="issue.comments">Comments: {{ issue.comments }}</p>
+        <p class="comments" v-if="issue.comments">
+          Comments: {{ issue.comments }}
+        </p>
         <p class="priority">Priority: {{ issue.priority }}</p>
-        <br />
         <button v-on:click="deleteIssue(issue._id)">Delete</button>
       </div>
     </div>
@@ -37,17 +41,19 @@ export default {
   methods: {
     ...mapActions(["getAllIssues", "deleteIssue"]),
     getStringFromDate(date) {
-      return `${date.getDate() < 10 ? `0${date.getDate()}` : date.getDate()}-${
+      return `${
+        date.getDate() < 10 ? `0${date.getDate()}` : date.getDate()
+      }-${
         date.getMonth() + 1 < 10
           ? `0${date.getMonth() + 1}`
           : date.getMonth() + 1
       }-${date.getFullYear()}`;
-    }
+    },
   },
   async mounted() {
     this.getAllIssues();
   },
-  components: { AddIssue }
+  components: { AddIssue },
 };
 </script>
 

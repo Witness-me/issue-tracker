@@ -5,7 +5,7 @@
       :currentTab="currentTab"
       v-on:switchTab="switchTab($event)"
     />
-    <component v-bind:is="currentTabComponent"></component>
+    <component v-bind:is="currentTab"></component>
     <!-- <Dashboard v-bind:is="currentTabComponent" />
     <AllIssues v-bind:is="currentTabComponent" />-->
   </div>
@@ -23,11 +23,7 @@ export default {
       tabs: ["Dashboard", "AllIssues"],
     };
   },
-  computed: {
-    currentTabComponent: function() {
-      return this.currentTab;
-    },
-  },
+  computed: {},
   methods: {
     switchTab(newTab) {
       this.currentTab = newTab;
