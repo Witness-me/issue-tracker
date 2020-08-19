@@ -2,6 +2,7 @@
   <div class="wrapper">
     <hr />
     <h1>Dashboard</h1>
+    <AddIssue />
     <p class="issue-counter">{{ `You have ${issuesCount} issues in total` }}</p>
     <div class="dashboard-container">
       <section class="dashboard-section">
@@ -58,6 +59,7 @@
 </template>
 
 <script>
+import AddIssue from "./AddIssue.vue";
 import { mapGetters, mapActions } from "vuex";
 export default {
   name: "Dashboard",
@@ -89,7 +91,8 @@ export default {
   },
   async mounted() {
     this.getAllIssues();
-  }
+  },
+  components: { AddIssue }
 };
 </script>
 

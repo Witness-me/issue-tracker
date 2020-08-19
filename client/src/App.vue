@@ -1,7 +1,6 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png" />
-    <AddIssue />
+    <Navbar />
     <Dashboard />
     <AllIssues />
   </div>
@@ -12,12 +11,13 @@ import { Component, Vue } from "vue-property-decorator";
 import AllIssues from "./components/AllIssues.vue";
 import AddIssue from "./components/AddIssue.vue";
 import Dashboard from "./components/Dashboard.vue";
+import Navbar from "./components/Navbar.vue";
 
 @Component({
   components: {
-    AddIssue,
-    AllIssues,
-    Dashboard
+    Navbar,
+    Dashboard,
+    AllIssues
   }
 })
 export default class App extends Vue {}

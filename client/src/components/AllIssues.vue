@@ -2,6 +2,7 @@
   <div class="container">
     <h1>All issues</h1>
     <!-- issues go here -->
+    <AddIssue />
     <hr />
     <div class="issues-container">
       <!-- <button v-on:click="refreshIssues()">Refresh</button> -->
@@ -28,6 +29,7 @@
 
 <script>
 //import * as api from "@/utils/api";
+import AddIssue from "./AddIssue.vue";
 import { mapGetters, mapActions } from "vuex";
 export default {
   name: "AllIssues",
@@ -44,7 +46,8 @@ export default {
   },
   async mounted() {
     this.getAllIssues();
-  }
+  },
+  components: { AddIssue }
 };
 </script>
 
