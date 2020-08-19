@@ -1,23 +1,16 @@
 <template>
   <div id="app">
-    <Navbar />
-    <Dashboard />
-    <AllIssues />
+    <Home />
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
-import AllIssues from "./components/AllIssues.vue";
-import AddIssue from "./components/AddIssue.vue";
-import Dashboard from "./components/Dashboard.vue";
-import Navbar from "./components/Navbar.vue";
+import Home from "./views/Home.vue";
 
 @Component({
   components: {
-    Navbar,
-    Dashboard,
-    AllIssues
+    Home
   }
 })
 export default class App extends Vue {}
