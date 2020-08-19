@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <h1>All our issues</h1>
+    <h1>All issues</h1>
     <!-- issues go here -->
     <hr />
     <div class="issues-container">
