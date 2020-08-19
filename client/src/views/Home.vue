@@ -1,9 +1,13 @@
 <template>
   <div>
-    <p>{{ tabs }}</p>
-    <Navbar />
-    <Dashboard />
-    <AllIssues />
+    <Navbar
+      :tabs="tabs"
+      :currentTab="currentTab"
+      v-on:switchTab="switchTab($event)"
+    />
+    <component v-bind:is="currentTabComponent"></component>
+    <!-- <Dashboard v-bind:is="currentTabComponent" />
+    <AllIssues v-bind:is="currentTabComponent" />-->
   </div>
 </template>
 
@@ -16,13 +20,23 @@ export default {
   data() {
     return {
       currentTab: "Dashboard",
-      tabs: ["Dashboard", "AllIssues"]
+      tabs: ["Dashboard", "AllIssues"],
     };
+  },
+  computed: {
+    currentTabComponent: function() {
+      return this.currentTab;
+    },
+  },
+  methods: {
+    switchTab(newTab) {
+      this.currentTab = newTab;
+    },
   },
   components: {
     Navbar,
     Dashboard,
-    AllIssues
-  }
+    AllIssues,
+  },
 };
 </script>
