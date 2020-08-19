@@ -14,7 +14,7 @@
         v-bind:index="index"
       >
         {{ getStringFromDate(issue.createdAt) }}
-        <p class="index">{{ `Issue #${index + 1}` }}</p>
+        <p class="index">{{ `Issue #${issuesCount - index}` }}</p>
         <p class="title">{{ issue.title }}</p>
         <p class="status">Status: {{ issue.status }}</p>
         <p class="comments" v-if="issue.comments">Comments: {{ issue.comments }}</p>

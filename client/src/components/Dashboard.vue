@@ -7,13 +7,15 @@
       <section class="dashboard-section">
         <h3 class="section-header">To do</h3>
         <div class="section-insides">
-          <div class="section-point" v-for="issue in statusToDo" v-bind:key="issue._id">
+          <div class="section-point" v-for="(issue, index) in statusToDo" v-bind:key="issue._id">
+            <p>{{ index + 1 }}</p>
             <p>{{ getStringFromDate(issue.createdAt) }}</p>
             <p class="title">{{ issue.title }}</p>
             <p class="status">Status: {{ issue.status }}</p>
             <p class="comments" v-if="issue.comments">Comments: {{ issue.comments }}</p>
             <p class="priority">Priority: {{ issue.priority }}</p>
             <button class="delete-issue-button" v-on:click="deleteIssue(issue._id)">Delete</button>
+            <button class="log" v-on:click="$log">log</button>
           </div>
         </div>
       </section>
@@ -21,7 +23,12 @@
       <section class="dashboard-section">
         <h3 class="section-header">In progress</h3>
         <div class="section-insides">
-          <div class="section-point" v-for="issue in statusInProgress" v-bind:key="issue._id">
+          <div
+            class="section-point"
+            v-for="(issue, index) in statusInProgress"
+            v-bind:key="issue._id"
+          >
+            <p>{{ index + 1 }}</p>
             <p>{{ getStringFromDate(issue.createdAt) }}</p>
             <p class="title">{{ issue.title }}</p>
             <p class="status">Status: {{ issue.status }}</p>
@@ -35,7 +42,8 @@
       <section class="dashboard-section">
         <h3 class="section-header">Done</h3>
         <div class="section-insides">
-          <div class="section-point" v-for="issue in statusDone" v-bind:key="issue._id">
+          <div class="section-point" v-for="(issue, index) in statusDone" v-bind:key="issue._id">
+            <p>{{ index + 1 }}</p>
             <p>{{ getStringFromDate(issue.createdAt) }}</p>
             <p class="title">{{ issue.title }}</p>
             <p class="status">Status: {{ issue.status }}</p>

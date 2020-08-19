@@ -1,14 +1,15 @@
 import { prototype } from "vue/types/umd";
-const axios = require("axios").create({
-  baseURL: process.env.VUE_APP_API,
-});
+import axios from "axios";
 
 const ApiPlugin = {
   install(Vue: any, options: any) {
-    Vue.prototype.$getIssues = async function() {
-      const result = await axios.get("");
+    const HTTP = axios.create({
+      baseURL: process.env.VUE_APP_API,
+    });
+    Vue.getIssues1 = async function() {
+      const result = await HTTP.get("");
       const data = result.data;
-      console.log("getting issues");
+      console.log("getting issues from plugin");
       return data.map((issue: any) => ({
         ...issue,
         createdAt: new Date(issue.createdAt),
