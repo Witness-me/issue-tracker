@@ -1,36 +1,63 @@
 <template>
-  <div class="container">
-    <h1>Add issue</h1>
-    <!-- input form -->
-    <div class="create-issue">
-      <!-- title -->
-      <label for="title">Title</label>
-      <input type="text" id="title" v-model="title" placeholder="Insert issue's title..." />
-      <br />
-      <!-- status -->
-      <input type="radio" id="to-do" value="To do" v-model="status" />
-      <label for="to-do">To do</label>
-
-      <input type="radio" id="in-progress" value="In progress" v-model="status" />
-      <label for="in-progress">In progress</label>
-
-      <input type="radio" id="done" value="Done" v-model="status" />
-      <label for="done">Done</label>
-      <br />
-      <!-- comments -->
-      <label for="comments">Comments</label>
-      <textarea type="text" id="comments" v-model="comments" placeholder="Insert your comments..." />
-      <br />
-      <!-- prioriy -->
-      <label for="priority">Priority</label>
-      <select v-model="priority" id="priority">
-        <option value="High">High</option>
-        <option value="Medium">Medium</option>
-        <option value="Low">Low</option>
-      </select>
-      <br />
-      <!-- button -->
-      <button v-on:click="addIssue">Post!</button>
+  <div class="modal-background" @click="closePopup">
+    <div class="modal-popup" @click.stop>
+      <h1>Add issue</h1>
+      <!-- input form -->
+      <div class="input-form">
+        <!-- title -->
+        <label for="title">Title</label>
+        <input
+          type="text"
+          id="title"
+          v-model="title"
+          placeholder="Insert issue's title..."
+        />
+        <br />
+        <!-- status -->
+        <input
+          type="radio"
+          id="to-do"
+          value="To do"
+          v-model="status"
+        />
+        <label for="to-do">To do</label>
+        <input
+          type="radio"
+          id="in-progress"
+          value="In progress"
+          v-model="status"
+        />
+        <label for="in-progress">In progress</label>
+        <input
+          type="radio"
+          id="done"
+          value="Done"
+          v-model="status"
+        />
+        <label for="done">Done</label>
+        <br />
+        <!-- comments -->
+        <label for="comments">Comments</label>
+        <textarea
+          type="text"
+          id="comments"
+          v-model="comments"
+          placeholder="Insert your comments..."
+        />
+        <br />
+        <!-- prioriy -->
+        <label for="priority">Priority</label>
+        <select v-model="priority" id="priority">
+          <option value="High">High</option>
+          <option value="Medium">Medium</option>
+          <option value="Low">Low</option>
+        </select>
+        <!-- buttons -->
+        <button @click="addIssue">
+          Post!
+        </button>
+        <button @click="closePopup">Cancel</button>
+      </div>
     </div>
   </div>
 </template>
@@ -44,56 +71,55 @@ export default {
       title: "",
       status: "To do",
       comments: "",
-      priority: "Medium"
+      priority: "Medium",
     };
   },
   methods: {
     async addIssue() {
-      await api.addIssue(this.title, this.status, this.comments, this.priority);
-      this.title = this.comments = "";
-      this.status = "To do";
-      this.priority = "Medium";
+      await api.addIssue(
+        this.title,
+        this.status,
+        this.comments,
+        this.priority
+      );
       await this.$store.dispatch("getAllIssues");
-    }
-  }
+      this.closePopup();
+    },
+    closePopup() {
+      this.$emit("closePopup");
+    },
+  },
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-div.container {
-  max-width: 800px;
-  margin: 0 auto;
-}
-
-p.error {
-  border: 1px solid #ff5b5f;
-  background-color: #ffc5c1;
-  padding: 10px;
-  margin-bottom: 15px;
-}
-
-div.issue {
-  position: relative;
-  border: 1px solid #5bd658;
-  background-color: #bcffb8;
-  padding: 10px 10px 30px 10px;
-  margin-bottom: 15px;
-}
-
-div.created-at {
-  position: absolute;
-  top: 0;
+.modal-background {
+  position: fixed;
   left: 0;
-  padding: 5px 15px 5px 15px;
-  background-color: darkgreen;
-  color: white;
-  font-size: 13px;
-}
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 10;
 
-p.title {
-  font-size: 22px;
-  font-weight: 700;
-  margin-bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.modal-popup {
+  position: fixed;
+  width: 450px;
+  height: 250px;
+  background: blanchedalmond;
+  border: 1px black solid;
+
+  /* left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto; */
+  z-index: 15;
 }
 </style>

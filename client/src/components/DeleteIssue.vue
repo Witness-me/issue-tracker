@@ -1,11 +1,15 @@
 <template>
-  <div class="container">
-    <h1>Delete issue</h1>
-    <!-- input form -->
-    <div class="delete-issue">
-      <p>Are you sure that you want to delete the issue?</p>
-      <!-- button -->
-      <button v-on:click="deleteIssue(issue._id)">Delete!</button>
+  <div class="modal-background">
+    <div class="modal-popup">
+      <h1>Delete issue</h1>
+      <!-- input form -->
+      <div class="delete-issue">
+        <p>Are you sure that you want to delete the issue?</p>
+        <!-- button -->
+        <button v-on:click="deleteIssue(issue._id)">
+          Delete!
+        </button>
+      </div>
     </div>
   </div>
 </template>
@@ -18,10 +22,7 @@ export default {
   computed: mapGetters(["allIssues", "issuesCount"]),
   methods: {
     ...mapActions(["getAllIssues", "deleteIssue"]),
-    async deleteIssue1(id) {
-      await api.deleteIssue(id);
-    }
-  }
+  },
 };
 </script>
 

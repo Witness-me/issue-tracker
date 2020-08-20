@@ -2,8 +2,6 @@
   <div class="wrapper">
     <hr />
     <h1>Dashboard</h1>
-    <AddIssue />
-    <hr />
     <p class="issue-counter">
       {{ `You have ${issuesCount} issues in total` }}
     </p>
@@ -17,7 +15,9 @@
             v-bind:key="issue._id"
           >
             <p>{{ index + 1 }}</p>
-            <p>{{ getStringFromDate(issue.createdAt) }}</p>
+            <p>
+              Created at: {{ getStringFromDate(issue.createdAt) }}
+            </p>
             <p class="title">{{ issue.title }}</p>
             <p class="status">Status: {{ issue.status }}</p>
             <p class="comments" v-if="issue.comments">
@@ -30,7 +30,6 @@
             >
               Delete
             </button>
-            <button class="log" v-on:click="$log">log</button>
           </div>
         </div>
       </section>
@@ -44,7 +43,9 @@
             v-bind:key="issue._id"
           >
             <p>{{ index + 1 }}</p>
-            <p>{{ getStringFromDate(issue.createdAt) }}</p>
+            <p>
+              Created at: {{ getStringFromDate(issue.createdAt) }}
+            </p>
             <p class="title">{{ issue.title }}</p>
             <p class="status">Status: {{ issue.status }}</p>
             <p class="comments" v-if="issue.comments">
@@ -70,7 +71,9 @@
             v-bind:key="issue._id"
           >
             <p>{{ index + 1 }}</p>
-            <p>{{ getStringFromDate(issue.createdAt) }}</p>
+            <p>
+              Created at: {{ getStringFromDate(issue.createdAt) }}
+            </p>
             <p class="title">{{ issue.title }}</p>
             <p class="status">Status: {{ issue.status }}</p>
             <p class="comments" v-if="issue.comments">
@@ -91,7 +94,6 @@
 </template>
 
 <script>
-import AddIssue from "./AddIssue.vue";
 import { mapGetters, mapActions } from "vuex";
 export default {
   name: "Dashboard",
@@ -132,7 +134,6 @@ export default {
   async mounted() {
     this.getAllIssues();
   },
-  components: { AddIssue },
 };
 </script>
 

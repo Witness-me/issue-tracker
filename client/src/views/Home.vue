@@ -1,13 +1,14 @@
 <template>
   <div>
-    <Navbar
-      :tabs="tabs"
-      :currentTab="currentTab"
-      v-on:switchTab="switchTab($event)"
+    <Navbar v-on:switchTab="switchTab($event)" />
+    <AddIssue
+      v-if="addIssueIsVisible"
+      v-on:closePopup="popupAddIssue($event)"
     />
     <component v-bind:is="currentTab"></component>
-    <!-- <Dashboard v-bind:is="currentTabComponent" />
-    <AllIssues v-bind:is="currentTabComponent" />-->
+    <button class="add-issue-button" v-on:click="popupAddIssue">
+      +
+    </button>
   </div>
 </template>
 
@@ -15,12 +16,13 @@
 import AllIssues from "../components/AllIssues.vue";
 import Dashboard from "../components/Dashboard.vue";
 import Navbar from "../components/Navbar.vue";
+import AddIssue from "../components/AddIssue.vue";
 export default {
   name: "Home",
   data() {
     return {
       currentTab: "Dashboard",
-      tabs: ["Dashboard", "AllIssues"],
+      addIssueIsVisible: false,
     };
   },
   computed: {},
@@ -28,11 +30,29 @@ export default {
     switchTab(newTab) {
       this.currentTab = newTab;
     },
+    popupAddIssue() {
+      this.addIssueIsVisible = !this.addIssueIsVisible;
+    },
   },
   components: {
     Navbar,
     Dashboard,
     AllIssues,
+    AddIssue,
   },
 };
 </script>
+
+<style scoped>
+.add-issue-button {
+  position: fixed;
+  bottom: 15%;
+  right: 8%;
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  border: 1px black solid;
+  font-size: 30px;
+  text-align: center;
+}
+</style>

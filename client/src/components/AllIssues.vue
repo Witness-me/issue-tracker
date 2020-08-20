@@ -3,8 +3,6 @@
     <hr />
     <h1>All issues</h1>
     <!-- issues go here -->
-    <AddIssue />
-    <hr />
     <div class="issues-container">
       <!-- <button v-on:click="refreshIssues()">Refresh</button> -->
       <p class="count">
@@ -17,7 +15,7 @@
         v-bind:issue="issue"
         v-bind:index="index"
       >
-        {{ getStringFromDate(issue.createdAt) }}
+        <p>Created at: {{ getStringFromDate(issue.createdAt) }}</p>
         <p class="index">{{ `Issue #${issuesCount - index}` }}</p>
         <p class="title">{{ issue.title }}</p>
         <p class="status">Status: {{ issue.status }}</p>
@@ -33,7 +31,6 @@
 
 <script>
 //import * as api from "@/utils/api";
-import AddIssue from "./AddIssue.vue";
 import { mapGetters, mapActions } from "vuex";
 export default {
   name: "AllIssues",
@@ -53,7 +50,6 @@ export default {
   async mounted() {
     this.getAllIssues();
   },
-  components: { AddIssue },
 };
 </script>
 

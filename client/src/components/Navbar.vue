@@ -13,7 +13,7 @@
 <script>
 export default {
   name: "Navbar",
-  props: ["tabs", "currentTab"],
+  // props: ["currentTab"],
   methods: {
     switchTab(tabName) {
       this.$emit("switchTab", tabName);
