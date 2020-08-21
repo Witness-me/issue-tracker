@@ -4,7 +4,8 @@ import App from "./App.vue";
 
 Vue.config.productionTip = false;
 
-/* eslint-disable no-new */
+// export const bus = new Vue();
+
 new Vue({
   render: (h) => h(App),
   store,

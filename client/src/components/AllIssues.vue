@@ -23,7 +23,9 @@
           Comments: {{ issue.comments }}
         </p>
         <p class="priority">Priority: {{ issue.priority }}</p>
-        <button v-on:click="deleteIssue(issue._id)">Delete</button>
+        <button class="delete-issue-button" @click="openDeleteModal(issue)">
+          Delete
+        </button>
       </div>
     </div>
   </div>
@@ -45,6 +47,9 @@ export default {
           ? `0${date.getMonth() + 1}`
           : date.getMonth() + 1
       }-${date.getFullYear()}`;
+    },
+    openDeleteModal(issue) {
+      this.$emit("openDeleteModal", issue);
     },
   },
   async mounted() {

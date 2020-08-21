@@ -21,6 +21,7 @@
 </template>
 
 <script>
+import { bus } from "../main";
 import { mapGetters, mapActions } from "vuex";
 import * as api from "@/utils/api";
 export default {
@@ -32,12 +33,12 @@ export default {
       this.$emit("closePopup");
     },
     async deleteIssue() {
-      await api.deleteIssue(this.issueIdForDeleting);
+      await api.deleteIssue(this.currentIssue._id);
       await this.getAllIssues();
       this.closePopup();
     },
   },
-  props: ["issueIdForDeleting"],
+  props: ["currentIssue"],
 };
 </script>
 

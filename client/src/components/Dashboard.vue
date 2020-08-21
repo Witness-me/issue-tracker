@@ -1,11 +1,6 @@
 <template>
   <div class="wrapper">
     <hr />
-    <DeleteIssue
-      :issueIdForDeleting="issueIdForDeleting"
-      v-if="deleteIssueIsVisible"
-      v-on:closePopup="popupDeleteIssue($event)"
-    />
     <h1>Dashboard</h1>
     <p class="issue-counter">
       {{ `You have ${issuesCount} issues in total` }}
@@ -20,9 +15,7 @@
             v-bind:key="issue._id"
           >
             <p>{{ index + 1 }}</p>
-            <p>
-              Created at: {{ getStringFromDate(issue.createdAt) }}
-            </p>
+            <p>Created at: {{ getStringFromDate(issue.createdAt) }}</p>
             <p class="title">{{ issue.title }}</p>
             <p class="status">Status: {{ issue.status }}</p>
             <p class="comments" v-if="issue.comments">
@@ -31,7 +24,7 @@
             <p class="priority">Priority: {{ issue.priority }}</p>
             <button
               class="delete-issue-button"
-              v-on:click="openDeleteDialog(issue._id)"
+              @click="openDeleteModal(issue)"
             >
               Delete
             </button>
@@ -48,9 +41,7 @@
             v-bind:key="issue._id"
           >
             <p>{{ index + 1 }}</p>
-            <p>
-              Created at: {{ getStringFromDate(issue.createdAt) }}
-            </p>
+            <p>Created at: {{ getStringFromDate(issue.createdAt) }}</p>
             <p class="title">{{ issue.title }}</p>
             <p class="status">Status: {{ issue.status }}</p>
             <p class="comments" v-if="issue.comments">
@@ -59,7 +50,7 @@
             <p class="priority">Priority: {{ issue.priority }}</p>
             <button
               class="delete-issue-button"
-              v-on:click="deleteIssue(issue._id)"
+              @click="openDeleteModal(issue)"
             >
               Delete
             </button>
@@ -76,9 +67,7 @@
             v-bind:key="issue._id"
           >
             <p>{{ index + 1 }}</p>
-            <p>
-              Created at: {{ getStringFromDate(issue.createdAt) }}
-            </p>
+            <p>Created at: {{ getStringFromDate(issue.createdAt) }}</p>
             <p class="title">{{ issue.title }}</p>
             <p class="status">Status: {{ issue.status }}</p>
             <p class="comments" v-if="issue.comments">
@@ -87,7 +76,7 @@
             <p class="priority">Priority: {{ issue.priority }}</p>
             <button
               class="delete-issue-button"
-              v-on:click="deleteIssue(issue._id)"
+              @click="openDeleteModal(issue)"
             >
               Delete
             </button>
@@ -99,7 +88,7 @@
 </template>
 
 <script>
-import DeleteIssue from "./DeleteIssue.vue";
+import { bus } from "../main";
 import { mapGetters, mapActions } from "vuex";
 export default {
   name: "Dashboard",
@@ -112,9 +101,7 @@ export default {
   computed: {
     ...mapGetters(["allIssues", "issuesCount"]),
     statusToDo() {
-      return this.allIssues.filter(
-        (issue) => issue.status === "To do"
-      );
+      return this.allIssues.filter((issue) => issue.status === "To do");
     },
     statusInProgress() {
       return this.allIssues.filter(
@@ -122,9 +109,7 @@ export default {
       );
     },
     statusDone() {
-      return this.allIssues.filter(
-        (issue) => issue.status === "Done"
-      );
+      return this.allIssues.filter((issue) => issue.status === "Done");
     },
   },
   methods: {
@@ -139,19 +124,13 @@ export default {
           : date.getMonth() + 1
       }-${date.getFullYear()}`;
     },
-    popupDeleteIssue() {
-      this.deleteIssueIsVisible = !this.deleteIssueIsVisible;
-    },
-    openDeleteDialog(issueId) {
-      this.issueIdForDeleting = issueId;
-      this.popupDeleteIssue();
+
+    openDeleteModal(issue) {
+      this.$emit("openDeleteModal", issue);
     },
   },
   async mounted() {
     this.getAllIssues();
-  },
-  components: {
-    DeleteIssue,
   },
 };
 </script>

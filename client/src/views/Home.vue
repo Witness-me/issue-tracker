@@ -5,7 +5,15 @@
       v-if="addIssueIsVisible"
       v-on:closePopup="popupAddIssue($event)"
     />
-    <component v-bind:is="currentTab"></component>
+    <DeleteIssue
+      :currentIssue="currentIssue"
+      v-if="deleteIssueIsVisible"
+      v-on:closePopup="popupDeleteIssue($event)"
+    />
+    <component
+      v-bind:is="currentTab"
+      v-on:openDeleteModal="openDeleteModal($event)"
+    ></component>
     <button class="add-issue-button" v-on:click="popupAddIssue">
       +
     </button>
@@ -17,12 +25,15 @@ import AllIssues from "../components/AllIssues.vue";
 import Dashboard from "../components/Dashboard.vue";
 import Navbar from "../components/Navbar.vue";
 import AddIssue from "../components/AddIssue.vue";
+import DeleteIssue from "../components/DeleteIssue.vue";
 export default {
   name: "Home",
   data() {
     return {
       currentTab: "Dashboard",
       addIssueIsVisible: false,
+      deleteIssueIsVisible: false,
+      currentIssue: {},
     };
   },
   computed: {},
@@ -33,12 +44,20 @@ export default {
     popupAddIssue() {
       this.addIssueIsVisible = !this.addIssueIsVisible;
     },
+    popupDeleteIssue() {
+      this.deleteIssueIsVisible = !this.deleteIssueIsVisible;
+    },
+    openDeleteModal(issue) {
+      this.currentIssue = issue;
+      this.popupDeleteIssue();
+    },
   },
   components: {
     Navbar,
     Dashboard,
     AllIssues,
     AddIssue,
+    DeleteIssue,
   },
 };
 </script>
