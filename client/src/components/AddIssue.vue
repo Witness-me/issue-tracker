@@ -9,7 +9,7 @@
         <input
           type="text"
           id="title"
-          v-model="title"
+          v-model="issue.title"
           placeholder="Insert issue's title..."
         />
         <br />
@@ -18,22 +18,17 @@
           type="radio"
           id="to-do"
           value="To do"
-          v-model="status"
+          v-model="issue.status"
         />
         <label for="to-do">To do</label>
         <input
           type="radio"
           id="in-progress"
           value="In progress"
-          v-model="status"
+          v-model="issue.status"
         />
         <label for="in-progress">In progress</label>
-        <input
-          type="radio"
-          id="done"
-          value="Done"
-          v-model="status"
-        />
+        <input type="radio" id="done" value="Done" v-model="issue.status" />
         <label for="done">Done</label>
         <br />
         <!-- comments -->
@@ -41,13 +36,13 @@
         <textarea
           type="text"
           id="comments"
-          v-model="comments"
+          v-model="issue.comments"
           placeholder="Insert your comments..."
         />
         <br />
         <!-- prioriy -->
         <label for="priority">Priority</label>
-        <select v-model="priority" id="priority">
+        <select v-model="issue.priority" id="priority">
           <option value="High">High</option>
           <option value="Medium">Medium</option>
           <option value="Low">Low</option>
@@ -68,20 +63,17 @@ export default {
   name: "AddIssue",
   data() {
     return {
-      title: "",
-      status: "To do",
-      comments: "",
-      priority: "Medium",
+      issue: {
+        title: "",
+        status: "To do",
+        comments: "",
+        priority: "Medium",
+      },
     };
   },
   methods: {
     async addIssue() {
-      await api.addIssue(
-        this.title,
-        this.status,
-        this.comments,
-        this.priority
-      );
+      await api.addIssue(this.issue);
       await this.$store.dispatch("getAllIssues");
       this.closePopup();
     },

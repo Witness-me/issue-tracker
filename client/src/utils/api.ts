@@ -19,13 +19,8 @@ export async function getIssues() {
 }
 
 // Create issue
-export async function addIssue(
-  title: string,
-  status: string,
-  comments: string,
-  priority: string
-) {
-  return axios.post("", { title, comments, status, priority });
+export async function addIssue(issue: object) {
+  return axios.post("", issue);
 }
 
 // Delete issue
