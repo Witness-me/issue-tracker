@@ -14,12 +14,7 @@
         />
         <br />
         <!-- status -->
-        <input
-          type="radio"
-          id="to-do"
-          value="To do"
-          v-model="issue.status"
-        />
+        <input type="radio" id="to-do" value="To do" v-model="issue.status" />
         <label for="to-do">To do</label>
         <input
           type="radio"
@@ -67,7 +62,8 @@ export default {
       await this.$store.dispatch("getAllIssues");
       this.closePopup();
     },
-    closePopup() {
+    async closePopup() {
+      await this.$store.dispatch("getAllIssues");
       this.$emit("closePopup");
     },
   },

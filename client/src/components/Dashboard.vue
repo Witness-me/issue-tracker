@@ -123,7 +123,7 @@
 </template>
 
 <script>
-import { bus } from "../main";
+import { getStringFromDate } from "../utils/dates";
 import { mapGetters, mapActions } from "vuex";
 export default {
   name: "Dashboard",
@@ -170,11 +170,7 @@ export default {
   methods: {
     ...mapActions(["getAllIssues", "deleteIssue"]),
     getStringFromDate(date) {
-      return `${date.getDate() < 10 ? `0${date.getDate()}` : date.getDate()}-${
-        date.getMonth() + 1 < 10
-          ? `0${date.getMonth() + 1}`
-          : date.getMonth() + 1
-      }-${date.getFullYear()}`;
+      return getStringFromDate(date);
     },
 
     openDeleteModal(issue) {
