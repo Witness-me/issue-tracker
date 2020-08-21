@@ -10,9 +10,15 @@
       v-if="deleteIssueIsVisible"
       v-on:closePopup="popupDeleteIssue($event)"
     />
+    <EditIssue
+      :issue="currentIssue"
+      v-if="editIssueIsVisible"
+      v-on:closePopup="popupEditIssue($event)"
+    />
     <component
       v-bind:is="currentTab"
       v-on:openDeleteModal="openDeleteModal($event)"
+      v-on:openEditModal="openEditModal($event)"
     ></component>
     <button class="add-issue-button" v-on:click="popupAddIssue">
       +
@@ -26,6 +32,7 @@ import Dashboard from "../components/Dashboard.vue";
 import Navbar from "../components/Navbar.vue";
 import AddIssue from "../components/AddIssue.vue";
 import DeleteIssue from "../components/DeleteIssue.vue";
+import EditIssue from "../components/EditIssue.vue";
 export default {
   name: "Home",
   data() {
@@ -33,6 +40,7 @@ export default {
       currentTab: "Dashboard",
       addIssueIsVisible: false,
       deleteIssueIsVisible: false,
+      editIssueIsVisible: false,
       currentIssue: {},
     };
   },
@@ -47,9 +55,16 @@ export default {
     popupDeleteIssue() {
       this.deleteIssueIsVisible = !this.deleteIssueIsVisible;
     },
+    popupEditIssue() {
+      this.editIssueIsVisible = !this.editIssueIsVisible;
+    },
     openDeleteModal(issue) {
       this.currentIssue = issue;
       this.popupDeleteIssue();
+    },
+    openEditModal(issue) {
+      this.currentIssue = issue;
+      this.popupEditIssue();
     },
   },
   components: {
@@ -58,6 +73,7 @@ export default {
     AllIssues,
     AddIssue,
     DeleteIssue,
+    EditIssue,
   },
 };
 </script>

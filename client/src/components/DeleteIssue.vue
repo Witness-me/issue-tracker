@@ -5,8 +5,7 @@
       <!-- input form -->
       <div class="delete-issue">
         <p>
-          Are you sure that you want to permanently delete the
-          issue?
+          Are you sure that you want to permanently delete the issue?
         </p>
         <!-- button -->
         <button @click="deleteIssue()">
@@ -21,20 +20,16 @@
 </template>
 
 <script>
-import { bus } from "../main";
-import { mapGetters, mapActions } from "vuex";
 import * as api from "@/utils/api";
 export default {
   name: "DeleteIssue",
-  computed: mapGetters(["allIssues", "issuesCount"]),
   methods: {
-    ...mapActions(["getAllIssues"]),
     closePopup() {
       this.$emit("closePopup");
     },
     async deleteIssue() {
       await api.deleteIssue(this.currentIssue._id);
-      await this.getAllIssues();
+      await this.$store.dispatch("getAllIssues");
       this.closePopup();
     },
   },

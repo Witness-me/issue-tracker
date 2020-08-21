@@ -23,6 +23,9 @@
           Comments: {{ issue.comments }}
         </p>
         <p class="priority">Priority: {{ issue.priority }}</p>
+        <button class="edit-issue-button" @click="openEditModal(issue)">
+          Edit
+        </button>
         <button class="delete-issue-button" @click="openDeleteModal(issue)">
           Delete
         </button>
@@ -50,6 +53,9 @@ export default {
     },
     openDeleteModal(issue) {
       this.$emit("openDeleteModal", issue);
+    },
+    openEditModal(issue) {
+      this.$emit("openEditModal", issue);
     },
   },
   async mounted() {

@@ -32,3 +32,8 @@ export async function addIssue(
 export async function deleteIssue(id: string) {
   return axios.delete(`delete/${id}`);
 }
+
+// Edit issue
+export async function editIssue(issue: any) {
+  return axios.put(`edit/${issue._id}`, issue);
+}
