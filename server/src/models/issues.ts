@@ -29,25 +29,25 @@ export async function getIssues(req: Request) {
 }
 
 // Add issue
-export async function addIssue(req: Request) {
+export async function addIssue(issue: any) {
   console.log("adding issues...");
   let entry = await new Issue({
-    title: req.body.title,
-    status: req.body.status,
+    title: issue.title,
+    status: issue.status,
     createdAt: new Date(),
     updatedAt: new Date(),
-    comments: req.body.comments || null,
-    priority: req.body.priority,
-    deadline: req.body.deadline || null,
+    comments: issue.comments || null,
+    priority: issue.priority,
+    deadline: issue.deadline || null,
   }).save();
   return entry;
 }
 
 // Update issue
-export async function updateIssue(req: Request) {
+export async function updateIssue(issues: any) {
   console.log("updating issue...");
-  const filter = { _id: req.params.id };
-  const update = req.body;
+  const filter = { _id: issues._id };
+  const update = issues;
   update.updatedAt = new Date();
   const result = await Issue.findOneAndUpdate(filter, update);
   if (!result) throw new Error(`Failed to find or update message`);

@@ -28,14 +28,14 @@ router.get("/", async (req: Request, res: Response) => {
 // Add issue
 router.post("/", async (req: Request, res: Response) => {
   console.log("post request...");
-  await addIssue(req);
+  await addIssue(req.body);
   res.status(201).send();
 });
 
 // Update issue (by ID)
-router.put("/:id", async (req: Request, res: Response) => {
+router.put("/edit/:id", async (req: Request, res: Response) => {
   console.log("put request...");
-  await updateIssue(req);
+  await updateIssue(req.body);
   res.status(201).send();
 });
 
@@ -46,11 +46,11 @@ router.delete("/delete/:id", async (req: Request, res: Response) => {
   res.status(200).send();
 });
 
-// Delete all issues
-router.delete("/deleteall", async (req: Request, res: Response) => {
-  console.log("delete request...");
-  await deleteAll();
-  res.status(200).send();
-});
+// // Delete all issues
+// router.delete("/deleteall", async (req: Request, res: Response) => {
+//   console.log("delete request...");
+//   await deleteAll();
+//   res.status(200).send();
+// });
 
 module.exports = router;

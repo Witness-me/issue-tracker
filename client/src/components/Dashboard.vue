@@ -9,10 +9,22 @@
       <section class="dashboard-section">
         <h3 class="section-header">To do</h3>
         <div class="section-insides">
+          <div class="issues-count">
+            <p v-if="statusToDoLength === 0">
+              You have not planned any tasks to do! Why not do it now?
+            </p>
+            <p v-else-if="statusToDoLength === 1">
+              You have 1 issue in your backlog!
+            </p>
+            <p v-else>
+              You have {{ statusToDoLength }} issues in your backlog!
+            </p>
+          </div>
           <div
             class="section-point"
             v-for="(issue, index) in statusToDo"
             v-bind:key="issue._id"
+            v-bind:class="{}"
           >
             <p>{{ index + 1 }}</p>
             <p>Created at: {{ getStringFromDate(issue.createdAt) }}</p>
@@ -38,6 +50,19 @@
       <section class="dashboard-section">
         <h3 class="section-header">In progress</h3>
         <div class="section-insides">
+          <div class="issues-count">
+            <p v-if="statusInProgressLength === 0">
+              You are not working on any issues. High time to start!
+            </p>
+            <p v-else-if="statusInProgressLength === 1">
+              You are currently working on
+              {{ statusInProgressLength }} issue!
+            </p>
+            <p v-else>
+              You are currently working on
+              {{ statusInProgressLength }} issues!
+            </p>
+          </div>
           <div
             class="section-point"
             v-for="(issue, index) in statusInProgress"
@@ -67,6 +92,17 @@
       <section class="dashboard-section">
         <h3 class="section-header">Done</h3>
         <div class="section-insides">
+          <div class="issues-count">
+            <p v-if="statusDoneLength === 0">
+              You have not yet finished any tasks...
+            </p>
+            <p v-else-if="statusDoneLength === 1">
+              You have finished 1 issue!
+            </p>
+            <p v-else>
+              You have finished {{ statusDoneLength }} issues! Keep it up!
+            </p>
+          </div>
           <div
             class="section-point"
             v-for="(issue, index) in statusDone"
@@ -112,13 +148,28 @@ export default {
     statusToDo() {
       return this.allIssues.filter((issue) => issue.status === "To do");
     },
+    statusToDoLength() {
+      return this.statusToDo.length;
+    },
+
     statusInProgress() {
       return this.allIssues.filter(
         (issue) => issue.status === "In progress"
       );
     },
+    statusInProgressLength() {
+      return this.statusInProgress.length;
+    },
+
     statusDone() {
       return this.allIssues.filter((issue) => issue.status === "Done");
+    },
+    statusDoneLength() {
+      return this.statusDone.length;
+    },
+
+    isHighPriority(issue) {
+      return issue.priority === "High";
     },
   },
   methods: {
@@ -173,7 +224,7 @@ export default {
 .section-point {
   background: olivedrab;
 }
-
-.delete-issue-button {
+.high-priority {
+  background: rebeccapurple;
 }
 </style>
