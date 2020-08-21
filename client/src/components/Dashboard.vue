@@ -1,6 +1,11 @@
 <template>
   <div class="wrapper">
     <hr />
+    <DeleteIssue
+      :issueIdForDeleting="issueIdForDeleting"
+      v-if="deleteIssueIsVisible"
+      v-on:closePopup="popupDeleteIssue($event)"
+    />
     <h1>Dashboard</h1>
     <p class="issue-counter">
       {{ `You have ${issuesCount} issues in total` }}
@@ -26,7 +31,7 @@
             <p class="priority">Priority: {{ issue.priority }}</p>
             <button
               class="delete-issue-button"
-              v-on:click="deleteIssue(issue._id)"
+              v-on:click="openDeleteDialog(issue._id)"
             >
               Delete
             </button>
@@ -94,11 +99,15 @@
 </template>
 
 <script>
+import DeleteIssue from "./DeleteIssue.vue";
 import { mapGetters, mapActions } from "vuex";
 export default {
   name: "Dashboard",
   data() {
-    return {};
+    return {
+      issueIdForDeleting: "",
+      deleteIssueIsVisible: false,
+    };
   },
   computed: {
     ...mapGetters(["allIssues", "issuesCount"]),
@@ -130,9 +139,19 @@ export default {
           : date.getMonth() + 1
       }-${date.getFullYear()}`;
     },
+    popupDeleteIssue() {
+      this.deleteIssueIsVisible = !this.deleteIssueIsVisible;
+    },
+    openDeleteDialog(issueId) {
+      this.issueIdForDeleting = issueId;
+      this.popupDeleteIssue();
+    },
   },
   async mounted() {
     this.getAllIssues();
+  },
+  components: {
+    DeleteIssue,
   },
 };
 </script>
