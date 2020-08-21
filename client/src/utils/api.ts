@@ -11,7 +11,6 @@ const axios = require("axios").create({
 export async function getIssues() {
   const result = await axios.get("/all");
   const data = result.data;
-  console.log("data", data);
   const issues = data.map((issue: any) => ({
     ...issue,
     createdAt: new Date(issue.createdAt),

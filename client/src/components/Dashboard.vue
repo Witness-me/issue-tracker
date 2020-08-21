@@ -26,10 +26,9 @@
             v-bind:key="issue._id"
             v-bind:class="{}"
           >
-            <p>{{ index + 1 }}</p>
+            <p>#{{ index + 1 }}</p>
             <p>Last updated at: {{ getStringFromDate(issue.updatedAt) }}</p>
             <p class="title">{{ issue.title }}</p>
-            <p class="status">Status: {{ issue.status }}</p>
             <p class="comments" v-if="issue.comments">
               Comments: {{ issue.comments }}
             </p>
@@ -64,10 +63,9 @@
             v-for="(issue, index) in statusInProgress"
             v-bind:key="issue._id"
           >
-            <p>{{ index + 1 }}</p>
+            <p>#{{ index + 1 }}</p>
             <p>Last updated at: {{ getStringFromDate(issue.updatedAt) }}</p>
             <p class="title">{{ issue.title }}</p>
-            <p class="status">Status: {{ issue.status }}</p>
             <p class="comments" v-if="issue.comments">
               Comments: {{ issue.comments }}
             </p>
@@ -101,10 +99,9 @@
             v-for="(issue, index) in statusDone"
             v-bind:key="issue._id"
           >
-            <p>{{ index + 1 }}</p>
+            <p>#{{ index + 1 }}</p>
             <p>Last updated at: {{ getStringFromDate(issue.updatedAt) }}</p>
             <p class="title">{{ issue.title }}</p>
-            <p class="status">Status: {{ issue.status }}</p>
             <p class="comments" v-if="issue.comments">
               Comments: {{ issue.comments }}
             </p>
@@ -139,6 +136,7 @@ export default {
       const todoIssues = this.allIssues.filter(
         issue => issue.status === "To do"
       );
+      this.sortByUpdateTime(todoIssues);
       return this.sortByPriority(todoIssues);
     },
 
@@ -150,6 +148,7 @@ export default {
       const issuesInProgress = this.allIssues.filter(
         issue => issue.status === "In progress"
       );
+      this.sortByUpdateTime(issuesInProgress);
       return this.sortByPriority(issuesInProgress);
     },
     statusInProgressLength() {
@@ -157,7 +156,10 @@ export default {
     },
 
     statusDone() {
-      return this.allIssues.filter(issue => issue.status === "Done");
+      const issuesDone = this.allIssues.filter(
+        issue => issue.status === "Done"
+      );
+      return this.sortByUpdateTime(issuesDone);
     },
     statusDoneLength() {
       return this.statusDone.length;
@@ -184,6 +186,9 @@ export default {
       const mediumPriority = array.filter(issue => issue.priority === "Medium");
       const lowPriority = array.filter(issue => issue.priority === "Low");
       return highPriority.concat(mediumPriority, lowPriority);
+    },
+    sortByUpdateTime(array) {
+      return array.sort((a, b) => b.updatedAt - a.updatedAt);
     },
   },
   async mounted() {
