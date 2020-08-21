@@ -37,19 +37,14 @@
 <script>
 //import * as api from "@/utils/api";
 import { mapGetters, mapActions } from "vuex";
+import { getStringFromDate } from "../utils/dates";
 export default {
   name: "AllIssues",
   computed: mapGetters(["allIssues", "issuesCount"]),
   methods: {
     ...mapActions(["getAllIssues", "deleteIssue"]),
     getStringFromDate(date) {
-      return `${
-        date.getDate() < 10 ? `0${date.getDate()}` : date.getDate()
-      }-${
-        date.getMonth() + 1 < 10
-          ? `0${date.getMonth() + 1}`
-          : date.getMonth() + 1
-      }-${date.getFullYear()}`;
+      return getStringFromDate(date);
     },
     openDeleteModal(issue) {
       this.$emit("openDeleteModal", issue);

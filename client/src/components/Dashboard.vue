@@ -27,7 +27,7 @@
             v-bind:class="{}"
           >
             <p>{{ index + 1 }}</p>
-            <p>Created at: {{ getStringFromDate(issue.createdAt) }}</p>
+            <p>Last updated at: {{ getStringFromDate(issue.updatedAt) }}</p>
             <p class="title">{{ issue.title }}</p>
             <p class="status">Status: {{ issue.status }}</p>
             <p class="comments" v-if="issue.comments">
@@ -65,7 +65,7 @@
             v-bind:key="issue._id"
           >
             <p>{{ index + 1 }}</p>
-            <p>Created at: {{ getStringFromDate(issue.createdAt) }}</p>
+            <p>Last updated at: {{ getStringFromDate(issue.updatedAt) }}</p>
             <p class="title">{{ issue.title }}</p>
             <p class="status">Status: {{ issue.status }}</p>
             <p class="comments" v-if="issue.comments">
@@ -102,7 +102,7 @@
             v-bind:key="issue._id"
           >
             <p>{{ index + 1 }}</p>
-            <p>Created at: {{ getStringFromDate(issue.createdAt) }}</p>
+            <p>Last updated at: {{ getStringFromDate(issue.updatedAt) }}</p>
             <p class="title">{{ issue.title }}</p>
             <p class="status">Status: {{ issue.status }}</p>
             <p class="comments" v-if="issue.comments">
