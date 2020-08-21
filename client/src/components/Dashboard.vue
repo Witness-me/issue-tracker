@@ -37,10 +37,7 @@
             <button class="edit-issue-button" @click="openEditModal(issue)">
               Edit
             </button>
-            <button
-              class="delete-issue-button"
-              @click="openDeleteModal(issue)"
-            >
+            <button class="delete-issue-button" @click="openDeleteModal(issue)">
               Delete
             </button>
           </div>
@@ -52,11 +49,10 @@
         <div class="section-insides">
           <div class="issues-count">
             <p v-if="statusInProgressLength === 0">
-              You are not working on any issues. High time to start!
+              You are not currently working on any issues. High time to start!
             </p>
             <p v-else-if="statusInProgressLength === 1">
-              You are currently working on
-              {{ statusInProgressLength }} issue!
+              You are currently working on 1 issue!
             </p>
             <p v-else>
               You are currently working on
@@ -79,10 +75,7 @@
             <button class="edit-issue-button" @click="openEditModal(issue)">
               Edit
             </button>
-            <button
-              class="delete-issue-button"
-              @click="openDeleteModal(issue)"
-            >
+            <button class="delete-issue-button" @click="openDeleteModal(issue)">
               Delete
             </button>
           </div>
@@ -97,10 +90,10 @@
               You have not yet finished any tasks...
             </p>
             <p v-else-if="statusDoneLength === 1">
-              You have finished 1 issue!
+              You have finished 1 task!
             </p>
             <p v-else>
-              You have finished {{ statusDoneLength }} issues! Keep it up!
+              You have finished {{ statusDoneLength }} tasks! Keep it up!
             </p>
           </div>
           <div
@@ -119,10 +112,7 @@
             <button class="edit-issue-button" @click="openEditModal(issue)">
               Edit
             </button>
-            <button
-              class="delete-issue-button"
-              @click="openDeleteModal(issue)"
-            >
+            <button class="delete-issue-button" @click="openDeleteModal(issue)">
               Delete
             </button>
           </div>
@@ -146,23 +136,28 @@ export default {
   computed: {
     ...mapGetters(["allIssues", "issuesCount"]),
     statusToDo() {
-      return this.allIssues.filter((issue) => issue.status === "To do");
+      const todoIssues = this.allIssues.filter(
+        issue => issue.status === "To do"
+      );
+      return this.sortByPriority(todoIssues);
     },
+
     statusToDoLength() {
       return this.statusToDo.length;
     },
 
     statusInProgress() {
-      return this.allIssues.filter(
-        (issue) => issue.status === "In progress"
+      const issuesInProgress = this.allIssues.filter(
+        issue => issue.status === "In progress"
       );
+      return this.sortByPriority(issuesInProgress);
     },
     statusInProgressLength() {
       return this.statusInProgress.length;
     },
 
     statusDone() {
-      return this.allIssues.filter((issue) => issue.status === "Done");
+      return this.allIssues.filter(issue => issue.status === "Done");
     },
     statusDoneLength() {
       return this.statusDone.length;
@@ -175,10 +170,7 @@ export default {
   methods: {
     ...mapActions(["getAllIssues", "deleteIssue"]),
     getStringFromDate(date) {
-      // eslint-disable-next-line prettier/prettier
-      return `${
-        date.getDate() < 10 ? `0${date.getDate()}` : date.getDate()
-      }-${
+      return `${date.getDate() < 10 ? `0${date.getDate()}` : date.getDate()}-${
         date.getMonth() + 1 < 10
           ? `0${date.getMonth() + 1}`
           : date.getMonth() + 1
@@ -190,6 +182,12 @@ export default {
     },
     openEditModal(issue) {
       this.$emit("openEditModal", issue);
+    },
+    sortByPriority(array) {
+      const highPriority = array.filter(issue => issue.priority === "High");
+      const mediumPriority = array.filter(issue => issue.priority === "Medium");
+      const lowPriority = array.filter(issue => issue.priority === "Low");
+      return highPriority.concat(mediumPriority, lowPriority);
     },
   },
   async mounted() {
