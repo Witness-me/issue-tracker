@@ -9,7 +9,6 @@ const issueSchema = new mongoose.Schema({
   updatedAt: Date,
   comments: String,
   priority: { type: String, required: [true, "Priority should be stated"] },
-  deadline: Date,
 });
 const Issue = mongoose.model("issue", issueSchema);
 
@@ -38,7 +37,6 @@ export async function addIssue(issue: any) {
     updatedAt: new Date(),
     comments: issue.comments || null,
     priority: issue.priority,
-    deadline: issue.deadline || null,
   }).save();
   return entry;
 }
