@@ -14,3 +14,5 @@ const userSchema = new Schema({
 const User = mongoose.model("user", userSchema);
 
 // more on that https://thinkster.io/tutorials/node-json-api/creating-the-user-model
+// https://www.mongodb.com/blog/post/6-rules-of-thumb-for-mongodb-schema-design-part-1
+// https://www.youtube.com/watch?v=kjKR0q8EBKE

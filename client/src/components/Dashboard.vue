@@ -223,6 +223,8 @@ export default {
   border-radius: 10px;
   background-color: #37bb73;
   color: #ffffff;
+  height: 700px;
+  overflow-y: scroll;
 }
 .section-insides {
   background: rgb(65, 151, 248);
