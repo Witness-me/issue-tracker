@@ -1,33 +1,42 @@
 <template>
-  <div class="container">
-    <hr />
+  <div class="wrapper">
     <h1>All issues</h1>
-    <!-- issues go here -->
     <div class="issues-container">
-      <!-- <button v-on:click="refreshIssues()">Refresh</button> -->
-      <p class="count">
+      <p class="counter">
         {{ `You have ${issuesCount} issues in total` }}
       </p>
-      <div
-        class="issue"
-        v-for="(issue, index) in allIssues"
-        v-bind:key="issue._id"
-      >
-        <p>Created at: {{ getStringFromDate(issue.createdAt) }}</p>
-        <p class="index">{{ `Issue #${issuesCount - index}` }}</p>
-        <p class="title">{{ issue.title }}</p>
-        <p class="status">Status: {{ issue.status }}</p>
-        <p class="comments" v-if="issue.comments">
-          Comments: {{ issue.comments }}
-        </p>
-        <p class="priority">Priority: {{ issue.priority }}</p>
-        <button class="edit-issue-button" @click="openEditModal(issue)">
-          Edit
-        </button>
-        <button class="delete-issue-button" @click="openDeleteModal(issue)">
-          Delete
-        </button>
-      </div>
+      <table>
+        <tr>
+          <th>#</th>
+          <!-- <th>Created at</th> -->
+          <th>Last updated at</th>
+          <th>Title</th>
+          <th>Comments</th>
+          <th>Status</th>
+          <th>Priority</th>
+          <th>Edit</th>
+          <th>Delete</th>
+        </tr>
+        <tr v-for="(issue, index) in allIssues" v-bind:key="issue._id">
+          <td>{{ `${issuesCount - index}` }}</td>
+          <!-- <td>{{ getStringFromDate(issue.createdAt) }}</td> -->
+          <td>{{ getStringFromDate(issue.updatedAt) }}</td>
+          <td>{{ issue.title }}</td>
+          <td>{{ issue.comments }}</td>
+          <td>{{ issue.status }}</td>
+          <td>{{ issue.priority }}</td>
+          <td>
+            <button class="edit-issue-button" @click="openEditModal(issue)">
+              Edit
+            </button>
+          </td>
+          <td>
+            <button class="delete-issue-button" @click="openDeleteModal(issue)">
+              Delete
+            </button>
+          </td>
+        </tr>
+      </table>
     </div>
   </div>
 </template>
@@ -59,8 +68,9 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-div.container {
-  max-width: 800px;
+.wrapper {
+  min-width: 800px;
+  max-width: 1200px;
   margin: 0 auto;
 }
 

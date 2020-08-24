@@ -1,6 +1,5 @@
 <template>
   <div class="wrapper">
-    <hr />
     <h1>Dashboard</h1>
     <p class="issue-counter">
       {{ `You have ${issuesCount} issues in total` }}

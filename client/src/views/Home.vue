@@ -58,13 +58,13 @@ export default {
     popupEditIssue() {
       this.editIssueIsVisible = !this.editIssueIsVisible;
     },
-    openDeleteModal(issue) {
-      this.currentIssue = issue;
-      this.popupDeleteIssue();
-    },
     openEditModal(issue) {
       this.currentIssue = issue;
       this.popupEditIssue();
+    },
+    openDeleteModal(issue) {
+      this.currentIssue = issue;
+      this.popupDeleteIssue();
     },
   },
   components: {

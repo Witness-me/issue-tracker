@@ -1,19 +1,22 @@
 <template>
   <div class="container">
-    <div><img alt="Vue logo" src="../assets/logo.png" /></div>
+    <!-- server data link -->
+    <router-link to="/server" class="router-link">
+      <button>View server data</button>
+    </router-link>
     <button class="dashboard" v-on:click="switchTab('Dashboard')">
       Dashboard
     </button>
     <button class="all-issues" v-on:click="switchTab('AllIssues')">
       All issues
     </button>
+    <hr />
   </div>
 </template>
 
 <script>
 export default {
   name: "Navbar",
-  // props: ["currentTab"],
   methods: {
     switchTab(tabName) {
       this.$emit("switchTab", tabName);
@@ -22,4 +25,10 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.router-link {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+</style>
