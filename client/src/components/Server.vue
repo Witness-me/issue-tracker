@@ -8,9 +8,9 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from "vuex";
+import { mapGetters } from "vuex";
 export default {
   name: "Server",
-  computed: mapGetters(["allIssues", "issuesCount"]),
+  computed: mapGetters(["allIssues"]),
 };
 </script>
