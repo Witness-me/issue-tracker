@@ -218,10 +218,10 @@ export default {
   color: #ffffff;
 }
 .section-insides {
-  background: yellowgreen;
+  background: rgb(65, 151, 248);
 }
 .section-point {
-  background: olivedrab;
+  background: rgb(217, 127, 253);
 }
 .high-priority {
   background: rebeccapurple;

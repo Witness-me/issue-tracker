@@ -22,10 +22,6 @@ export default new Vuex.Store({
       const issues = await api.getIssues();
       ctx.commit("updateIssues", issues);
     },
-    async deleteIssue(ctx, id: string) {
-      await api.deleteIssue(id);
-      await this.dispatch("getAllIssues");
-    },
   },
   getters: {
     allIssues(state) {
