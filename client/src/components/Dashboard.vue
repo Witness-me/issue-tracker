@@ -24,7 +24,10 @@
             class="section-point"
             v-for="(issue, index) in statusToDo"
             v-bind:key="issue._id"
-            v-bind:class="{}"
+            v-bind:class="{
+              'high-priority': isHighPriority(issue),
+              'low-priority': isLowPriority(issue),
+            }"
           >
             <p>#{{ index + 1 }}</p>
             <p>Last updated at: {{ getStringFromDate(issue.updatedAt) }}</p>
@@ -125,10 +128,7 @@ import { mapGetters, mapActions } from "vuex";
 export default {
   name: "Dashboard",
   data() {
-    return {
-      issueIdForDeleting: "",
-      deleteIssueIsVisible: false,
-    };
+    return {};
   },
   computed: {
     ...mapGetters(["allIssues", "issuesCount"]),
@@ -165,12 +165,19 @@ export default {
       return this.statusDone.length;
     },
 
-    isHighPriority(issue) {
-      return issue.priority === "High";
-    },
+    // isHighPriority(issue) {
+    //   // return issue.priority === "High";
+    //   return true;
+    // },
   },
   methods: {
     ...mapActions(["getAllIssues", "deleteIssue"]),
+    isHighPriority(issue) {
+      return issue.priority === "High";
+    },
+    isLowPriority(issue) {
+      return issue.priority === "Low";
+    },
     getStringFromDate(date) {
       return getStringFromDate(date);
     },
@@ -221,9 +228,12 @@ export default {
   background: rgb(65, 151, 248);
 }
 .section-point {
-  background: rgb(217, 127, 253);
+  background: rgb(115, 78, 153);
 }
 .high-priority {
   background: rebeccapurple;
+}
+.low-priority {
+  background: rgb(129, 104, 155);
 }
 </style>

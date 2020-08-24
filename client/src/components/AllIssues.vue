@@ -12,8 +12,6 @@
         class="issue"
         v-for="(issue, index) in allIssues"
         v-bind:key="issue._id"
-        v-bind:issue="issue"
-        v-bind:index="index"
       >
         <p>Created at: {{ getStringFromDate(issue.createdAt) }}</p>
         <p class="index">{{ `Issue #${issuesCount - index}` }}</p>
