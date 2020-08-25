@@ -205,7 +205,7 @@ export default {
 
 <style scoped>
 .wrapper {
-  min-width: 620px;
+  text-align: center;
 }
 
 .dashboard-container {
@@ -222,7 +222,7 @@ export default {
   border-radius: 10px;
   background-color: #37bb73;
   color: #ffffff;
-  height: 700px;
+  height: 400px;
   overflow-y: scroll;
 }
 .section-insides {

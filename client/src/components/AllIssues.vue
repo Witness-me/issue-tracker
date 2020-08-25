@@ -7,22 +7,20 @@
       </p>
       <table>
         <tr>
+          <th></th>
           <th>#</th>
-          <!-- <th>Created at</th> -->
-          <th>Last updated at</th>
+          <th>Created at</th>
           <th>Title</th>
-          <th>Comments</th>
           <th>Status</th>
           <th>Priority</th>
           <th>Edit</th>
           <th>Delete</th>
         </tr>
         <tr v-for="(issue, index) in allIssues" v-bind:key="issue._id">
+          <td><a href="#" v-if="issue.status !== 'Done'">Done</a></td>
           <td>{{ `${issuesCount - index}` }}</td>
-          <!-- <td>{{ getStringFromDate(issue.createdAt) }}</td> -->
-          <td>{{ getStringFromDate(issue.updatedAt) }}</td>
+          <td>{{ getStringFromDate(issue.createdAt) }}</td>
           <td>{{ issue.title }}</td>
-          <td>{{ issue.comments }}</td>
           <td>{{ issue.status }}</td>
           <td>{{ issue.priority }}</td>
           <td>
@@ -72,6 +70,7 @@ export default {
   min-width: 800px;
   max-width: 1200px;
   margin: 0 auto;
+  text-align: center;
 }
 
 p.error {
