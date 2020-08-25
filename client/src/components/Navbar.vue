@@ -2,10 +2,10 @@
   <div class="navbar-wrapper">
     <img class="logo" src="../assets/bug.png" />
     <!-- Icon above made by <a href="https://www.flaticon.com/authors/vitaly-gorbachev" title="Vitaly Gorbachev">Vitaly Gorbachev</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a> -->
-    <button class="navbar-button" v-on:click="switchTab('Dashboard')">
+    <button class="navbar-button" @click="switchTab('Dashboard')">
       Dashboard
     </button>
-    <button class="navbar-button" v-on:click="switchTab('AllIssues')">
+    <button class="navbar-button" @click="switchTab('AllIssues')">
       All issues
     </button>
     <div class="navbar-pannel">
@@ -31,11 +31,12 @@ export default {
 .navbar-wrapper {
   height: 40px;
   background: #4d4ee3;
+  color: black;
   display: flex;
 }
 .logo {
   height: 32px;
-  margin: auto 10px;
+  margin: 4px 10px;
   transform: rotate(30deg);
 }
 .navbar-button {
@@ -48,7 +49,6 @@ export default {
   border: 0;
 }
 .navbar-button:hover {
-  /* background: rgb(98, 98, 231); */
   background: #6b6be0;
 }
 .navbar-pannel {

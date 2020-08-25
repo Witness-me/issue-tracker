@@ -1,10 +1,16 @@
 <template>
   <div class="server-wrapper">
-    <header class="navbar-pannel">
+    <div class="navbar-wrapper">
       <router-link to="/">
-        <button class="navbar-button">Back to Homepage</button>
+        <img class="logo" src="../assets/bug.png" />
       </router-link>
-    </header>
+
+      <div class="navbar-pannel">
+        <router-link to="/">
+          <button class="navbar-button">Back to Homepage</button>
+        </router-link>
+      </div>
+    </div>
     <h1>Server information</h1>
 
     <div v-for="issue in allIssues" v-bind:key="issue._id">

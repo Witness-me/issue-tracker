@@ -31,11 +31,11 @@ export default {
 
 <style scoped>
 .wrapper {
-  box-sizing: border-box;
-  margin: 0;
-  height: 40px;
-  background: #bbcde5;
-  text-align: center;
+  height: 39px;
+  background: #f1f3f8;
+  display: flex;
+  justify-content: center;
+  border-top: 1px solid #4d4ee3;
 }
 .contact-icon {
   height: 20px;

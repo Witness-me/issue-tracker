@@ -14,12 +14,7 @@
         />
         <br />
         <!-- status -->
-        <input
-          type="radio"
-          id="to-do"
-          value="To do"
-          v-model="issue.status"
-        />
+        <input type="radio" id="to-do" value="To do" v-model="issue.status" />
         <label for="to-do">To do</label>
         <input
           type="radio"
@@ -106,12 +101,6 @@ export default {
   height: 250px;
   background: blanchedalmond;
   border: 1px black solid;
-
-  /* left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  margin: auto; */
   z-index: 15;
 }
 </style>

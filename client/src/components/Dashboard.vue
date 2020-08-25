@@ -1,119 +1,170 @@
 <template>
   <div class="wrapper">
-    <h1>Dashboard</h1>
-    <p class="issue-counter">
-      {{ `You have ${issuesCount} issues in total` }}
-    </p>
     <div class="dashboard-container">
       <section class="dashboard-section">
-        <h3 class="section-header">To do</h3>
-        <div class="section-insides">
-          <div class="issues-count">
-            <p v-if="statusToDoLength === 0">
-              You have not planned any tasks to do! Why not do it now?
-            </p>
-            <p v-else-if="statusToDoLength === 1">
-              You have 1 issue in your backlog!
-            </p>
-            <p v-else>
-              You have {{ statusToDoLength }} issues in your backlog!
-            </p>
+        <div class="section-header-container">
+          <div>
+            <h3 class="section-header">To do</h3>
+            <div class="issues-count">
+              <p v-if="statusToDoLength === 0">
+                You have not yet planned any tasks to do
+              </p>
+              <p v-else-if="statusToDoLength === 1">
+                You have 1 issue in your backlog!
+              </p>
+              <p v-else>
+                You have {{ statusToDoLength }} issues in your backlog!
+              </p>
+            </div>
           </div>
+          <div class="section-header-reverse">
+            <img src="../assets/plus.png" class="add-issue-button" alt="" />
+          </div>
+        </div>
+        <div class="section-insides">
           <div
             class="section-point"
-            v-for="(issue, index) in statusToDo"
+            v-for="issue in statusToDo"
             v-bind:key="issue._id"
             v-bind:class="{
               'high-priority': isHighPriority(issue),
               'low-priority': isLowPriority(issue),
             }"
           >
-            <p>#{{ index + 1 }}</p>
-            <p>Last updated at: {{ getStringFromDate(issue.updatedAt) }}</p>
+            <p class="update-date">
+              Last updated at: {{ getStringFromDate(issue.updatedAt) }}
+            </p>
             <p class="title">{{ issue.title }}</p>
             <p class="comments" v-if="issue.comments">
               Comments: {{ issue.comments }}
             </p>
-            <p class="priority">Priority: {{ issue.priority }}</p>
-            <button class="edit-issue-button" @click="openEditModal(issue)">
-              Edit
-            </button>
-            <button class="delete-issue-button" @click="openDeleteModal(issue)">
-              Delete
-            </button>
+            <div class="section-point-ending">
+              <div class="priority">Priority: {{ issue.priority }}</div>
+              <div class="section-point-ending-reverse">
+                <img
+                  class="dashboard-icon"
+                  src="../assets/marker.png"
+                  alt=""
+                  @click="openEditModal(issue)"
+                />
+                <img
+                  class="dashboard-icon"
+                  src="../assets/delete.png"
+                  alt=""
+                  @click="openDeleteModal(issue)"
+                />
+                <img class="dashboard-icon" src="../assets/next.png" alt="" />
+                <img class="dashboard-icon" src="../assets/tick.png" alt="" />
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
       <section class="dashboard-section">
-        <h3 class="section-header">In progress</h3>
-        <div class="section-insides">
-          <div class="issues-count">
-            <p v-if="statusInProgressLength === 0">
-              You are not currently working on any issues. High time to start!
-            </p>
-            <p v-else-if="statusInProgressLength === 1">
-              You are currently working on 1 issue!
-            </p>
-            <p v-else>
-              You are currently working on
-              {{ statusInProgressLength }} issues!
-            </p>
+        <div class="section-header-container">
+          <div>
+            <h3 class="section-header">In progress</h3>
+            <div class="issues-count">
+              <p v-if="statusInProgressLength === 0">
+                High time to start working on something!
+              </p>
+              <p v-else-if="statusInProgressLength === 1">
+                You are currently working on 1 issue!
+              </p>
+              <p v-else>
+                You are currently working on
+                {{ statusInProgressLength }} issues!
+              </p>
+            </div>
           </div>
+          <div class="section-header-reverse">
+            <img src="../assets/plus.png" class="add-issue-button" alt="" />
+          </div>
+        </div>
+        <div class="section-insides">
           <div
             class="section-point"
-            v-for="(issue, index) in statusInProgress"
+            v-for="issue in statusInProgress"
             v-bind:key="issue._id"
           >
-            <p>#{{ index + 1 }}</p>
-            <p>Last updated at: {{ getStringFromDate(issue.updatedAt) }}</p>
+            <p class="update-date">
+              Last updated at: {{ getStringFromDate(issue.updatedAt) }}
+            </p>
             <p class="title">{{ issue.title }}</p>
             <p class="comments" v-if="issue.comments">
               Comments: {{ issue.comments }}
             </p>
-            <p class="priority">Priority: {{ issue.priority }}</p>
-            <button class="edit-issue-button" @click="openEditModal(issue)">
-              Edit
-            </button>
-            <button class="delete-issue-button" @click="openDeleteModal(issue)">
-              Delete
-            </button>
+            <div class="section-point-ending">
+              <div class="priority">Priority: {{ issue.priority }}</div>
+              <div class="section-point-ending-reverse">
+                <img
+                  class="dashboard-icon"
+                  src="../assets/marker.png"
+                  alt=""
+                  @click="openEditModal(issue)"
+                />
+                <img
+                  class="dashboard-icon"
+                  src="../assets/delete.png"
+                  alt=""
+                  @click="openDeleteModal(issue)"
+                />
+                <img class="dashboard-icon" src="../assets/tick.png" alt="" />
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
       <section class="dashboard-section">
-        <h3 class="section-header">Done</h3>
-        <div class="section-insides">
-          <div class="issues-count">
-            <p v-if="statusDoneLength === 0">
-              You have not yet finished any tasks...
-            </p>
-            <p v-else-if="statusDoneLength === 1">
-              You have finished 1 task!
-            </p>
-            <p v-else>
-              You have finished {{ statusDoneLength }} tasks! Keep it up!
-            </p>
+        <div class="section-header-container">
+          <div>
+            <h3 class="section-header">Done</h3>
+            <div class="issues-count">
+              <p v-if="statusDoneLength === 0">
+                You have not yet finished any tasks...
+              </p>
+              <p v-else-if="statusDoneLength === 1">
+                You have finished 1 task!
+              </p>
+              <p v-else>{{ statusDoneLength }} tasks finished. Keep it up!</p>
+            </div>
           </div>
+          <div class="section-header-reverse">
+            <img src="../assets/plus.png" class="add-issue-button" alt="" />
+          </div>
+        </div>
+        <div class="section-insides">
           <div
             class="section-point"
-            v-for="(issue, index) in statusDone"
+            v-for="issue in statusDone"
             v-bind:key="issue._id"
           >
-            <p>#{{ index + 1 }}</p>
-            <p>Last updated at: {{ getStringFromDate(issue.updatedAt) }}</p>
+            <p class="update-date">
+              Last updated at: {{ getStringFromDate(issue.updatedAt) }}
+            </p>
             <p class="title">{{ issue.title }}</p>
             <p class="comments" v-if="issue.comments">
               Comments: {{ issue.comments }}
             </p>
-            <p class="priority">Priority: {{ issue.priority }}</p>
-            <button class="edit-issue-button" @click="openEditModal(issue)">
-              Edit
-            </button>
-            <button class="delete-issue-button" @click="openDeleteModal(issue)">
-              Delete
-            </button>
+            <div class="section-point-ending">
+              <div class="priority">Priority: {{ issue.priority }}</div>
+              <div class="section-point-ending-reverse">
+                <img
+                  class="dashboard-icon"
+                  src="../assets/marker.png"
+                  alt=""
+                  @click="openEditModal(issue)"
+                />
+                <img
+                  class="dashboard-icon"
+                  src="../assets/delete.png"
+                  alt=""
+                  @click="openDeleteModal(issue)"
+                />
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -163,11 +214,6 @@ export default {
     statusDoneLength() {
       return this.statusDone.length;
     },
-
-    // isHighPriority(issue) {
-    //   // return issue.priority === "High";
-    //   return true;
-    // },
   },
   methods: {
     ...mapActions(["getAllIssues", "deleteIssue"]),
@@ -204,37 +250,115 @@ export default {
 </script>
 
 <style scoped>
+/* block styles */
 .wrapper {
-  text-align: center;
+  background: #bbcde5;
+  min-height: calc(100vh - 85px);
 }
 
 .dashboard-container {
   display: flex;
   flex-wrap: nowrap;
-  justify-content: space-evenly;
+  justify-content: center;
   align-items: flex-start;
 }
 .dashboard-section {
+  box-sizing: border-box;
   flex-grow: 1;
-  min-height: 100px;
-  min-width: 200px;
-  max-width: 25%;
-  border-radius: 10px;
-  background-color: #37bb73;
-  color: #ffffff;
-  height: 400px;
-  overflow-y: scroll;
+  min-height: 55px;
+  min-width: 250px;
+  max-width: 22%;
+  border-radius: 5px;
+  background: #4d4ee3;
+  color: #f1f3f8;
+  margin: 10px 5px;
+  padding: 8px;
+  padding-top: 5px;
 }
+.section-header-container {
+  display: flex;
+}
+.section-header-reverse {
+  display: flex;
+  flex-grow: 10;
+  flex-direction: row-reverse;
+}
+.add-issue-button {
+  height: 25px;
+  width: 25px;
+  display: flex;
+  margin: auto 5px;
+}
+
+/* inside the section */
 .section-insides {
-  background: rgb(65, 151, 248);
+  max-height: calc(100vh - 153px);
+  overflow-y: scroll;
+  color: #303030;
 }
 .section-point {
-  background: rgb(115, 78, 153);
+  border-radius: 3px;
+  background: #f1f3f8;
+  margin-top: 5px;
+  padding: 5px 8px;
 }
+.section-header {
+  height: 20px;
+  line-height: 20px;
+  font-size: 15px;
+  font-weight: 400;
+  margin: 0;
+}
+.issues-count {
+  height: 15px;
+  line-height: 15px;
+  font-size: 12px;
+}
+
+/* points styles */
+.update-date {
+  font-size: 10px;
+  text-align: right;
+  color: #757474;
+}
+.title {
+  font-size: 14px;
+  padding: 7px 0;
+}
+.comments {
+  font-size: 13px;
+  padding: 3px 0;
+}
+.priority {
+  font-size: 12px;
+  line-height: 17px;
+}
+.section-point-ending {
+  display: flex;
+  height: 17px;
+}
+.section-point-ending-reverse {
+  display: flex;
+  justify-content: flex-end;
+  flex-grow: 10;
+}
+.dashboard-icon {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 1px 5px;
+  height: 15px;
+  width: 15px;
+}
+.dashboard-icon:hover {
+  height: 17px;
+  width: 17px;
+  margin: 0 4px;
+}
+
 .high-priority {
-  background: rebeccapurple;
+  background: #f1f3f8;
 }
 .low-priority {
-  background: rgb(129, 104, 155);
+  background: #f1f3f8;
 }
 </style>
