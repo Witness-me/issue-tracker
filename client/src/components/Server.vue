@@ -1,5 +1,5 @@
 <template>
-  <div class="about">
+  <div class="server-wrapper">
     <header class="navbar-pannel">
       <router-link to="/">
         <button class="navbar-button">Back to Homepage</button>
@@ -20,3 +20,9 @@ export default {
   computed: mapGetters(["allIssues"]),
 };
 </script>
+
+<style scoped>
+.server-wrapper {
+  text-align: center;
+}
+</style>

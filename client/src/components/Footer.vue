@@ -34,11 +34,11 @@ export default {
   box-sizing: border-box;
   margin: 0;
   height: 40px;
-  background: rgb(175, 175, 235);
+  background: #bbcde5;
   text-align: center;
 }
 .contact-icon {
-  height: 25px;
-  margin: auto 5px;
+  height: 20px;
+  margin: 10px 5px;
 }
 </style>

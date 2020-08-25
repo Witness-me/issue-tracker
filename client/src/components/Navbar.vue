@@ -30,7 +30,7 @@ export default {
 <style>
 .navbar-wrapper {
   height: 40px;
-  background: rgb(77, 77, 231);
+  background: #4d4ee3;
   display: flex;
 }
 .logo {
@@ -48,9 +48,11 @@ export default {
   border: 0;
 }
 .navbar-button:hover {
-  background: rgb(98, 98, 231);
+  /* background: rgb(98, 98, 231); */
+  background: #6b6be0;
 }
 .navbar-pannel {
+  background: #4d4ee3;
   flex-grow: 100;
   display: flex;
   flex-direction: row-reverse;

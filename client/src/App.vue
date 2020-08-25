@@ -27,6 +27,7 @@ body {
   background: #f1f3f8;
   color: #302e38;
   color: #2c3e50;
+  color: #303030;
   margin: 0;
   height: 100%;
   min-height: 100%;
