@@ -29,30 +29,32 @@ export default {
 
 <style>
 .navbar-wrapper {
-  height: 40px;
-  background: #4d4ee3;
-  color: black;
+  height: 39px;
+  background: #2c365e;
+  /* old color 4d4ee3 */
   display: flex;
+  border-bottom: 1px solid #303030;
 }
 .logo {
-  height: 32px;
-  margin: 4px 10px;
+  height: 30px;
+  margin: 5px 10px;
   transform: rotate(30deg);
 }
 .navbar-button {
-  height: 40px;
+  height: 39px;
   background: inherit;
   padding-left: 15px;
   padding-right: 15px;
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 400;
   border: 0;
+  color: #f1f3f8;
 }
 .navbar-button:hover {
   background: #6b6be0;
 }
 .navbar-pannel {
-  background: #4d4ee3;
+  background: #2c365e;
   flex-grow: 100;
   display: flex;
   flex-direction: row-reverse;

@@ -53,8 +53,18 @@
                   alt=""
                   @click="openDeleteModal(issue)"
                 />
-                <img class="dashboard-icon" src="../assets/next.png" alt="" />
-                <img class="dashboard-icon" src="../assets/tick.png" alt="" />
+                <img
+                  class="dashboard-icon"
+                  src="../assets/next.png"
+                  alt=""
+                  @click="moveToInProgress(issue)"
+                />
+                <img
+                  class="dashboard-icon"
+                  src="../assets/tick.png"
+                  alt=""
+                  @click="moveToDone(issue)"
+                />
               </div>
             </div>
           </div>
@@ -110,7 +120,12 @@
                   alt=""
                   @click="openDeleteModal(issue)"
                 />
-                <img class="dashboard-icon" src="../assets/tick.png" alt="" />
+                <img
+                  class="dashboard-icon"
+                  src="../assets/tick.png"
+                  alt=""
+                  @click="moveToDone(issue)"
+                />
               </div>
             </div>
           </div>
@@ -175,6 +190,7 @@
 <script>
 import { getStringFromDate } from "../utils/dates";
 import { mapGetters, mapActions } from "vuex";
+import * as api from "@/utils/api";
 export default {
   name: "Dashboard",
   data() {
@@ -233,6 +249,16 @@ export default {
     openEditModal(issue) {
       this.$emit("openEditModal", issue);
     },
+    async moveToInProgress(issue) {
+      issue.status = "In progress";
+      await api.editIssue(issue);
+      await this.$store.dispatch("getAllIssues");
+    },
+    async moveToDone(issue) {
+      issue.status = "Done";
+      await api.editIssue(issue);
+      await this.$store.dispatch("getAllIssues");
+    },
     sortByPriority(array) {
       const highPriority = array.filter(issue => issue.priority === "High");
       const mediumPriority = array.filter(issue => issue.priority === "Medium");
@@ -269,7 +295,7 @@ export default {
   min-width: 250px;
   max-width: 22%;
   border-radius: 5px;
-  background: #4d4ee3;
+  background: #2c365e; /* 303030 - тоже ничего */
   color: #f1f3f8;
   margin: 10px 5px;
   padding: 8px;
@@ -287,7 +313,7 @@ export default {
   height: 25px;
   width: 25px;
   display: flex;
-  margin: auto 5px;
+  margin: auto 3px;
 }
 
 /* inside the section */
@@ -312,12 +338,13 @@ export default {
 .issues-count {
   height: 15px;
   line-height: 15px;
-  font-size: 12px;
+  font-size: 11px;
 }
 
 /* points styles */
 .update-date {
   font-size: 10px;
+  font-style: italic;
   text-align: right;
   color: #757474;
 }
@@ -328,6 +355,7 @@ export default {
 .comments {
   font-size: 13px;
   padding: 3px 0;
+  font-style: italic;
 }
 .priority {
   font-size: 12px;
