@@ -26,15 +26,7 @@
           </div>
         </div>
         <div class="section-insides">
-          <div
-            class="section-point"
-            v-for="issue in statusToDo"
-            v-bind:key="issue._id"
-            v-bind:class="{
-              'high-priority': isHighPriority(issue),
-              'low-priority': isLowPriority(issue),
-            }"
-          >
+          <div class="section-point" v-for="issue in statusToDo" v-bind:key="issue._id">
             <p class="update-date">Last updated at: {{ getStringFromDate(issue.updatedAt) }}</p>
             <p class="title">{{ issue.title }}</p>
             <p class="comments" v-if="issue.comments">{{ issue.comments }}</p>
@@ -240,14 +232,6 @@ export default {
   },
   methods: {
     ...mapActions(["getAllIssues", "deleteIssue"]),
-
-    // getting priority
-    isHighPriority(issue) {
-      return issue.priority === "High";
-    },
-    isLowPriority(issue) {
-      return issue.priority === "Low";
-    },
 
     // date
     getStringFromDate(date) {

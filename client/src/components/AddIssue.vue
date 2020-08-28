@@ -6,22 +6,12 @@
       <div class="input-form">
         <!-- title -->
         <label for="title">Title</label>
-        <input
-          type="text"
-          id="title"
-          v-model="issue.title"
-          placeholder="Insert issue's title..."
-        />
+        <input type="text" id="title" v-model="issue.title" placeholder="Insert issue's title..." />
         <br />
         <!-- status -->
         <input type="radio" id="to-do" value="To do" v-model="issue.status" />
         <label for="to-do">To do</label>
-        <input
-          type="radio"
-          id="in-progress"
-          value="In progress"
-          v-model="issue.status"
-        />
+        <input type="radio" id="in-progress" value="In progress" v-model="issue.status" />
         <label for="in-progress">In progress</label>
         <input type="radio" id="done" value="Done" v-model="issue.status" />
         <label for="done">Done</label>
@@ -43,9 +33,7 @@
           <option value="Low">Low</option>
         </select>
         <!-- buttons -->
-        <button @click="addIssue">
-          Post!
-        </button>
+        <button @click="addIssue">Post!</button>
         <button @click="closePopup">Cancel</button>
       </div>
     </div>
@@ -62,8 +50,8 @@ export default {
         title: "",
         status: "To do",
         comments: "",
-        priority: "Medium",
-      },
+        priority: "Medium"
+      }
     };
   },
   props: ["newIssueStatus"],
@@ -75,11 +63,11 @@ export default {
     },
     closePopup() {
       this.$emit("closePopup");
-    },
+    }
   },
   mounted() {
-    this.issue.status = this.newIssueStatus;
-  },
+    this.issue.status = this.newIssueStatus || "To do";
+  }
 };
 </script>
 

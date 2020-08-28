@@ -4,6 +4,7 @@
     <h1>All issues</h1>
     <div class="issues-container">
       <p class="counter">{{ `You have ${issuesCount} issues in total` }}</p>
+      <button @click="popupAddIssue() ">Add issue</button>
       <table>
         <tr>
           <th></th>
@@ -42,11 +43,19 @@ import { mapGetters, mapActions } from "vuex";
 import { getStringFromDate } from "../utils/dates";
 export default {
   name: "AllIssues",
+  data() {
+    return {
+      addIssueIsVisible: false
+    };
+  },
   computed: mapGetters(["allIssues", "issuesCount"]),
   methods: {
     ...mapActions(["getAllIssues", "deleteIssue"]),
     getStringFromDate(date) {
       return getStringFromDate(date);
+    },
+    popupAddIssue() {
+      this.addIssueIsVisible = !this.addIssueIsVisible;
     },
     openDeleteModal(issue) {
       this.$emit("openDeleteModal", issue);
@@ -57,6 +66,9 @@ export default {
   },
   async mounted() {
     this.getAllIssues();
+  },
+  components: {
+    AddIssue
   }
 };
 </script>
