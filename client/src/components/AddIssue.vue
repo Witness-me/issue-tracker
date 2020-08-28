@@ -66,6 +66,7 @@ export default {
       },
     };
   },
+  props: ["newIssueStatus"],
   methods: {
     async addIssue() {
       await api.addIssue(this.issue);
@@ -75,6 +76,9 @@ export default {
     closePopup() {
       this.$emit("closePopup");
     },
+  },
+  mounted() {
+    this.issue.status = this.newIssueStatus;
   },
 };
 </script>

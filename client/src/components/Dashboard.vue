@@ -1,24 +1,28 @@
 <template>
   <div class="wrapper">
+    <AddIssue
+      v-if="addIssueIsVisible"
+      :newIssueStatus="newIssueStatus"
+      v-on:closePopup="popupAddIssue($event)"
+    />
     <div class="dashboard-container">
       <section class="dashboard-section">
         <div class="section-header-container">
           <div>
             <h3 class="section-header">To do</h3>
             <div class="issues-count">
-              <p v-if="statusToDoLength === 0">
-                You have not yet planned any tasks to do
-              </p>
-              <p v-else-if="statusToDoLength === 1">
-                You have 1 issue in your backlog!
-              </p>
-              <p v-else>
-                You have {{ statusToDoLength }} issues in your backlog!
-              </p>
+              <p v-if="statusToDoLength === 0">You have not yet planned any tasks to do</p>
+              <p v-else-if="statusToDoLength === 1">You have 1 issue in your backlog!</p>
+              <p v-else>You have {{ statusToDoLength }} issues in your backlog!</p>
             </div>
           </div>
           <div class="section-header-reverse">
-            <img src="../assets/plus.png" class="add-issue-button" alt="" />
+            <img
+              src="../assets/plus.png"
+              class="add-issue-button"
+              @click="openAddModal('To do')"
+              alt
+            />
           </div>
         </div>
         <div class="section-insides">
@@ -31,40 +35,31 @@
               'low-priority': isLowPriority(issue),
             }"
           >
-            <p class="update-date">
-              Last updated at: {{ getStringFromDate(issue.updatedAt) }}
-            </p>
+            <p class="update-date">Last updated at: {{ getStringFromDate(issue.updatedAt) }}</p>
             <p class="title">{{ issue.title }}</p>
-            <p class="comments" v-if="issue.comments">
-              Comments: {{ issue.comments }}
-            </p>
+            <p class="comments" v-if="issue.comments">Comments: {{ issue.comments }}</p>
             <div class="section-point-ending">
               <div class="priority">Priority: {{ issue.priority }}</div>
               <div class="section-point-ending-reverse">
                 <img
                   class="dashboard-icon"
                   src="../assets/marker.png"
-                  alt=""
+                  alt
                   @click="openEditModal(issue)"
                 />
                 <img
                   class="dashboard-icon"
                   src="../assets/delete.png"
-                  alt=""
+                  alt
                   @click="openDeleteModal(issue)"
                 />
                 <img
                   class="dashboard-icon"
                   src="../assets/next.png"
-                  alt=""
+                  alt
                   @click="moveToInProgress(issue)"
                 />
-                <img
-                  class="dashboard-icon"
-                  src="../assets/tick.png"
-                  alt=""
-                  @click="moveToDone(issue)"
-                />
+                <img class="dashboard-icon" src="../assets/tick.png" alt @click="moveToDone(issue)" />
               </div>
             </div>
           </div>
@@ -76,12 +71,8 @@
           <div>
             <h3 class="section-header">In progress</h3>
             <div class="issues-count">
-              <p v-if="statusInProgressLength === 0">
-                High time to start working on something!
-              </p>
-              <p v-else-if="statusInProgressLength === 1">
-                You are currently working on 1 issue!
-              </p>
+              <p v-if="statusInProgressLength === 0">High time to start working on something!</p>
+              <p v-else-if="statusInProgressLength === 1">You are currently working on 1 issue!</p>
               <p v-else>
                 You are currently working on
                 {{ statusInProgressLength }} issues!
@@ -89,43 +80,35 @@
             </div>
           </div>
           <div class="section-header-reverse">
-            <img src="../assets/plus.png" class="add-issue-button" alt="" />
+            <img
+              src="../assets/plus.png"
+              class="add-issue-button"
+              @click="openAddModal('In progress')"
+              alt
+            />
           </div>
         </div>
         <div class="section-insides">
-          <div
-            class="section-point"
-            v-for="issue in statusInProgress"
-            v-bind:key="issue._id"
-          >
-            <p class="update-date">
-              Last updated at: {{ getStringFromDate(issue.updatedAt) }}
-            </p>
+          <div class="section-point" v-for="issue in statusInProgress" v-bind:key="issue._id">
+            <p class="update-date">Last updated at: {{ getStringFromDate(issue.updatedAt) }}</p>
             <p class="title">{{ issue.title }}</p>
-            <p class="comments" v-if="issue.comments">
-              Comments: {{ issue.comments }}
-            </p>
+            <p class="comments" v-if="issue.comments">Comments: {{ issue.comments }}</p>
             <div class="section-point-ending">
               <div class="priority">Priority: {{ issue.priority }}</div>
               <div class="section-point-ending-reverse">
                 <img
                   class="dashboard-icon"
                   src="../assets/marker.png"
-                  alt=""
+                  alt
                   @click="openEditModal(issue)"
                 />
                 <img
                   class="dashboard-icon"
                   src="../assets/delete.png"
-                  alt=""
+                  alt
                   @click="openDeleteModal(issue)"
                 />
-                <img
-                  class="dashboard-icon"
-                  src="../assets/tick.png"
-                  alt=""
-                  @click="moveToDone(issue)"
-                />
+                <img class="dashboard-icon" src="../assets/tick.png" alt @click="moveToDone(issue)" />
               </div>
             </div>
           </div>
@@ -137,45 +120,38 @@
           <div>
             <h3 class="section-header">Done</h3>
             <div class="issues-count">
-              <p v-if="statusDoneLength === 0">
-                You have not yet finished any tasks...
-              </p>
-              <p v-else-if="statusDoneLength === 1">
-                You have finished 1 task!
-              </p>
+              <p v-if="statusDoneLength === 0">You have not yet finished any tasks...</p>
+              <p v-else-if="statusDoneLength === 1">You have finished 1 task!</p>
               <p v-else>{{ statusDoneLength }} tasks finished. Keep it up!</p>
             </div>
           </div>
           <div class="section-header-reverse">
-            <img src="../assets/plus.png" class="add-issue-button" alt="" />
+            <img
+              src="../assets/plus.png"
+              class="add-issue-button"
+              @click="openAddModal('Done')"
+              alt
+            />
           </div>
         </div>
         <div class="section-insides">
-          <div
-            class="section-point"
-            v-for="issue in statusDone"
-            v-bind:key="issue._id"
-          >
-            <p class="update-date">
-              Last updated at: {{ getStringFromDate(issue.updatedAt) }}
-            </p>
+          <div class="section-point" v-for="issue in statusDone" v-bind:key="issue._id">
+            <p class="update-date">Last updated at: {{ getStringFromDate(issue.updatedAt) }}</p>
             <p class="title">{{ issue.title }}</p>
-            <p class="comments" v-if="issue.comments">
-              Comments: {{ issue.comments }}
-            </p>
+            <p class="comments" v-if="issue.comments">Comments: {{ issue.comments }}</p>
             <div class="section-point-ending">
               <div class="priority">Priority: {{ issue.priority }}</div>
               <div class="section-point-ending-reverse">
                 <img
                   class="dashboard-icon"
                   src="../assets/marker.png"
-                  alt=""
+                  alt
                   @click="openEditModal(issue)"
                 />
                 <img
                   class="dashboard-icon"
                   src="../assets/delete.png"
-                  alt=""
+                  alt
                   @click="openDeleteModal(issue)"
                 />
               </div>
@@ -190,14 +166,18 @@
 <script>
 import { getStringFromDate } from "../utils/dates";
 import { mapGetters, mapActions } from "vuex";
+import AddIssue from "./AddIssue.vue";
 import * as api from "@/utils/api";
 export default {
   name: "Dashboard",
   data() {
-    return {};
+    return {
+      addIssueIsVisible: false,
+      newIssueStatus: "To do"
+    };
   },
   computed: {
-    ...mapGetters(["allIssues", "issuesCount"]),
+    ...mapGetters(["allIssues"]),
     statusToDo() {
       const todoIssues = this.allIssues.filter(
         issue => issue.status === "To do"
@@ -229,26 +209,40 @@ export default {
     },
     statusDoneLength() {
       return this.statusDone.length;
-    },
+    }
   },
   methods: {
     ...mapActions(["getAllIssues", "deleteIssue"]),
+
+    // getting priority
     isHighPriority(issue) {
       return issue.priority === "High";
     },
     isLowPriority(issue) {
       return issue.priority === "Low";
     },
+
+    // date
     getStringFromDate(date) {
       return getStringFromDate(date);
     },
 
+    // opening modals
+    openAddModal(status = "To do") {
+      this.newIssueStatus = status;
+      this.popupAddIssue();
+    },
+    popupAddIssue() {
+      this.addIssueIsVisible = !this.addIssueIsVisible;
+    },
     openDeleteModal(issue) {
       this.$emit("openDeleteModal", issue);
     },
     openEditModal(issue) {
       this.$emit("openEditModal", issue);
     },
+
+    // move to different section
     async moveToInProgress(issue) {
       issue.status = "In progress";
       await api.editIssue(issue);
@@ -259,6 +253,7 @@ export default {
       await api.editIssue(issue);
       await this.$store.dispatch("getAllIssues");
     },
+    // sorting
     sortByPriority(array) {
       const highPriority = array.filter(issue => issue.priority === "High");
       const mediumPriority = array.filter(issue => issue.priority === "Medium");
@@ -267,11 +262,14 @@ export default {
     },
     sortByUpdateTime(array) {
       return array.sort((a, b) => b.updatedAt - a.updatedAt);
-    },
+    }
   },
   async mounted() {
     this.getAllIssues();
   },
+  components: {
+    AddIssue
+  }
 };
 </script>
 
@@ -303,6 +301,7 @@ export default {
 }
 .section-header-container {
   display: flex;
+  padding-left: 10px;
 }
 .section-header-reverse {
   display: flex;
@@ -310,18 +309,35 @@ export default {
   flex-direction: row-reverse;
 }
 .add-issue-button {
-  height: 25px;
-  width: 25px;
+  height: 23px;
+  width: 23px;
   display: flex;
   margin: auto 3px;
+}
+.add-issue-button:hover {
+  height: 25px;
+  width: 25px;
+  margin: auto 2px;
 }
 
 /* inside the section */
 .section-insides {
   max-height: calc(100vh - 153px);
-  overflow-y: scroll;
+  overflow-y: auto;
   color: #303030;
+  /* sroll bars design (firefox) */
+  scrollbar-width: thin;
+  scrollbar-color: #bbcde5 transparent;
 }
+/* sroll bars design (webkit) */
+.section-insides::-webkit-scrollbar {
+  width: 7px; /* width of the entire scrollbar */
+}
+.section-insides::-webkit-scrollbar-thumb {
+  background-color: #bbcde5;
+  border-radius: 10px;
+}
+
 .section-point {
   border-radius: 3px;
   background: #f1f3f8;

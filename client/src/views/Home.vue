@@ -1,10 +1,7 @@
 <template>
   <div>
     <Navbar v-on:switchTab="switchTab($event)" />
-    <AddIssue
-      v-if="addIssueIsVisible"
-      v-on:closePopup="popupAddIssue($event)"
-    />
+
     <DeleteIssue
       :currentIssue="currentIssue"
       v-if="deleteIssueIsVisible"
@@ -21,9 +18,9 @@
       v-on:openEditModal="openEditModal($event)"
       class="main"
     ></component>
-    <button class="add-issue-button" v-on:click="popupAddIssue">
+    <!-- <button class="add-issue-button" v-on:click="popupAddIssue">
       +
-    </button>
+    </button> -->
     <Footer />
   </div>
 </template>
@@ -32,7 +29,6 @@
 import Navbar from "../components/Navbar.vue";
 import AllIssues from "../components/AllIssues.vue";
 import Dashboard from "../components/Dashboard.vue";
-import AddIssue from "../components/AddIssue.vue";
 import EditIssue from "../components/EditIssue.vue";
 import DeleteIssue from "../components/DeleteIssue.vue";
 import Footer from "../components/Footer.vue";
@@ -41,7 +37,6 @@ export default {
   data() {
     return {
       currentTab: "Dashboard",
-      addIssueIsVisible: false,
       deleteIssueIsVisible: false,
       editIssueIsVisible: false,
       currentIssue: {},
@@ -52,9 +47,7 @@ export default {
     switchTab(newTab) {
       this.currentTab = newTab;
     },
-    popupAddIssue() {
-      this.addIssueIsVisible = !this.addIssueIsVisible;
-    },
+
     popupDeleteIssue() {
       this.deleteIssueIsVisible = !this.deleteIssueIsVisible;
     },
@@ -74,7 +67,6 @@ export default {
     Navbar,
     Dashboard,
     AllIssues,
-    AddIssue,
     DeleteIssue,
     EditIssue,
     Footer,
