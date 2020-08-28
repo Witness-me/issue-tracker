@@ -1,10 +1,9 @@
 <template>
   <div class="wrapper">
+    <AddIssue v-if="addIssueIsVisible" v-on:closePopup="popupAddIssue($event)" />
     <h1>All issues</h1>
     <div class="issues-container">
-      <p class="counter">
-        {{ `You have ${issuesCount} issues in total` }}
-      </p>
+      <p class="counter">{{ `You have ${issuesCount} issues in total` }}</p>
       <table>
         <tr>
           <th></th>
@@ -17,21 +16,19 @@
           <th>Delete</th>
         </tr>
         <tr v-for="(issue, index) in allIssues" v-bind:key="issue._id">
-          <td><a href="#" v-if="issue.status !== 'Done'">Done</a></td>
+          <td>
+            <a href="#" v-if="issue.status !== 'Done'">Done</a>
+          </td>
           <td>{{ `${issuesCount - index}` }}</td>
           <td>{{ getStringFromDate(issue.createdAt) }}</td>
           <td>{{ issue.title }}</td>
           <td>{{ issue.status }}</td>
           <td>{{ issue.priority }}</td>
           <td>
-            <button class="edit-issue-button" @click="openEditModal(issue)">
-              Edit
-            </button>
+            <button class="edit-issue-button" @click="openEditModal(issue)">Edit</button>
           </td>
           <td>
-            <button class="delete-issue-button" @click="openDeleteModal(issue)">
-              Delete
-            </button>
+            <button class="delete-issue-button" @click="openDeleteModal(issue)">Delete</button>
           </td>
         </tr>
       </table>
@@ -40,7 +37,7 @@
 </template>
 
 <script>
-//import * as api from "@/utils/api";
+import AddIssue from "./AddIssue.vue";
 import { mapGetters, mapActions } from "vuex";
 import { getStringFromDate } from "../utils/dates";
 export default {
@@ -56,11 +53,11 @@ export default {
     },
     openEditModal(issue) {
       this.$emit("openEditModal", issue);
-    },
+    }
   },
   async mounted() {
     this.getAllIssues();
-  },
+  }
 };
 </script>
 

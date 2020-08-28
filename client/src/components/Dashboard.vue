@@ -37,9 +37,18 @@
           >
             <p class="update-date">Last updated at: {{ getStringFromDate(issue.updatedAt) }}</p>
             <p class="title">{{ issue.title }}</p>
-            <p class="comments" v-if="issue.comments">Comments: {{ issue.comments }}</p>
+            <p class="comments" v-if="issue.comments">{{ issue.comments }}</p>
             <div class="section-point-ending">
-              <div class="priority">Priority: {{ issue.priority }}</div>
+              <div class="priority">
+                <span class="priority-block">Priority:</span>
+                <span class="priority-block">
+                  <svg class="priority-block" height="8" width="8">
+                    <circle v-if="issue.priority === 'High'" cx="4" cy="4" r="4" fill="#F52416" />
+                    <circle v-if="issue.priority === 'Medium'" cx="4" cy="4" r="4" fill="#EBBC00" />
+                    <circle v-if="issue.priority === 'Low'" cx="4" cy="4" r="4" fill="#37D000" />
+                  </svg>
+                </span>
+              </div>
               <div class="section-point-ending-reverse">
                 <img
                   class="dashboard-icon"
@@ -92,9 +101,18 @@
           <div class="section-point" v-for="issue in statusInProgress" v-bind:key="issue._id">
             <p class="update-date">Last updated at: {{ getStringFromDate(issue.updatedAt) }}</p>
             <p class="title">{{ issue.title }}</p>
-            <p class="comments" v-if="issue.comments">Comments: {{ issue.comments }}</p>
+            <p class="comments" v-if="issue.comments">{{ issue.comments }}</p>
             <div class="section-point-ending">
-              <div class="priority">Priority: {{ issue.priority }}</div>
+              <div class="priority">
+                <span class="priority-block">Priority:</span>
+                <span class="priority-block">
+                  <svg class="priority-block" height="8" width="8">
+                    <circle v-if="issue.priority === 'High'" cx="4" cy="4" r="4" fill="#F52416" />
+                    <circle v-if="issue.priority === 'Medium'" cx="4" cy="4" r="4" fill="#EBBC00" />
+                    <circle v-if="issue.priority === 'Low'" cx="4" cy="4" r="4" fill="#37D000" />
+                  </svg>
+                </span>
+              </div>
               <div class="section-point-ending-reverse">
                 <img
                   class="dashboard-icon"
@@ -138,9 +156,18 @@
           <div class="section-point" v-for="issue in statusDone" v-bind:key="issue._id">
             <p class="update-date">Last updated at: {{ getStringFromDate(issue.updatedAt) }}</p>
             <p class="title">{{ issue.title }}</p>
-            <p class="comments" v-if="issue.comments">Comments: {{ issue.comments }}</p>
+            <p class="comments" v-if="issue.comments">{{ issue.comments }}</p>
             <div class="section-point-ending">
-              <div class="priority">Priority: {{ issue.priority }}</div>
+              <div class="priority">
+                <span class="priority-block">Priority:</span>
+                <span class="priority-block">
+                  <svg class="priority-block" height="8" width="8">
+                    <circle v-if="issue.priority === 'High'" cx="4" cy="4" r="4" fill="#F52416" />
+                    <circle v-if="issue.priority === 'Medium'" cx="4" cy="4" r="4" fill="#EBBC00" />
+                    <circle v-if="issue.priority === 'Low'" cx="4" cy="4" r="4" fill="#37D000" />
+                  </svg>
+                </span>
+              </div>
               <div class="section-point-ending-reverse">
                 <img
                   class="dashboard-icon"
@@ -365,17 +392,21 @@ export default {
   color: #757474;
 }
 .title {
-  font-size: 14px;
+  font-size: 13px;
   padding: 7px 0;
 }
 .comments {
-  font-size: 13px;
-  padding: 3px 0;
+  font-size: 12px;
+  padding-bottom: 5px;
   font-style: italic;
 }
 .priority {
-  font-size: 12px;
+  font-size: 10px;
   line-height: 17px;
+  display: inline-block;
+}
+svg {
+  margin: auto 3px;
 }
 .section-point-ending {
   display: flex;
