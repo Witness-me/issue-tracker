@@ -205,7 +205,8 @@ export default {
   data() {
     return {
       addIssueIsVisible: false,
-      newIssueStatus: "To do"
+      newIssueStatus: "To do",
+      comment: ""
     };
   },
   computed: {
@@ -317,7 +318,7 @@ export default {
   min-width: 250px;
   max-width: 22%;
   border-radius: 5px;
-  background: #2c365e; /* 303030 - тоже ничего */
+  background: #2c365e;
   color: #f1f3f8;
   margin: 10px 5px;
   padding: 8px;

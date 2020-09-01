@@ -1,6 +1,11 @@
 <template>
   <div class="wrapper">
     <AddIssue v-if="addIssueIsVisible" v-on:closePopup="popupAddIssue($event)" />
+    <Comments
+      v-if="commentsAreVisible"
+      :comment="comment"
+      v-on:closePopup="openCommentsModal($event)"
+    />
     <div class="table-container">
       <div class="table-header">
         <p class="counter">{{ `You currently have ${issuesCount} issues in total...` }}</p>
@@ -9,6 +14,7 @@
       <table class="table">
         <tr class="table-top-row">
           <th class="title">Issue</th>
+          <th class="comments"></th>
           <th class="mark-as-done"></th>
           <th class="created-at">Created</th>
           <th class="status">Status</th>
@@ -17,6 +23,16 @@
         </tr>
         <tr v-for="issue in allIssues" v-bind:key="issue._id" class="table-row">
           <td @click="openEditModal(issue)" class="title">{{ issue.title }}</td>
+          <td class="comments">
+            <img
+              v-if="issue.comments"
+              class="icon"
+              src="../assets/img/comments.png"
+              alt="See comments"
+              title="See comments"
+              @click="openCommentsModal(issue.comments)"
+            />
+          </td>
           <td class="mark-as-done">
             <img
               v-if="issue.status !== 'Done'"
@@ -54,13 +70,16 @@
 
 <script>
 import AddIssue from "./AddIssue.vue";
+import Comments from "./Comments.vue";
 import { mapGetters, mapActions } from "vuex";
 import { getStringFromDate } from "../utils/dates";
+import * as api from "@/utils/api";
 export default {
   name: "AllIssues",
   data() {
     return {
-      addIssueIsVisible: false
+      addIssueIsVisible: false,
+      commentsAreVisible: false
     };
   },
   computed: mapGetters(["allIssues", "issuesCount"]),
@@ -78,6 +97,10 @@ export default {
     openEditModal(issue) {
       this.$emit("openEditModal", issue);
     },
+    openCommentsModal(comment) {
+      if (comment) this.comment = comment;
+      this.commentsAreVisible = !this.commentsAreVisible;
+    },
 
     // Issue status
     statusToDo(status) {
@@ -89,6 +112,13 @@ export default {
     statusDone(status) {
       return status === "Done";
     },
+
+    async moveToDone(issue) {
+      issue.status = "Done";
+      await api.editIssue(issue);
+      // await this.$store.dispatch("getAllIssues");
+    },
+
     // Issue priority
     isHighPriority(priority) {
       return priority === "High";
@@ -101,7 +131,8 @@ export default {
     this.getAllIssues();
   },
   components: {
-    AddIssue
+    AddIssue,
+    Comments
   }
 };
 </script>
@@ -160,9 +191,6 @@ export default {
 
 /* table styles */
 .table {
-  /* min-width: 760px;
-  max-width: 1200px;
-  width: 95%; */
   min-width: 760px;
   width: 100%;
   color: #303030;
@@ -205,6 +233,7 @@ td.title {
 td.title:hover {
   cursor: pointer;
 }
+.comments,
 .mark-as-done {
   width: 40px;
   text-align: center;
