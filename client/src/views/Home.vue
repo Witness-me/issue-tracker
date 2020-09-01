@@ -18,9 +18,6 @@
       v-on:openEditModal="openEditModal($event)"
       class="main"
     ></component>
-    <!-- <button class="add-issue-button" v-on:click="popupAddIssue">
-      +
-    </button> -->
     <Footer />
   </div>
 </template>
@@ -39,7 +36,7 @@ export default {
       currentTab: "Dashboard",
       deleteIssueIsVisible: false,
       editIssueIsVisible: false,
-      currentIssue: {},
+      currentIssue: {}
     };
   },
   computed: {},
@@ -61,7 +58,7 @@ export default {
     openDeleteModal(issue) {
       this.currentIssue = issue;
       this.popupDeleteIssue();
-    },
+    }
   },
   components: {
     Navbar,
@@ -69,24 +66,13 @@ export default {
     AllIssues,
     DeleteIssue,
     EditIssue,
-    Footer,
-  },
+    Footer
+  }
 };
 </script>
 
 <style scoped>
 .main {
   min-height: calc(100vh - 80px);
-}
-.add-issue-button {
-  position: fixed;
-  bottom: 15%;
-  right: 8%;
-  height: 50px;
-  width: 50px;
-  border-radius: 50%;
-  border: 1px black solid;
-  font-size: 30px;
-  text-align: center;
 }
 </style>

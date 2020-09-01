@@ -12,16 +12,16 @@
             <h3 class="section-header">To do</h3>
             <div class="issues-count">
               <p v-if="statusToDoLength === 0">You have not yet planned any tasks to do</p>
-              <p v-else-if="statusToDoLength === 1">You have 1 issue in your backlog!</p>
-              <p v-else>You have {{ statusToDoLength }} issues in your backlog!</p>
+              <p v-else-if="statusToDoLength === 1">You have 1 issue in your backlog</p>
+              <p v-else>You have {{ statusToDoLength }} issues in your backlog</p>
             </div>
           </div>
           <div class="section-header-reverse">
             <img
-              src="../assets/plus.png"
+              src="../assets/img/plus.png"
               class="add-issue-button"
               @click="openAddModal('To do')"
-              alt
+              alt="Add issue"
             />
           </div>
         </div>
@@ -44,23 +44,30 @@
               <div class="section-point-ending-reverse">
                 <img
                   class="dashboard-icon"
-                  src="../assets/marker.png"
-                  alt
+                  src="../assets/img/marker.png"
+                  alt="Edit"
                   @click="openEditModal(issue)"
                 />
                 <img
                   class="dashboard-icon"
-                  src="../assets/delete.png"
-                  alt
+                  src="../assets/img/delete.png"
+                  alt="Delete"
                   @click="openDeleteModal(issue)"
                 />
                 <img
                   class="dashboard-icon"
-                  src="../assets/next.png"
-                  alt
+                  src="../assets/img/next.png"
+                  alt="Move to current"
+                  title="Move to current"
                   @click="moveToInProgress(issue)"
                 />
-                <img class="dashboard-icon" src="../assets/tick.png" alt @click="moveToDone(issue)" />
+                <img
+                  class="dashboard-icon"
+                  src="../assets/img/tick.png"
+                  alt="Mark as done"
+                  title="Mark as done"
+                  @click="moveToDone(issue)"
+                />
               </div>
             </div>
           </div>
@@ -72,20 +79,20 @@
           <div>
             <h3 class="section-header">In progress</h3>
             <div class="issues-count">
-              <p v-if="statusInProgressLength === 0">High time to start working on something!</p>
-              <p v-else-if="statusInProgressLength === 1">You are currently working on 1 issue!</p>
+              <p v-if="statusInProgressLength === 0">High time to start working!</p>
+              <p v-else-if="statusInProgressLength === 1">Сurrently working on 1 issue</p>
               <p v-else>
-                You are currently working on
-                {{ statusInProgressLength }} issues!
+                Currently working on
+                {{ statusInProgressLength }} issues
               </p>
             </div>
           </div>
           <div class="section-header-reverse">
             <img
-              src="../assets/plus.png"
+              src="../assets/img/plus.png"
               class="add-issue-button"
               @click="openAddModal('In progress')"
-              alt
+              alt="Delete"
             />
           </div>
         </div>
@@ -108,17 +115,23 @@
               <div class="section-point-ending-reverse">
                 <img
                   class="dashboard-icon"
-                  src="../assets/marker.png"
-                  alt
+                  src="../assets/img/marker.png"
+                  alt="Edit"
                   @click="openEditModal(issue)"
                 />
                 <img
                   class="dashboard-icon"
-                  src="../assets/delete.png"
-                  alt
+                  src="../assets/img/delete.png"
+                  alt="Delete"
                   @click="openDeleteModal(issue)"
                 />
-                <img class="dashboard-icon" src="../assets/tick.png" alt @click="moveToDone(issue)" />
+                <img
+                  class="dashboard-icon"
+                  src="../assets/img/tick.png"
+                  alt="Mark as done"
+                  title="Mark as done"
+                  @click="moveToDone(issue)"
+                />
               </div>
             </div>
           </div>
@@ -137,10 +150,10 @@
           </div>
           <div class="section-header-reverse">
             <img
-              src="../assets/plus.png"
+              src="../assets/img/plus.png"
               class="add-issue-button"
               @click="openAddModal('Done')"
-              alt
+              alt="Add issue"
             />
           </div>
         </div>
@@ -163,14 +176,14 @@
               <div class="section-point-ending-reverse">
                 <img
                   class="dashboard-icon"
-                  src="../assets/marker.png"
-                  alt
+                  src="../assets/img/marker.png"
+                  alt="Edit"
                   @click="openEditModal(issue)"
                 />
                 <img
                   class="dashboard-icon"
-                  src="../assets/delete.png"
-                  alt
+                  src="../assets/img/delete.png"
+                  alt="Delete"
                   @click="openDeleteModal(issue)"
                 />
               </div>
@@ -287,7 +300,7 @@ export default {
 <style scoped>
 /* block styles */
 .wrapper {
-  background: #bbcde5;
+  background: #f1f3f8;
   min-height: calc(100vh - 85px);
 }
 
@@ -313,6 +326,7 @@ export default {
 .section-header-container {
   display: flex;
   padding-left: 10px;
+  margin-bottom: 5px;
 }
 .section-header-reverse {
   display: flex;
@@ -329,6 +343,7 @@ export default {
   height: 25px;
   width: 25px;
   margin: auto 2px;
+  cursor: pointer;
 }
 
 /* inside the section */
@@ -352,7 +367,7 @@ export default {
 .section-point {
   border-radius: 3px;
   background: #f1f3f8;
-  margin-top: 5px;
+  margin-bottom: 6px;
   padding: 5px 8px;
 }
 .section-header {
@@ -377,6 +392,7 @@ export default {
 }
 .title {
   font-size: 13px;
+  font-weight: 500;
   padding: 7px 0;
 }
 .comments {
@@ -412,6 +428,7 @@ svg {
   height: 17px;
   width: 17px;
   margin: 0 4px;
+  cursor: pointer;
 }
 
 .high-priority {

@@ -71,21 +71,18 @@ export default {
 };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
 .modal-background {
   position: fixed;
-  left: 0;
   top: 0;
   bottom: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.4);
+  background: rgba(0, 0, 0, 0.6);
   z-index: 10;
 
   display: flex;
   justify-content: center;
-  align-items: center;
 }
 .modal-popup {
   position: fixed;
@@ -94,5 +91,6 @@ export default {
   background: blanchedalmond;
   border: 1px black solid;
   z-index: 15;
+  align-items: center;
 }
 </style>

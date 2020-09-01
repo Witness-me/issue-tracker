@@ -2,7 +2,7 @@
   <div class="server-wrapper">
     <div class="navbar-wrapper">
       <router-link to="/">
-        <img class="logo" src="../assets/bug.png" />
+        <img class="logo" src="../assets/img/bug.png" />
       </router-link>
 
       <div class="navbar-pannel">
@@ -13,9 +13,7 @@
     </div>
     <h1>Server information</h1>
 
-    <div v-for="issue in allIssues" v-bind:key="issue._id">
-      {{ issue }}
-    </div>
+    <div v-for="issue in allIssues" v-bind:key="issue._id">{{ issue }}</div>
   </div>
 </template>
 
@@ -23,7 +21,7 @@
 import { mapGetters } from "vuex";
 export default {
   name: "Server",
-  computed: mapGetters(["allIssues"]),
+  computed: mapGetters(["allIssues"])
 };
 </script>
 
