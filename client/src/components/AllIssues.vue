@@ -79,7 +79,8 @@ export default {
   data() {
     return {
       addIssueIsVisible: false,
-      commentsAreVisible: false
+      commentsAreVisible: false,
+      comment: ""
     };
   },
   computed: mapGetters(["allIssues", "issuesCount"]),

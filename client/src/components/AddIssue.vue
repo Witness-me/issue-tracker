@@ -3,6 +3,10 @@
     <div class="modal-popup" @click.stop>
       <img class="close-modal-icon" src="../assets/img/close.png" alt="Close" @click="closePopup" />
       <h1 class="modal-header">Add issue</h1>
+      <!-- error -->
+      <div class="modal-error" v-if="error">
+        <p>Issue's title is required!</p>
+      </div>
       <!-- title -->
       <textarea
         type="text"
@@ -65,15 +69,19 @@ export default {
         status: "To do",
         comments: "",
         priority: "Medium"
-      }
+      },
+      error: false
     };
   },
   props: ["newIssueStatus"],
   methods: {
     async addIssue() {
-      await api.addIssue(this.issue);
-      await this.$store.dispatch("getAllIssues");
-      this.closePopup();
+      if (!this.issue.title) this.error = true;
+      else {
+        await api.addIssue(this.issue);
+        await this.$store.dispatch("getAllIssues");
+        this.closePopup();
+      }
     },
     closePopup() {
       this.$emit("closePopup");
@@ -101,7 +109,7 @@ export default {
 .modal-popup {
   position: fixed;
   width: 600px;
-  height: 350px;
+  height: 360px;
   background: #f2f3f7;
   border: 2px #303030 solid;
   z-index: 15;
@@ -128,6 +136,12 @@ export default {
   text-transform: uppercase;
   margin-top: 20px;
   margin-bottom: 10px;
+}
+.modal-error {
+  color: #fd4646;
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 5px;
 }
 .modal-inputs {
   box-sizing: border-box;
@@ -163,7 +177,7 @@ export default {
 .input-comments {
   width: 400px;
   height: 70px;
-  margin: 5px;
+  margin: 0 5px;
   border: 1px solid #2c365e;
   border-radius: 3px;
   resize: none;
@@ -184,6 +198,7 @@ export default {
   height: 30px;
   line-height: 20px;
   width: 100px;
+  margin: 0;
 }
 .input-submit-button:hover {
   background: #2c365e;

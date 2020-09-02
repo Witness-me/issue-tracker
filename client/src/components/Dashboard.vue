@@ -205,8 +205,7 @@ export default {
   data() {
     return {
       addIssueIsVisible: false,
-      newIssueStatus: "To do",
-      comment: ""
+      newIssueStatus: "To do"
     };
   },
   computed: {
