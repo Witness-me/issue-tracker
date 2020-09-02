@@ -1,20 +1,15 @@
 <template>
   <div class="modal-background" @click="closePopup()">
     <div class="modal-popup" @click.stop>
-      <h1>Delete issue</h1>
+      <img class="close-modal-icon" src="../assets/img/close.png" alt="Close" @click="closePopup" />
+      <h1 class="modal-header">Delete issue</h1>
       <!-- input form -->
-      <div class="delete-issue">
-        <p>
-          Are you sure that you want to permanently delete the issue?
-        </p>
+      <div class="modal-content">
+        <p>Are you sure that you want to permanently delete the issue?</p>
+        <p>This cannot be undone.</p>
         <!-- button -->
-        <button @click="deleteIssue()">
-          Delete!
-        </button>
-        <button @click="closePopup()">
-          Cancel
-        </button>
       </div>
+      <button class="input-submit-button" @click="deleteIssue">Delete</button>
     </div>
   </div>
 </template>
@@ -31,11 +26,26 @@ export default {
       await api.deleteIssue(this.currentIssue._id);
       await this.$store.dispatch("getAllIssues");
       this.closePopup();
-    },
+    }
   },
-  props: ["currentIssue"],
+  props: ["currentIssue"]
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped></style>
+<style scoped>
+.modal-popup {
+  height: 250px;
+  width: 500px;
+}
+.modal-content {
+  text-align: center;
+  font-size: 14px;
+  font-weight: 500;
+  margin-top: 40px;
+  margin-bottom: 60px;
+}
+.modal-content p {
+  padding: 3px 0;
+}
+</style>

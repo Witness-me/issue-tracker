@@ -1,52 +1,57 @@
 <template>
   <div class="modal-background" @click="closePopup">
     <div class="modal-popup" @click.stop>
-      <h1>Edit issue</h1>
+      <img class="close-modal-icon" src="../assets/img/close.png" alt="Close" @click="closePopup" />
+      <h1 class="modal-header">Edit issue</h1>
       <!-- input form -->
       <div class="input-form">
         <!-- title -->
-        <label for="title">Title</label>
-        <input
+        <textarea
           type="text"
-          id="title"
+          class="input-title modal-inputs"
           v-model="issue.title"
-          placeholder="Insert issue's title..."
+          placeholder="Enter your issue here..."
+          maxlength="200"
         />
         <br />
         <!-- status -->
-        <input type="radio" id="to-do" value="To do" v-model="issue.status" />
-        <label for="to-do">To do</label>
-        <input
-          type="radio"
-          id="in-progress"
-          value="In progress"
-          v-model="issue.status"
-        />
-        <label for="in-progress">In progress</label>
-        <input type="radio" id="done" value="Done" v-model="issue.status" />
-        <label for="done">Done</label>
+        <div class="input-status">
+          <input type="radio" id="to-do" value="To do" v-model="issue.status" />
+          <label for="to-do">To do</label>
+        </div>
+        <div class="input-status">
+          <input type="radio" id="in-progress" value="In progress" v-model="issue.status" />
+          <label for="in-progress">In progress</label>
+        </div>
+        <div class="input-status">
+          <input type="radio" id="done" value="Done" v-model="issue.status" />
+          <label for="done">Done</label>
+        </div>
         <br />
         <!-- comments -->
-        <label for="comments">Comments</label>
-        <textarea
-          type="text"
-          id="comments"
-          v-model="issue.comments"
-          placeholder="Insert your comments..."
-        />
+        <div class="input-form-container">
+          <label for="input-comments">Comments:</label>
+          <textarea
+            type="text"
+            class="input-comments modal-inputs"
+            v-model="issue.comments"
+            placeholder="Enter your comments..."
+            maxlength="600"
+          />
+        </div>
         <br />
         <!-- prioriy -->
-        <label for="priority">Priority</label>
-        <select v-model="issue.priority" id="priority">
-          <option value="High">High</option>
-          <option value="Medium">Medium</option>
-          <option value="Low">Low</option>
-        </select>
+        <div class="input-form-container">
+          <label for="input-priority">Priority:</label>
+          <select v-model="issue.priority" class="input-priority">
+            <option value="High">High</option>
+            <option value="Medium">Medium</option>
+            <option value="Low">Low</option>
+          </select>
+        </div>
+        <br />
         <!-- buttons -->
-        <button @click="editIssue">
-          Edit!
-        </button>
-        <button @click="closePopup">Cancel</button>
+        <button class="input-submit-button" @click="editIssue">Edit</button>
       </div>
     </div>
   </div>
@@ -65,9 +70,9 @@ export default {
     async closePopup() {
       await this.$store.dispatch("getAllIssues");
       this.$emit("closePopup");
-    },
+    }
   },
 
-  props: ["issue"],
+  props: ["issue"]
 };
 </script>

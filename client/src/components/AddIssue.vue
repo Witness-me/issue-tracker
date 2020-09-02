@@ -1,57 +1,55 @@
 <template>
   <div class="modal-background" @click="closePopup">
     <div class="modal-popup" @click.stop>
+      <img class="close-modal-icon" src="../assets/img/close.png" alt="Close" @click="closePopup" />
       <h1 class="modal-header">Add issue</h1>
-      <!-- input form -->
-      <div class="input-form">
-        <!-- title -->
-        <!-- <label for="title"></label> -->
+      <!-- title -->
+      <textarea
+        type="text"
+        class="input-title modal-inputs"
+        v-model="issue.title"
+        placeholder="Enter your issue here..."
+        maxlength="200"
+      />
+      <br />
+      <!-- status -->
+      <div class="input-status">
+        <input type="radio" id="to-do" value="To do" v-model="issue.status" />
+        <label for="to-do">To do</label>
+      </div>
+      <div class="input-status">
+        <input type="radio" id="in-progress" value="In progress" v-model="issue.status" />
+        <label for="in-progress">In progress</label>
+      </div>
+      <div class="input-status">
+        <input type="radio" id="done" value="Done" v-model="issue.status" />
+        <label for="done">Done</label>
+      </div>
+      <br />
+      <!-- comments -->
+      <div class="input-form-container">
+        <label for="input-comments">Comments:</label>
         <textarea
           type="text"
-          class="input-title modal-inputs"
-          v-model="issue.title"
-          placeholder="Enter your issue here..."
+          class="input-comments modal-inputs"
+          v-model="issue.comments"
+          placeholder="Enter your comments..."
+          maxlength="600"
         />
-        <br />
-        <!-- status -->
-        <div class="input-status">
-          <input type="radio" id="to-do" value="To do" v-model="issue.status" />
-          <label for="to-do">To do</label>
-        </div>
-        <div class="input-status">
-          <input type="radio" id="in-progress" value="In progress" v-model="issue.status" />
-          <label for="in-progress">In progress</label>
-        </div>
-        <div class="input-status">
-          <input type="radio" id="done" value="Done" v-model="issue.status" />
-          <label for="done">Done</label>
-        </div>
-        <br />
-        <!-- comments -->
-        <div class="input-form-container">
-          <label for="input-comments">Comments:</label>
-          <textarea
-            type="text"
-            class="input-comments modal-inputs"
-            v-model="issue.comments"
-            placeholder="Enter your comments..."
-          />
-        </div>
-        <br />
-        <!-- prioriy -->
-        <div class="input-form-container">
-          <label for="input-priority">Priority:</label>
-          <select v-model="issue.priority" class="input-priority">
-            <option value="High">High</option>
-            <option value="Medium">Medium</option>
-            <option value="Low">Low</option>
-          </select>
-        </div>
-        <br />
-        <!-- buttons -->
-        <button class="input-submit-button" @click="addIssue">Add</button>
-        <!-- <button @click="closePopup">Cancel</button> -->
       </div>
+      <br />
+      <!-- prioriy -->
+      <div class="input-form-container">
+        <label for="input-priority">Priority:</label>
+        <select v-model="issue.priority" class="input-priority">
+          <option value="High">High</option>
+          <option value="Medium">Medium</option>
+          <option value="Low">Low</option>
+        </select>
+      </div>
+      <br />
+      <!-- buttons -->
+      <button class="input-submit-button" @click="addIssue">Add</button>
     </div>
   </div>
 </template>
@@ -94,7 +92,7 @@ export default {
   bottom: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(0, 0, 0, 0.4);
   z-index: 10;
   display: flex;
   justify-content: center;
@@ -104,10 +102,25 @@ export default {
   position: fixed;
   width: 600px;
   height: 350px;
-  background: #f1f3f8;
-  border: 1px #303030 solid;
+  background: #f2f3f7;
+  border: 2px #303030 solid;
   z-index: 15;
   text-align: center;
+  border-radius: 4px;
+}
+.close-modal-icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  height: 23px;
+  width: 23px;
+}
+.close-modal-icon:hover {
+  top: 9px;
+  right: 9px;
+  height: 25px;
+  width: 25px;
+  cursor: pointer;
 }
 .modal-header {
   font-size: 16px;
@@ -115,9 +128,6 @@ export default {
   text-transform: uppercase;
   margin-top: 20px;
   margin-bottom: 10px;
-}
-.input-form {
-  /* background: burlywood; */
 }
 .modal-inputs {
   box-sizing: border-box;
@@ -134,6 +144,7 @@ export default {
   margin-bottom: 5px;
   border: 1px solid #2c365e;
   border-radius: 3px;
+  resize: none;
 }
 .input-status {
   display: inline;
@@ -155,6 +166,7 @@ export default {
   margin: 5px;
   border: 1px solid #2c365e;
   border-radius: 3px;
+  resize: none;
 }
 .input-priority {
   margin: 0 10px;
@@ -164,16 +176,14 @@ export default {
 .input-submit-button {
   width: 100px;
   height: 30px;
-  border: 2px solid #2c365e;
-  /* border: 0; */
-  color: #2c365e;
-  background: #cdd9f5;
+  border: 2px solid #272f52;
+  color: #f1f3f8;
+  background: #384579;
   font-family: "Roboto", sans-serif;
   font-weight: 700;
   height: 30px;
   line-height: 20px;
   width: 100px;
-  /* border-radius: 10px; */
 }
 .input-submit-button:hover {
   background: #2c365e;

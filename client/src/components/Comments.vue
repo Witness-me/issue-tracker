@@ -1,9 +1,11 @@
 <template>
   <div class="modal-background" @click="closePopup">
     <div class="modal-popup" @click.stop>
-      <h1>Comment</h1>
-      <div class="comment">{{ comment }}</div>
-      <button @click="closePopup">Cancel</button>
+      <img class="close-modal-icon" src="../assets/img/close.png" alt="Close" @click="closePopup" />
+      <h1 class="modal-header">Comments</h1>
+      <div class="modal-content">
+        <p>{{ comment }}</p>
+      </div>
     </div>
   </div>
 </template>
@@ -20,3 +22,23 @@ export default {
   props: ["comment"]
 };
 </script>
+
+<style scoped>
+.modal-popup {
+  height: 270px;
+  width: 520px;
+}
+.modal-content {
+  text-align: center;
+  font-size: 14px;
+  font-weight: 500;
+  height: 200px;
+  margin: 30px 10px;
+  /* display: flex;
+  justify-content: center;
+  align-items: flex-start; */
+  /* margin: auto 10px; */
+  /* margin-top: 40px;
+  margin-bottom: 60px; */
+}
+</style>

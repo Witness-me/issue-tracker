@@ -191,7 +191,7 @@ export default {
 
 /* table styles */
 .table {
-  min-width: 760px;
+  min-width: 720px;
   width: 100%;
   color: #303030;
   margin-bottom: 30px;
