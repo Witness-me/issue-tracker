@@ -39,7 +39,6 @@ export default {
       currentIssue: {}
     };
   },
-  computed: {},
   methods: {
     switchTab(newTab) {
       this.currentTab = newTab;
