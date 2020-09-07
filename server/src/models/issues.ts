@@ -1,14 +1,16 @@
 import * as mongoose from "mongoose";
 import { Request } from "express";
+const Schema = mongoose.Schema;
 
 // Create Issue schema
-const issueSchema = new mongoose.Schema({
+const issueSchema = new Schema({
   title: { type: String, required: [true, "Issue title is required"] },
   status: { type: String, required: [true, "Choose the issue's status"] },
   createdAt: Date,
   updatedAt: Date,
   comments: String,
   priority: { type: String, required: [true, "Priority should be stated"] },
+  // user: Schema.Types.ObjectId,
 });
 const Issue = mongoose.model("issue", issueSchema);
 

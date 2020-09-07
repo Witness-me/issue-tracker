@@ -9,7 +9,7 @@ const userSchema = new Schema({
   comments: String,
   hash: String,
   salt: String,
-  issues: [{ type: Schema.Types.ObjectId, ref: "issue" }],
+  // issues: [{ type: Schema.Types.ObjectId, ref: "issue" }],
 });
 const User = mongoose.model("user", userSchema);
 

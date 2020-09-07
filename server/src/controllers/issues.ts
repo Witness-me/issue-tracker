@@ -4,7 +4,6 @@ import {
   addIssue,
   deleteIssue,
   updateIssue,
-  deleteAll,
 } from "../models/issues";
 const express = require("express");
 import { Request, Response } from "express";
@@ -26,7 +25,7 @@ router.get("/", async (req: Request, res: Response) => {
 });
 
 // Add issue
-router.post("/", async (req: Request, res: Response) => {
+router.post("/new", async (req: Request, res: Response) => {
   console.log("post request...");
   await addIssue(req.body);
   res.status(201).send();
