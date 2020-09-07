@@ -146,14 +146,13 @@ export default {
   margin: 0 auto;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: stretch;
   background: #f1f3f8;
 }
 .table-container {
   display: flex;
   flex-direction: column;
-  width: 100%;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   min-width: 780px;
   max-width: 1200px;
