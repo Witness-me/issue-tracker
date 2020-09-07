@@ -8,8 +8,8 @@ const axios = require("axios").create({
 });
 
 // Get issues
-export async function getIssues() {
-  const result = await axios.get("/all");
+export async function getIssues(query: object) {
+  const result = await axios.get("/", query);
   const data = result.data;
   const issues = data.map((issue: any) => ({
     ...issue,
@@ -21,7 +21,7 @@ export async function getIssues() {
 
 // Create issue
 export async function addIssue(issue: object) {
-  return axios.post("", issue);
+  return axios.post("new", issue);
 }
 
 // Delete issue

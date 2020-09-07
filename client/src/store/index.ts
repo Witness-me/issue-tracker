@@ -19,7 +19,7 @@ export default new Vuex.Store({
   actions: {
     async getAllIssues(ctx) {
       //this.state.issues = await api.getIssues();
-      const issues = await api.getIssues();
+      const issues = await api.getIssues({});
       ctx.commit("updateIssues", issues);
     },
   },
