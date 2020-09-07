@@ -13,21 +13,21 @@
           placeholder="Enter your issue here..."
           maxlength="200"
         />
-        <br />
         <!-- status -->
         <div class="input-status">
-          <input type="radio" id="to-do" value="To do" v-model="issue.status" />
-          <label for="to-do">To do</label>
+          <div>
+            <input type="radio" id="to-do" value="To do" v-model="issue.status" />
+            <label for="to-do">To do</label>
+          </div>
+          <div>
+            <input type="radio" id="in-progress" value="In progress" v-model="issue.status" />
+            <label for="in-progress">In progress</label>
+          </div>
+          <div>
+            <input type="radio" id="done" value="Done" v-model="issue.status" />
+            <label for="done">Done</label>
+          </div>
         </div>
-        <div class="input-status">
-          <input type="radio" id="in-progress" value="In progress" v-model="issue.status" />
-          <label for="in-progress">In progress</label>
-        </div>
-        <div class="input-status">
-          <input type="radio" id="done" value="Done" v-model="issue.status" />
-          <label for="done">Done</label>
-        </div>
-        <br />
         <!-- comments -->
         <div class="input-form-container">
           <label for="input-comments">Comments:</label>
@@ -39,9 +39,8 @@
             maxlength="600"
           />
         </div>
-        <br />
         <!-- prioriy -->
-        <div class="input-form-container">
+        <div class="input-form-container input-priority-container">
           <label for="input-priority">Priority:</label>
           <select v-model="issue.priority" class="input-priority">
             <option value="High">High</option>
@@ -49,7 +48,6 @@
             <option value="Low">Low</option>
           </select>
         </div>
-        <br />
         <!-- buttons -->
         <button class="input-submit-button" @click="editIssue">Edit</button>
       </div>

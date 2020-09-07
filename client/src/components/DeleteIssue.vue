@@ -43,7 +43,7 @@ export default {
   font-size: 14px;
   font-weight: 500;
   margin-top: 40px;
-  margin-bottom: 60px;
+  margin-bottom: 50px;
 }
 .modal-content p {
   padding: 3px 0;

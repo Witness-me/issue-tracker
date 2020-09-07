@@ -346,7 +346,7 @@ export default {
   cursor: pointer;
 }
 
-/* inside the section */
+/* inside the section styles*/
 .section-insides {
   max-height: calc(100vh - 153px);
   overflow-y: auto;
@@ -357,7 +357,7 @@ export default {
 }
 /* sroll bars design (webkit) */
 .section-insides::-webkit-scrollbar {
-  width: 7px; /* width of the entire scrollbar */
+  width: 7px;
 }
 .section-insides::-webkit-scrollbar-thumb {
   background-color: #bbcde5;

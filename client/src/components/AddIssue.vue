@@ -15,21 +15,21 @@
         placeholder="Enter your issue here..."
         maxlength="200"
       />
-      <br />
       <!-- status -->
       <div class="input-status">
-        <input type="radio" id="to-do" value="To do" v-model="issue.status" />
-        <label for="to-do">To do</label>
+        <div>
+          <input type="radio" id="to-do" value="To do" v-model="issue.status" />
+          <label for="to-do">To do</label>
+        </div>
+        <div>
+          <input type="radio" id="in-progress" value="In progress" v-model="issue.status" />
+          <label for="in-progress">In progress</label>
+        </div>
+        <div>
+          <input type="radio" id="done" value="Done" v-model="issue.status" />
+          <label for="done">Done</label>
+        </div>
       </div>
-      <div class="input-status">
-        <input type="radio" id="in-progress" value="In progress" v-model="issue.status" />
-        <label for="in-progress">In progress</label>
-      </div>
-      <div class="input-status">
-        <input type="radio" id="done" value="Done" v-model="issue.status" />
-        <label for="done">Done</label>
-      </div>
-      <br />
       <!-- comments -->
       <div class="input-form-container">
         <label for="input-comments">Comments:</label>
@@ -41,9 +41,8 @@
           maxlength="600"
         />
       </div>
-      <br />
       <!-- prioriy -->
-      <div class="input-form-container">
+      <div class="input-form-container input-priority-container">
         <label for="input-priority">Priority:</label>
         <select v-model="issue.priority" class="input-priority">
           <option value="High">High</option>
@@ -51,7 +50,6 @@
           <option value="Low">Low</option>
         </select>
       </div>
-      <br />
       <!-- buttons -->
       <button class="input-submit-button" @click="addIssue">Add</button>
     </div>
@@ -150,20 +148,21 @@ export default {
   padding: 5px;
   font-size: 14px;
   font-weight: 500;
+  margin: 8px;
+  border-radius: 3px;
+  resize: none;
+  font-family: "Roboto", sans-serif;
+  border: 1px solid #2c365e;
 }
 .input-title {
   width: 530px;
   height: 65px;
-  margin: 10px;
-  margin-bottom: 5px;
-  border: 1px solid #2c365e;
-  border-radius: 3px;
-  resize: none;
 }
 .input-status {
-  display: inline;
+  display: flex;
+  justify-content: center;
   box-sizing: border-box;
-  margin: 5px 3px;
+  margin-bottom: 5px;
   font-size: 14px;
   font-weight: 500;
 }
@@ -175,12 +174,12 @@ export default {
   font-weight: 500;
 }
 .input-comments {
-  width: 400px;
-  height: 70px;
-  margin: 0 5px;
-  border: 1px solid #2c365e;
-  border-radius: 3px;
-  resize: none;
+  width: 430px;
+  height: 80px;
+}
+.input-priority-container {
+  margin-top: 5px;
+  margin-bottom: 20px;
 }
 .input-priority {
   margin: 0 10px;

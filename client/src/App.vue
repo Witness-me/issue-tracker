@@ -34,6 +34,8 @@ body {
   min-height: 100%;
   min-height: 100vh;
   min-width: 780px;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 div,
 p,

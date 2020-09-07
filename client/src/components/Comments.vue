@@ -25,20 +25,14 @@ export default {
 
 <style scoped>
 .modal-popup {
-  height: 270px;
+  height: 280px;
   width: 520px;
 }
 .modal-content {
   text-align: center;
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 400;
   height: 200px;
   margin: 30px 10px;
-  /* display: flex;
-  justify-content: center;
-  align-items: flex-start; */
-  /* margin: auto 10px; */
-  /* margin-top: 40px;
-  margin-bottom: 60px; */
 }
 </style>
