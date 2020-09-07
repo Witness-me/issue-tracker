@@ -6,7 +6,9 @@ import {
   updateIssue,
 } from "../models/issues";
 const express = require("express");
+import { authCheck } from "./auth";
 import { Request, Response } from "express";
+
 const router = express.Router();
 console.log("controller started");
 
@@ -18,7 +20,7 @@ router.get("/all", async (req: Request, res: Response) => {
 });
 
 // Find issues by any parameter
-router.get("/", async (req: Request, res: Response) => {
+router.get("/", authCheck, async (req: Request, res: Response) => {
   console.log("get request finding...");
   const issuesFound = await getIssues(req.body);
   res.send(issuesFound);
