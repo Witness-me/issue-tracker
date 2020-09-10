@@ -22,7 +22,6 @@ export async function getAllIssues() {
 }
 
 // Find issues by parameter
-// not used for now
 export async function getIssues(req: Request) {
   console.log("getting issues...");
   const issueFound = await Issue.find(req);

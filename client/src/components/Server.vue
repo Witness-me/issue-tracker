@@ -1,12 +1,12 @@
 <template>
   <div class="server-wrapper">
     <div class="navbar-wrapper">
-      <router-link to="/">
+      <router-link to="/home">
         <img class="logo" src="../assets/img/bug.png" />
       </router-link>
 
       <div class="navbar-pannel">
-        <router-link to="/">
+        <router-link to="/home">
           <button class="navbar-button">Back to Homepage</button>
         </router-link>
       </div>

@@ -1,7 +1,5 @@
-// import axios from "axios";
-// const instance = axios.create({
-//   baseURL: process.env.VUE_APP_API,
-// });
+// import request from "request";
+import { getAccessToken } from "./auth";
 
 const axios = require("axios").create({
   baseURL: process.env.VUE_APP_API,
@@ -9,7 +7,25 @@ const axios = require("axios").create({
 
 // Get issues
 export async function getIssues(query: object) {
-  const result = await axios.get("/", query);
+  // const options = {
+  //   method: "POST",
+  //   url: "https://witness-me.eu.auth0.com/oauth/token",
+  //   headers: { "content-type": "application/json" },
+  //   body:
+  //     '{"client_id":"Fw2ZEl7H66AvKfrwQE1E20Ldkdl0Ro1u","client_secret":"IXzG071un3hiqfJx76iwqFOFHbQpfMYxYotCGeOxB1EQ9KYC13DeNxGaThwipAjR","audience":"issue-tracker","grant_type":"client_credentials"}',
+  // };
+
+  // request(options, function(error, response, body) {
+  //   if (error) throw new Error(error);
+
+  //   console.log(body);
+  // });
+
+  const result = await axios.get(
+    "/",
+    { headers: { Authorization: `Bearer ${getAccessToken()}` } },
+    query
+  );
   const data = result.data;
   const issues = data.map((issue: any) => ({
     ...issue,

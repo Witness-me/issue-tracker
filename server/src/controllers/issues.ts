@@ -13,16 +13,19 @@ const router = express.Router();
 console.log("controller started");
 
 // Get all issues
-router.get("/all", async (req: Request, res: Response) => {
-  console.log("get request all...");
-  const allIssues = await getAllIssues();
-  res.send(allIssues);
-});
+// router.get("/all", async (req: Request, res: Response) => {
+//   console.log("get request all...");
+//   const allIssues = await getAllIssues();
+//   res.send(allIssues);
+// });
 
+// authCheck,
 // Find issues by any parameter
 router.get("/", authCheck, async (req: Request, res: Response) => {
   console.log("get request finding...");
+  console.log(authCheck);
   const issuesFound = await getIssues(req.body);
+  // const issuesFound = await getAllIssues();
   res.send(issuesFound);
 });
 
