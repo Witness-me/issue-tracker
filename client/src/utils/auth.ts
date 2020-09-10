@@ -3,6 +3,8 @@ import decode from "jwt-decode";
 import auth0, { WebAuth } from "auth0-js";
 // import Router from "vue-router";
 import Auth0Lock from "auth0-lock";
+import jwt_decode from "jwt-decode";
+
 const ID_TOKEN_KEY = "id_token";
 const ACCESS_TOKEN_KEY = "access_token";
 
@@ -35,6 +37,11 @@ export function login() {
 
 export function getIdToken() {
   return localStorage.getItem(ID_TOKEN_KEY);
+}
+export function user() {
+  const jwt = getIdToken();
+  const decoded = jwt_decode(jwt);
+  console.log(decoded.sub);
 }
 
 function getTokenExpirationDate(encodedToken) {

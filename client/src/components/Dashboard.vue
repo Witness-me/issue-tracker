@@ -286,6 +286,7 @@ import { getStringFromDate } from "../utils/dates";
 import { mapGetters, mapActions } from "vuex";
 import AddIssue from "./AddIssue.vue";
 import * as api from "@/utils/api";
+import { user } from "../utils/auth";
 export default {
   name: "Dashboard",
   data() {
@@ -376,6 +377,7 @@ export default {
   },
   async mounted() {
     this.getAllIssues();
+    user();
   },
   components: {
     AddIssue,

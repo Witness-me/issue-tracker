@@ -7,20 +7,6 @@ const axios = require("axios").create({
 
 // Get issues
 export async function getIssues(query: object) {
-  // const options = {
-  //   method: "POST",
-  //   url: "https://witness-me.eu.auth0.com/oauth/token",
-  //   headers: { "content-type": "application/json" },
-  //   body:
-  //     '{"client_id":"Fw2ZEl7H66AvKfrwQE1E20Ldkdl0Ro1u","client_secret":"IXzG071un3hiqfJx76iwqFOFHbQpfMYxYotCGeOxB1EQ9KYC13DeNxGaThwipAjR","audience":"issue-tracker","grant_type":"client_credentials"}',
-  // };
-
-  // request(options, function(error, response, body) {
-  //   if (error) throw new Error(error);
-
-  //   console.log(body);
-  // });
-
   const result = await axios.get(
     "/",
     { headers: { Authorization: `Bearer ${getAccessToken()}` } },

@@ -1,6 +1,9 @@
 <template>
   <div class="wrapper">
-    <AddIssue v-if="addIssueIsVisible" v-on:closePopup="popupAddIssue($event)" />
+    <AddIssue
+      v-if="addIssueIsVisible"
+      v-on:closePopup="popupAddIssue($event)"
+    />
     <Comments
       v-if="commentsAreVisible"
       :comment="comment"
@@ -8,8 +11,12 @@
     />
     <div class="table-container">
       <div class="table-header">
-        <p class="counter">{{ `You currently have ${issuesCount} issues in total...` }}</p>
-        <button @click="popupAddIssue()" class="add-issue-button">Submit issue</button>
+        <p class="counter">
+          {{ `You currently have ${issuesCount} issues in total...` }}
+        </p>
+        <button @click="popupAddIssue()" class="add-issue-button">
+          Submit issue
+        </button>
       </div>
       <table class="table">
         <tr class="table-top-row">
@@ -47,13 +54,24 @@
           <td>
             <div
               class="status-div"
-              :class="{'status-to-do': statusToDo(issue.status), 'status-in-progress': statusInProgress(issue.status), 'status-done': statusDone(issue.status)}"
-            >{{ issue.status }}</div>
+              :class="{
+                'status-to-do': statusToDo(issue.status),
+                'status-in-progress': statusInProgress(issue.status),
+                'status-done': statusDone(issue.status),
+              }"
+            >
+              {{ issue.status }}
+            </div>
           </td>
           <td
             class="priority"
-            :class="{'high-priority': isHighPriority(issue.priority) && !statusDone(issue.status)}"
-          >{{ issue.priority }}</td>
+            :class="{
+              'high-priority':
+                isHighPriority(issue.priority) && !statusDone(issue.status),
+            }"
+          >
+            {{ issue.priority }}
+          </td>
           <td class="delete">
             <img
               class="icon"
@@ -80,7 +98,7 @@ export default {
     return {
       addIssueIsVisible: false,
       commentsAreVisible: false,
-      comment: ""
+      comment: "",
     };
   },
   computed: mapGetters(["allIssues", "issuesCount"]),
@@ -126,15 +144,15 @@ export default {
     },
     isLowPriority(priority) {
       return priority === "Low";
-    }
+    },
   },
   async mounted() {
     this.getAllIssues();
   },
   components: {
     AddIssue,
-    Comments
-  }
+    Comments,
+  },
 };
 </script>
 
