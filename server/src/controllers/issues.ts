@@ -23,7 +23,6 @@ console.log("controller started");
 // Find issues by any parameter
 router.get("/", authCheck, async (req: Request, res: Response) => {
   console.log("get request finding...");
-  console.log(authCheck);
   const issuesFound = await getIssues(req.body);
   // const issuesFound = await getAllIssues();
   res.send(issuesFound);

@@ -2,24 +2,36 @@
   <div class="navbar-wrapper">
     <img class="logo" src="../assets/img/bug.png" />
     <!-- Icon above made by <a href="https://www.flaticon.com/authors/vitaly-gorbachev" title="Vitaly Gorbachev">Vitaly Gorbachev</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a> -->
-    <button class="navbar-button" @click="switchTab('Dashboard')">Dashboard</button>
-    <button class="navbar-button" @click="switchTab('AllIssues')">All issues</button>
+    <button class="navbar-button" @click="switchTab('Dashboard')">
+      Dashboard
+    </button>
+    <button class="navbar-button" @click="switchTab('AllIssues')">
+      All issues
+    </button>
+    <router-link to="/server">
+      <button class="navbar-button">View server data</button>
+    </router-link>
     <div class="navbar-pannel">
-      <router-link to="/server">
-        <button class="navbar-button">View server data</button>
-      </router-link>
+      <button class="navbar-button" @click="handleLogout()">Log out</button>
     </div>
   </div>
 </template>
 
 <script>
+import { isLoggedIn, logout } from "@/utils/auth";
 export default {
   name: "Navbar",
   methods: {
     switchTab(tabName) {
       this.$emit("switchTab", tabName);
-    }
-  }
+    },
+    handleLogout() {
+      logout();
+    },
+    isLoggedIn() {
+      return isLoggedIn();
+    },
+  },
 };
 </script>
 

@@ -14,14 +14,19 @@
     <h1>Server information</h1>
 
     <div v-for="issue in allIssues" v-bind:key="issue._id">{{ issue }}</div>
+    <Footer />
   </div>
 </template>
 
 <script>
 import { mapGetters } from "vuex";
+import Footer from "./Footer.vue";
 export default {
   name: "Server",
-  computed: mapGetters(["allIssues"])
+  computed: mapGetters(["allIssues"]),
+  components: {
+    Footer,
+  },
 };
 </script>
 

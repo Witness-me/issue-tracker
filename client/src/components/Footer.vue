@@ -9,17 +9,23 @@
     </a>
 
     <a href="https://github.com/winess-me">
-      <img class="contact-icon" src="https://img.icons8.com/material-outlined/48/000000/github.png" />
+      <img
+        class="contact-icon"
+        src="https://img.icons8.com/material-outlined/48/000000/github.png"
+      />
     </a>
     <a href="https://t.me/witness_me">
-      <img class="contact-icon" src="https://img.icons8.com/ios/50/000000/telegram-app.png" />
+      <img
+        class="contact-icon"
+        src="https://img.icons8.com/ios/50/000000/telegram-app.png"
+      />
     </a>
   </div>
 </template>
 
 <script>
 export default {
-  name: "Footer"
+  name: "Footer",
 };
 </script>
 

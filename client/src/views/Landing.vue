@@ -19,9 +19,6 @@ export default {
     handleLogin() {
       login();
     },
-    // handleLogout() {
-    //   logout();
-    // },
     isLoggedIn() {
       return isLoggedIn();
     },

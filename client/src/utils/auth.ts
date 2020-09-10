@@ -1,19 +1,21 @@
 import decode from "jwt-decode";
 // import axios from "axios";
-import auth0 from "auth0-js";
-import Router from "vue-router";
+import auth0, { WebAuth } from "auth0-js";
+// import Router from "vue-router";
 import Auth0Lock from "auth0-lock";
 const ID_TOKEN_KEY = "id_token";
 const ACCESS_TOKEN_KEY = "access_token";
 
 const CLIENT_ID = "Fw2ZEl7H66AvKfrwQE1E20Ldkdl0Ro1u";
 const CLIENT_DOMAIN = "witness-me.eu.auth0.com";
-// const CLIENT_DOMAIN = "https://witness-me.eu.auth0.com/oauth/token";
+const CLIENT_AUTH0_DOMAIN_URL = "https://witness-me.eu.auth0.com";
+
 const REDIRECT = "http://localhost:8080/callback";
+const VUE_APP_DOMAINURL = "http://localhost:8080";
 const SCOPE = "user";
 const AUDIENCE = "issue-tracker";
 
-const auth = new auth0.WebAuth({
+let auth = new auth0.WebAuth({
   clientID: CLIENT_ID,
   domain: CLIENT_DOMAIN,
 });
@@ -83,7 +85,13 @@ function clearAccessToken() {
 export function logout() {
   clearIdToken();
   clearAccessToken();
-  router.go("/");
+  window.location.href =
+    CLIENT_AUTH0_DOMAIN_URL +
+    "/v2/logout?returnTo=" +
+    VUE_APP_DOMAINURL +
+    "/&client_id=" +
+    CLIENT_ID;
+  // router.go("/");
 }
 
 // Helper function that will allow us to extract the access_token and id_token
