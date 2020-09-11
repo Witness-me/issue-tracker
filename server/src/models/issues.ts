@@ -10,7 +10,7 @@ const issueSchema = new Schema({
   updatedAt: Date,
   comments: String,
   priority: { type: String, required: [true, "Priority should be stated"] },
-  // user: Schema.Types.ObjectId,
+  userId: { type: String, required: [true, "UserId is required"] },
 });
 const Issue = mongoose.model("issue", issueSchema);
 
@@ -22,9 +22,10 @@ export async function getAllIssues() {
 }
 
 // Find issues by parameter
-export async function getIssues(req: Request) {
-  console.log("getting issues...");
-  const issueFound = await Issue.find(req);
+export async function getIssues(query: object) {
+  console.log("getting issues for user...");
+  // console.log(query);
+  const issueFound = await Issue.find(query);
   return issueFound;
 }
 
@@ -38,6 +39,7 @@ export async function addIssue(issue: any) {
     updatedAt: new Date(),
     comments: issue.comments || null,
     priority: issue.priority,
+    userId: issue.userId,
   }).save();
   return entry;
 }
@@ -48,6 +50,10 @@ export async function updateIssue(issues: any) {
   const filter = { _id: issues._id };
   const update = issues;
   update.updatedAt = new Date();
+  // const result = await Issue.updateMany(
+  //   {},
+  //   { userId: "google-oauth2|105734693007492324608" }
+  // );
   const result = await Issue.findOneAndUpdate(filter, update);
   if (!result) throw new Error(`Failed to find or update message`);
 }

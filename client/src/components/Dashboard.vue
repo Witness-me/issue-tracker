@@ -11,15 +11,9 @@
           <div>
             <h3 class="section-header">To do</h3>
             <div class="issues-count">
-              <p v-if="statusToDoLength === 0">
-                You have not yet planned any tasks to do
-              </p>
-              <p v-else-if="statusToDoLength === 1">
-                You have 1 issue in your backlog
-              </p>
-              <p v-else>
-                You have {{ statusToDoLength }} issues in your backlog
-              </p>
+              <p v-if="statusToDoLength === 0">You have not yet planned any tasks to do</p>
+              <p v-else-if="statusToDoLength === 1">You have 1 issue in your backlog</p>
+              <p v-else>You have {{ statusToDoLength }} issues in your backlog</p>
             </div>
           </div>
           <div class="section-header-reverse">
@@ -32,14 +26,8 @@
           </div>
         </div>
         <div class="section-insides">
-          <div
-            class="section-point"
-            v-for="issue in statusToDo"
-            v-bind:key="issue._id"
-          >
-            <p class="update-date">
-              Last updated at: {{ getStringFromDate(issue.updatedAt) }}
-            </p>
+          <div class="section-point" v-for="issue in statusToDo" v-bind:key="issue._id">
+            <p class="update-date">Last updated at: {{ getStringFromDate(issue.updatedAt) }}</p>
             <p class="title">{{ issue.title }}</p>
             <p class="comments" v-if="issue.comments">{{ issue.comments }}</p>
             <div class="section-point-ending">
@@ -47,27 +35,9 @@
                 <span class="priority-block">Priority:</span>
                 <span class="priority-block">
                   <svg class="priority-block" height="8" width="8">
-                    <circle
-                      v-if="issue.priority === 'High'"
-                      cx="4"
-                      cy="4"
-                      r="4"
-                      fill="#F52416"
-                    />
-                    <circle
-                      v-if="issue.priority === 'Medium'"
-                      cx="4"
-                      cy="4"
-                      r="4"
-                      fill="#EBBC00"
-                    />
-                    <circle
-                      v-if="issue.priority === 'Low'"
-                      cx="4"
-                      cy="4"
-                      r="4"
-                      fill="#37D000"
-                    />
+                    <circle v-if="issue.priority === 'High'" cx="4" cy="4" r="4" fill="#F52416" />
+                    <circle v-if="issue.priority === 'Medium'" cx="4" cy="4" r="4" fill="#EBBC00" />
+                    <circle v-if="issue.priority === 'Low'" cx="4" cy="4" r="4" fill="#37D000" />
                   </svg>
                 </span>
               </div>
@@ -109,12 +79,8 @@
           <div>
             <h3 class="section-header">In progress</h3>
             <div class="issues-count">
-              <p v-if="statusInProgressLength === 0">
-                High time to start working!
-              </p>
-              <p v-else-if="statusInProgressLength === 1">
-                Сurrently working on 1 issue
-              </p>
+              <p v-if="statusInProgressLength === 0">High time to start working!</p>
+              <p v-else-if="statusInProgressLength === 1">Сurrently working on 1 issue</p>
               <p v-else>
                 Currently working on
                 {{ statusInProgressLength }} issues
@@ -131,14 +97,8 @@
           </div>
         </div>
         <div class="section-insides">
-          <div
-            class="section-point"
-            v-for="issue in statusInProgress"
-            v-bind:key="issue._id"
-          >
-            <p class="update-date">
-              Last updated at: {{ getStringFromDate(issue.updatedAt) }}
-            </p>
+          <div class="section-point" v-for="issue in statusInProgress" v-bind:key="issue._id">
+            <p class="update-date">Last updated at: {{ getStringFromDate(issue.updatedAt) }}</p>
             <p class="title">{{ issue.title }}</p>
             <p class="comments" v-if="issue.comments">{{ issue.comments }}</p>
             <div class="section-point-ending">
@@ -146,27 +106,9 @@
                 <span class="priority-block">Priority:</span>
                 <span class="priority-block">
                   <svg class="priority-block" height="8" width="8">
-                    <circle
-                      v-if="issue.priority === 'High'"
-                      cx="4"
-                      cy="4"
-                      r="4"
-                      fill="#F52416"
-                    />
-                    <circle
-                      v-if="issue.priority === 'Medium'"
-                      cx="4"
-                      cy="4"
-                      r="4"
-                      fill="#EBBC00"
-                    />
-                    <circle
-                      v-if="issue.priority === 'Low'"
-                      cx="4"
-                      cy="4"
-                      r="4"
-                      fill="#37D000"
-                    />
+                    <circle v-if="issue.priority === 'High'" cx="4" cy="4" r="4" fill="#F52416" />
+                    <circle v-if="issue.priority === 'Medium'" cx="4" cy="4" r="4" fill="#EBBC00" />
+                    <circle v-if="issue.priority === 'Low'" cx="4" cy="4" r="4" fill="#37D000" />
                   </svg>
                 </span>
               </div>
@@ -201,12 +143,8 @@
           <div>
             <h3 class="section-header">Done</h3>
             <div class="issues-count">
-              <p v-if="statusDoneLength === 0">
-                You have not yet finished any tasks...
-              </p>
-              <p v-else-if="statusDoneLength === 1">
-                You have finished 1 task!
-              </p>
+              <p v-if="statusDoneLength === 0">You have not yet finished any tasks...</p>
+              <p v-else-if="statusDoneLength === 1">You have finished 1 task!</p>
               <p v-else>{{ statusDoneLength }} tasks finished. Keep it up!</p>
             </div>
           </div>
@@ -220,14 +158,8 @@
           </div>
         </div>
         <div class="section-insides">
-          <div
-            class="section-point"
-            v-for="issue in statusDone"
-            v-bind:key="issue._id"
-          >
-            <p class="update-date">
-              Last updated at: {{ getStringFromDate(issue.updatedAt) }}
-            </p>
+          <div class="section-point" v-for="issue in statusDone" v-bind:key="issue._id">
+            <p class="update-date">Last updated at: {{ getStringFromDate(issue.updatedAt) }}</p>
             <p class="title">{{ issue.title }}</p>
             <p class="comments" v-if="issue.comments">{{ issue.comments }}</p>
             <div class="section-point-ending">
@@ -235,27 +167,9 @@
                 <span class="priority-block">Priority:</span>
                 <span class="priority-block">
                   <svg class="priority-block" height="8" width="8">
-                    <circle
-                      v-if="issue.priority === 'High'"
-                      cx="4"
-                      cy="4"
-                      r="4"
-                      fill="#F52416"
-                    />
-                    <circle
-                      v-if="issue.priority === 'Medium'"
-                      cx="4"
-                      cy="4"
-                      r="4"
-                      fill="#EBBC00"
-                    />
-                    <circle
-                      v-if="issue.priority === 'Low'"
-                      cx="4"
-                      cy="4"
-                      r="4"
-                      fill="#37D000"
-                    />
+                    <circle v-if="issue.priority === 'High'" cx="4" cy="4" r="4" fill="#F52416" />
+                    <circle v-if="issue.priority === 'Medium'" cx="4" cy="4" r="4" fill="#EBBC00" />
+                    <circle v-if="issue.priority === 'Low'" cx="4" cy="4" r="4" fill="#37D000" />
                   </svg>
                 </span>
               </div>
@@ -286,13 +200,12 @@ import { getStringFromDate } from "../utils/dates";
 import { mapGetters, mapActions } from "vuex";
 import AddIssue from "./AddIssue.vue";
 import * as api from "@/utils/api";
-import { user } from "../utils/auth";
 export default {
   name: "Dashboard",
   data() {
     return {
       addIssueIsVisible: false,
-      newIssueStatus: "To do",
+      newIssueStatus: "To do"
     };
   },
   computed: {
@@ -328,7 +241,7 @@ export default {
     },
     statusDoneLength() {
       return this.statusDone.length;
-    },
+    }
   },
   methods: {
     ...mapActions(["getAllIssues", "deleteIssue"]),
@@ -373,15 +286,14 @@ export default {
     },
     sortByUpdateTime(array) {
       return array.sort((a, b) => b.updatedAt - a.updatedAt);
-    },
+    }
   },
   async mounted() {
     this.getAllIssues();
-    user();
   },
   components: {
-    AddIssue,
-  },
+    AddIssue
+  }
 };
 </script>
 
@@ -401,7 +313,7 @@ export default {
 .dashboard-section {
   box-sizing: border-box;
   flex-grow: 1;
-  min-height: 55px;
+  min-height: 60px;
   min-width: 250px;
   max-width: 22%;
   border-radius: 5px;
@@ -454,7 +366,8 @@ export default {
 
 .section-point {
   border-radius: 3px;
-  background: #f1f3f8;
+  /* background: #f1f3f8; */
+  background: #f5f7f8;
   margin-bottom: 6px;
   padding: 5px 8px;
 }

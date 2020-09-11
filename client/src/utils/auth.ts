@@ -3,7 +3,7 @@ import decode from "jwt-decode";
 import auth0, { WebAuth } from "auth0-js";
 // import Router from "vue-router";
 import Auth0Lock from "auth0-lock";
-import jwt_decode from "jwt-decode";
+import jwtDecode from "jwt-decode";
 
 const ID_TOKEN_KEY = "id_token";
 const ACCESS_TOKEN_KEY = "access_token";
@@ -17,7 +17,7 @@ const VUE_APP_DOMAINURL = "http://localhost:8080";
 const SCOPE = "user";
 const AUDIENCE = "issue-tracker";
 
-let auth = new auth0.WebAuth({
+const auth = new auth0.WebAuth({
   clientID: CLIENT_ID,
   domain: CLIENT_DOMAIN,
 });
@@ -38,10 +38,11 @@ export function login() {
 export function getIdToken() {
   return localStorage.getItem(ID_TOKEN_KEY);
 }
-export function user() {
+
+export function getUserId() {
   const jwt = getIdToken();
-  const decoded = jwt_decode(jwt);
-  console.log(decoded.sub);
+  const decodedJWT = jwtDecode(jwt);
+  return decodedJWT.sub;
 }
 
 function getTokenExpirationDate(encodedToken) {

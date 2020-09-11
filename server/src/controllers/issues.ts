@@ -21,10 +21,9 @@ console.log("controller started");
 
 // authCheck,
 // Find issues by any parameter
-router.get("/", authCheck, async (req: Request, res: Response) => {
-  console.log("get request finding...");
-  const issuesFound = await getIssues(req.body);
-  // const issuesFound = await getAllIssues();
+router.get("/home", authCheck, async (req: Request, res: Response) => {
+  console.log("get request finding for user...");
+  const issuesFound = await getIssues({ userId: req.user.sub });
   res.send(issuesFound);
 });
 
@@ -38,6 +37,13 @@ router.post("/new", async (req: Request, res: Response) => {
 // Update issue (by ID)
 router.put("/edit/:id", async (req: Request, res: Response) => {
   console.log("put request...");
+  await updateIssue(req.body);
+  res.status(201).send();
+});
+
+// Update all issues (needs correction in models/issues)
+router.put("/editall", async (req, res) => {
+  console.log("EDIT ALL");
   await updateIssue(req.body);
   res.status(201).send();
 });

@@ -1,5 +1,5 @@
 // import request from "request";
-import { getAccessToken } from "./auth";
+import { getAccessToken, getUserId } from "./auth";
 
 const axios = require("axios").create({
   baseURL: process.env.VUE_APP_API,
@@ -7,8 +7,9 @@ const axios = require("axios").create({
 
 // Get issues
 export async function getIssues(query: object) {
+  console.log("query:", query);
   const result = await axios.get(
-    "/",
+    "/home",
     { headers: { Authorization: `Bearer ${getAccessToken()}` } },
     query
   );
@@ -23,6 +24,7 @@ export async function getIssues(query: object) {
 
 // Create issue
 export async function addIssue(issue: object) {
+  issue.userId = getUserId();
   return axios.post("new", issue);
 }
 
