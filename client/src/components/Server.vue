@@ -16,19 +16,18 @@
       <h1>Server information</h1>
       <div v-for="issue in allIssues" v-bind:key="issue._id">{{ issue }}</div>
     </div>
-
-    <Footer />
   </div>
 </template>
 
 <script>
-import { mapGetters } from "vuex";
-import Footer from "./Footer.vue";
+import { mapGetters, mapActions } from "vuex";
 export default {
   name: "Server",
+
   computed: mapGetters(["allIssues"]),
-  components: {
-    Footer
+  methods: mapActions(["getAllIssues"]),
+  async mounted() {
+    this.getAllIssues();
   }
 };
 </script>
