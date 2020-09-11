@@ -1,28 +1,26 @@
 <template>
   <div>
-    <p>Having trouble with getting things done?</p>
+    <h1>Having trouble with getting things done?</h1>
     <p>
       Try out our issue tracking app! Manage unlimited number of tasks with us
       for absolutely no charge!
     </p>
-    <button class="login-button" @click="handleLogin()">
-      Sign up / Log In
-    </button>
+    <button class="button" @click="handleLogin()">Sign up / Log In</button>
   </div>
 </template>
 
 <script>
-import { isLoggedIn, login, logout } from "@/utils/auth";
+import { login } from "@/utils/auth";
 export default {
   name: "Landing",
   methods: {
     handleLogin() {
       login();
-    },
-    isLoggedIn() {
-      return isLoggedIn();
-    },
-  },
+    }
+    // isLoggedIn() {
+    //   return isLoggedIn();
+    // }
+  }
 };
 </script>
 

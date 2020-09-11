@@ -24,7 +24,6 @@ export async function getAllIssues() {
 // Find issues by parameter
 export async function getIssues(query: object) {
   console.log("getting issues for user...");
-  // console.log(query);
   const issueFound = await Issue.find(query);
   return issueFound;
 }

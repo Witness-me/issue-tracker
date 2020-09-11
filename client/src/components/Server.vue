@@ -11,9 +11,12 @@
         </router-link>
       </div>
     </div>
-    <h1>Server information</h1>
 
-    <div v-for="issue in allIssues" v-bind:key="issue._id">{{ issue }}</div>
+    <div class="main">
+      <h1>Server information</h1>
+      <div v-for="issue in allIssues" v-bind:key="issue._id">{{ issue }}</div>
+    </div>
+
     <Footer />
   </div>
 </template>
@@ -25,8 +28,8 @@ export default {
   name: "Server",
   computed: mapGetters(["allIssues"]),
   components: {
-    Footer,
-  },
+    Footer
+  }
 };
 </script>
 

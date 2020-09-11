@@ -22,7 +22,7 @@ console.log("controller started");
 // authCheck,
 // Find issues by any parameter
 router.get("/home", authCheck, async (req: Request, res: Response) => {
-  console.log("get request finding for user...");
+  console.log("get request...");
   const issuesFound = await getIssues({ userId: req.user.sub });
   res.send(issuesFound);
 });
@@ -42,11 +42,11 @@ router.put("/edit/:id", async (req: Request, res: Response) => {
 });
 
 // Update all issues (needs correction in models/issues)
-router.put("/editall", async (req, res) => {
-  console.log("EDIT ALL");
-  await updateIssue(req.body);
-  res.status(201).send();
-});
+// router.put("/editall", async (req, res) => {
+//   console.log("EDIT ALL");
+//   await updateIssue(req.body);
+//   res.status(201).send();
+// });
 
 // Delete issue by ID
 router.delete("/delete/:id", async (req: Request, res: Response) => {
