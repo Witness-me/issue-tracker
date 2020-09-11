@@ -13,8 +13,10 @@
     </div>
 
     <div class="main">
-      <h1>Server information</h1>
-      <div v-for="issue in allIssues" v-bind:key="issue._id">{{ issue }}</div>
+      <div>
+        <h1 class="title">Server information</h1>
+        <div class="server-data" v-for="issue in allIssues" v-bind:key="issue._id">{{ issue }}</div>
+      </div>
     </div>
   </div>
 </template>
@@ -35,5 +37,20 @@ export default {
 <style scoped>
 .server-wrapper {
   text-align: center;
+}
+.main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.title {
+  font-size: 15px;
+  font-weight: 500;
+  padding-top: 20px;
+  padding-bottom: 10px;
+}
+.server-data {
+  font-size: 12px;
+  margin-bottom: 7px;
 }
 </style>
