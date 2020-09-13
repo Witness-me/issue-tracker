@@ -42,12 +42,14 @@
         </Carousel>
       </div>
     </div>
+    <Footer />
   </div>
 </template>
 
 <script>
 import { login } from "@/utils/auth";
 import { Carousel, Slide } from "vue-carousel";
+import Footer from "../components/Footer.vue";
 export default {
   name: "Landing",
   methods: {
@@ -58,6 +60,7 @@ export default {
   components: {
     Carousel,
     Slide,
+    Footer,
   },
 };
 </script>
@@ -65,7 +68,7 @@ export default {
 <style scoped>
 .landing-wrapper {
   height: 100vh;
-  min-width: 1050px;
+  min-width: 930px;
   /* min-height: 600px; */
   box-sizing: border-box;
 }

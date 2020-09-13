@@ -36,7 +36,7 @@ export default {
       currentTab: "Dashboard",
       deleteIssueIsVisible: false,
       editIssueIsVisible: false,
-      currentIssue: {}
+      currentIssue: {},
     };
   },
   methods: {
@@ -57,7 +57,7 @@ export default {
     openDeleteModal(issue) {
       this.currentIssue = issue;
       this.popupDeleteIssue();
-    }
+    },
   },
   components: {
     Navbar,
@@ -65,8 +65,8 @@ export default {
     AllIssues,
     DeleteIssue,
     EditIssue,
-    Footer
-  }
+    Footer,
+  },
 };
 </script>
 
