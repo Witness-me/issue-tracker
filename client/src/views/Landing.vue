@@ -10,40 +10,70 @@
           <li>Free. Always.</li>
         </ul>
       </div>
-      <button class="login-button" @click="handleLogin()">Sign up / Log In</button>
-      <div class="screenshot"></div>
+      <!-- <img src="../assets/img/landing/Dashboard" alt=""> -->
+      <button class="login-button" @click="handleLogin()">
+        Sign up / Log In
+      </button>
+      <div class="slider">
+        <Carousel
+          :perPage="1"
+          :centerMode="true"
+          :autoplay="true"
+          :autoplayTimeout="5000"
+          :loop="true"
+          :paginationEnabled="false"
+          :speed="1000"
+        >
+          <Slide>
+            <!-- <img src="../assets/landing/AllIssues.png" alt="" /> -->
+            <img
+              src="../assets/img/landing/Dashboard.png"
+              alt=""
+              class="screenshot"
+            />
+          </Slide>
+          <Slide>
+            <img
+              src="../assets/img/landing/AllIssues.png"
+              alt=""
+              class="screenshot"
+            />
+          </Slide>
+        </Carousel>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import { login } from "@/utils/auth";
+import { Carousel, Slide } from "vue-carousel";
 export default {
   name: "Landing",
   methods: {
     handleLogin() {
       login();
-    }
-  }
+    },
+  },
+  components: {
+    Carousel,
+    Slide,
+  },
 };
 </script>
 
 <style scoped>
 .landing-wrapper {
   height: 100vh;
-  /* max-height: 100%; */
-  min-width: 800px;
-  min-height: 600px;
+  min-width: 1050px;
+  /* min-height: 600px; */
   box-sizing: border-box;
-  /* align-content: center;
-  text-align: center; */
 }
 .landing-container {
   position: relative;
   margin-left: auto;
   margin-right: auto;
   top: 30px;
-  /* margin-top: 60px; */
   background: #f0670c;
   background-image: linear-gradient(100deg, #f0670c, #eca97c);
   color: #f1f3f8;
@@ -92,9 +122,27 @@ li {
   color: #f1f3f8;
   cursor: pointer;
 }
+.slider {
+  position: absolute;
+  top: 240px;
+  left: 80px;
+  width: 100%;
+  min-width: 500px;
+  max-width: 1000px;
+  /* background: cornflowerblue; */
+  /* width: 410px; */
+  margin-right: 5px;
+  /* border: 1px solid rgb(143, 143, 143); */
+  border-radius: 5px;
+}
 .screenshot {
-  height: 300px;
-  width: 700px;
-  background: cornflowerblue;
+  width: 100%;
+  /* border-bottom: 1px solid rgb(143, 143, 143); */
+  border-radius: 5px;
+  /* min-width: 500px;
+  max-width: 900px; */
+  /* width: 600px; */
+  /* height: 300px; */
+  /* width: auto; */
 }
 </style>
