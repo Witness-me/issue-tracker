@@ -40,6 +40,7 @@ body {
 div,
 p,
 h1,
+h2,
 a {
   margin: 0;
 }

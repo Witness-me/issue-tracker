@@ -1,6 +1,5 @@
 import {
   getIssues,
-  getAllIssues,
   addIssue,
   deleteIssue,
   updateIssue,
@@ -19,8 +18,7 @@ console.log("controller started");
 //   res.send(allIssues);
 // });
 
-// authCheck,
-// Find issues by any parameter
+// Find issues for current user
 router.get("/home", authCheck, async (req: Request, res: Response) => {
   console.log("get request...");
   const issuesFound = await getIssues({ userId: req.user.sub });
@@ -34,19 +32,12 @@ router.post("/new", async (req: Request, res: Response) => {
   res.status(201).send();
 });
 
-// Update issue (by ID)
+// Update issue by ID
 router.put("/edit/:id", async (req: Request, res: Response) => {
   console.log("put request...");
   await updateIssue(req.body);
   res.status(201).send();
 });
-
-// Update all issues (needs correction in models/issues)
-// router.put("/editall", async (req, res) => {
-//   console.log("EDIT ALL");
-//   await updateIssue(req.body);
-//   res.status(201).send();
-// });
 
 // Delete issue by ID
 router.delete("/delete/:id", async (req: Request, res: Response) => {
@@ -54,12 +45,5 @@ router.delete("/delete/:id", async (req: Request, res: Response) => {
   await deleteIssue(req.params.id);
   res.status(200).send();
 });
-
-// // Delete all issues
-// router.delete("/deleteall", async (req: Request, res: Response) => {
-//   console.log("delete request...");
-//   await deleteAll();
-//   res.status(200).send();
-// });
 
 module.exports = router;
