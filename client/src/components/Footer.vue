@@ -1,6 +1,5 @@
 <template>
   <div class="wrapper">
-    <!-- <p>Created by Vladislav Nikolaenko in 2020</p> -->
     <a href="mailto:vladislavnikolaenko@gmail.com">
       <img
         class="contact-icon"
@@ -25,6 +24,7 @@ export default {
 
 <style scoped>
 .wrapper {
+  width: 100%;
   height: 39px;
   background: #bbcde5;
   display: flex;

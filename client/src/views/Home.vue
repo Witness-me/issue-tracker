@@ -18,7 +18,6 @@
       v-on:openEditModal="openEditModal($event)"
       class="main"
     ></component>
-    <Footer />
   </div>
 </template>
 
@@ -28,7 +27,6 @@ import AllIssues from "../components/AllIssues.vue";
 import Dashboard from "../components/Dashboard.vue";
 import EditIssue from "../components/EditIssue.vue";
 import DeleteIssue from "../components/DeleteIssue.vue";
-import Footer from "../components/Footer.vue";
 export default {
   name: "Home",
   data() {
@@ -65,7 +63,6 @@ export default {
     AllIssues,
     DeleteIssue,
     EditIssue,
-    Footer,
   },
 };
 </script>
@@ -73,7 +70,7 @@ export default {
 <style>
 .main {
   margin: 0;
-  min-height: calc(100vh - 80px);
+  /* min-height: calc(100vh - 80px); */
 }
 /* .bottom-background {
   position: relative;

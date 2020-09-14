@@ -15,7 +15,13 @@
     <div class="main">
       <div>
         <h1 class="title">Server information</h1>
-        <div class="server-data" v-for="issue in allIssues" v-bind:key="issue._id">{{ issue }}</div>
+        <div
+          class="server-data"
+          v-for="issue in allIssues"
+          v-bind:key="issue._id"
+        >
+          {{ issue }}
+        </div>
       </div>
     </div>
   </div>
@@ -30,15 +36,16 @@ export default {
   methods: mapActions(["getAllIssues"]),
   async mounted() {
     this.getAllIssues();
-  }
+  },
 };
 </script>
 
 <style scoped>
 .server-wrapper {
-  text-align: center;
+  /* text-align: center; */
 }
 .main {
+  text-align: center;
   display: flex;
   justify-content: center;
   align-items: center;
