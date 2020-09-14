@@ -24,6 +24,7 @@ export default {
 
 <style scoped>
 .wrapper {
+  white-space: nowrap;
   width: 100%;
   height: 39px;
   background: #bbcde5;
@@ -33,6 +34,7 @@ export default {
 }
 .contact-icon {
   height: 20px;
-  margin: 10px 5px;
+  margin: 0 5px;
+  margin-top: 9px;
 }
 </style>

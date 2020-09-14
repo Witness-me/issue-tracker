@@ -280,17 +280,23 @@
     </div>
     <div v-if="isLoading" class="spinner">
       <vue-simple-spinner
-        size="30"
-        line-size="4"
+        :size="30"
+        :line-size="4"
+        :speed="1"
         line-fg-color="#5B831E"
         line-bg-color="#f1f3f8"
-        speed="1"
       ></vue-simple-spinner>
     </div>
   </div>
 </template>
 
 <script>
+// import {
+//   isLoggedIn,
+//   getIdToken,
+//   getTokenExpirationDate,
+//   isTokenExpired,
+// } from "../utils/auth";
 import { getStringFromDate } from "../utils/dates";
 import { mapGetters, mapActions } from "vuex";
 import AddIssue from "./AddIssue.vue";
@@ -302,6 +308,8 @@ export default {
       addIssueIsVisible: false,
       newIssueStatus: "To do",
       isLoading: false,
+      // token:
+      //   "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Il9HTld3TkE2LXpDcy1YcmJhWHlGMiJ9.eyJpc3MiOiJodHRwczovL3dpdG5lc3MtbWUuZXUuYXV0aDAuY29tLyIsInN1YiI6Imdvb2dsZS1vYXV0aDJ8MTA1NzM0NjkzMDA3NDkyMzI0NjA4IiwiYXVkIjoiRncyWkVsN0g2NkF2S2Zyd1FFMUUyMExka2RsMFJvMXUiLCJpYXQiOjE2MDAwNjY0OTgsImV4cCI6MTYwMDEwMjQ5OCwiYXRfaGFzaCI6InJNLVVsY0EtOUZ4ajNlNDlYMG5tR2ciLCJub25jZSI6IjRFUlppTTFqcUpGeHlBbDRsSm81dTVTMm5vOXBCSU5VIn0.Am2x2pj8wg4fphQ7ZP7VAMotGY4n-VnVxE8p3FrkXvSZEaGurWbNCYFjN-4epryPPhdi9eNsIJcsfzGGWvlfu79rY2C2dKJ90u4j7Yu7IwN8fI98_lmevKq3E6V9iAohJsu6Z_BdrY5qQtxGeIEnomKjuuUQuLtt-o6bIxF59ieZHIC9GknxGbi8RG5tG9PvYEneNJbwoImwSLzm8DvmMUo2W_bqXX2gecjot0LdQ8ZGBCs5Z8XU4Rt4TIboARaVt7gGziKcfWnvMpErts5DQZ-F19esFCC0qxRThX0wKBRF5FgX0iYmpjUN0TB9gLp9hpDDNCDG52o40mSeYqEvDg",
     };
   },
   computed: {
@@ -386,6 +394,21 @@ export default {
   },
   async mounted() {
     this.isLoading = true;
+
+    // console.log(isLoggedIn());
+    // console.log("isTokenExpired", isTokenExpired(this.token));
+    // console.log(getTokenExpirationDate(this.token));
+    // const date = new Date(0);
+    // console.log(date);
+    // console.log(date.setUTCSeconds(1600073698));
+
+    // const tokenExpTime = 1600073698;
+    // console.log(tokenExpTime * 1000);
+
+    // const date = new Date();
+    // const currentTimestamp = date.setUTCSeconds(0);
+    // console.log(currentTimestamp);
+
     await this.getAllIssues();
     this.isLoading = false;
   },

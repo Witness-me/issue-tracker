@@ -1,9 +1,6 @@
 <template>
   <div class="wrapper">
-    <AddIssue
-      v-if="addIssueIsVisible"
-      v-on:closePopup="popupAddIssue($event)"
-    />
+    <AddIssue v-if="addIssueIsVisible" v-on:closePopup="popupAddIssue($event)" />
     <Comments
       v-if="commentsAreVisible"
       :comment="comment"
@@ -11,12 +8,8 @@
     />
     <div class="table-container">
       <div class="table-header">
-        <p class="counter">
-          {{ `You currently have ${issuesCount} issues in total...` }}
-        </p>
-        <button @click="popupAddIssue()" class="add-issue-button">
-          Submit issue
-        </button>
+        <p class="counter">{{ `You currently have ${issuesCount} issues in total...` }}</p>
+        <button @click="popupAddIssue()" class="add-issue-button">Submit issue</button>
       </div>
       <table class="table">
         <tr class="table-top-row">
@@ -59,9 +52,7 @@
                 'status-in-progress': statusInProgress(issue.status),
                 'status-done': statusDone(issue.status),
               }"
-            >
-              {{ issue.status }}
-            </div>
+            >{{ issue.status }}</div>
           </td>
           <td
             class="priority"
@@ -69,13 +60,11 @@
               'high-priority':
                 isHighPriority(issue.priority) && !statusDone(issue.status),
             }"
-          >
-            {{ issue.priority }}
-          </td>
+          >{{ issue.priority }}</td>
           <td class="delete">
             <img
               class="icon"
-              src="../assets/img/delete2.png"
+              src="../assets/img/delete.png"
               alt="Delete"
               @click="openDeleteModal(issue)"
             />
@@ -85,11 +74,11 @@
 
       <div v-if="isLoading" class="spinner">
         <vue-simple-spinner
-          size="30"
-          line-size="4"
+          :size="30"
+          :line-size="4"
+          :speed="1"
           line-fg-color="#5B831E"
           line-bg-color="#f1f3f8"
-          speed="1"
         ></vue-simple-spinner>
       </div>
     </div>
@@ -109,7 +98,7 @@ export default {
       addIssueIsVisible: false,
       commentsAreVisible: false,
       comment: "",
-      isLoading: false,
+      isLoading: false
     };
   },
   computed: mapGetters(["allIssues", "issuesCount"]),
@@ -155,7 +144,7 @@ export default {
     },
     isLowPriority(priority) {
       return priority === "Low";
-    },
+    }
   },
   async mounted() {
     this.isLoading = true;
@@ -164,8 +153,8 @@ export default {
   },
   components: {
     AddIssue,
-    Comments,
-  },
+    Comments
+  }
 };
 </script>
 

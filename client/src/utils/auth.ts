@@ -35,8 +35,8 @@ export function getUserId() {
   const decodedJWT = decode(jwt);
   return decodedJWT.sub;
 }
-
-function getTokenExpirationDate(encodedToken: string) {
+// delete export
+export function getTokenExpirationDate(encodedToken: string) {
   const token = decode(encodedToken);
   if (!token.exp) {
     return null;
@@ -46,7 +46,16 @@ function getTokenExpirationDate(encodedToken: string) {
   return date;
 }
 
-function isTokenExpired(token: string) {
+export function isTokenExpired(token: string) {
+  // const decodedToken = decode(token);
+  // if (!decodedToken.exp) return true;
+  // const tokenExpTime = decodedToken.exp * 1000;
+  // const date = new Date();
+  // const currentTimestamp = date.setUTCSeconds(0);
+  // console.log(tokenExpTime, "tokenExpTime");
+  // console.log(currentTimestamp, "currentTimestamp");
+  // return tokenExpTime < currentTimestamp;
+
   const expirationDate = getTokenExpirationDate(token);
   return expirationDate < new Date();
 }

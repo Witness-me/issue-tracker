@@ -2,7 +2,7 @@
   <div>
     <div class="landing-wrapper">
       <div class="landing-container">
-        <h1 class="landing-title">Having trouble with getting things done?</h1>
+        <h1 class="landing-title">Having troubles getting things done?</h1>
         <h2 class="landing-title h2">Try out our issue tracking app!</h2>
         <div class="landing-text-container">
           <ul>
@@ -63,7 +63,14 @@ export default {
   height: 100%;
   min-width: 930px;
   box-sizing: border-box;
-  background: #d0ddff;
+  /* background: #fff4b3; */
+  /* background: #fdf9de; */
+  background: #fff;
+
+  /* background: #e3e2e6; */
+
+  /* background-size: 10px 10px;
+  background-image: radial-gradient(circle, #000000 0px, rgba(0, 0, 0, 0) 1px); */
 }
 .landing-container {
   position: relative;
@@ -81,7 +88,7 @@ export default {
   height: 300px;
   padding: 30px 40px;
   font-weight: 500;
-  margin-bottom: 620px;
+  margin-bottom: 625px;
 }
 .landing-title {
   font-size: 34px;
@@ -126,16 +133,22 @@ li {
   width: 100%;
   min-width: 500px;
   max-width: 1000px;
-  /* background: cornflowerblue; */
+  background: #f1f3f8;
   /* width: 410px; */
+  padding: 0;
   margin-right: 5px;
-  /* border: 1px solid rgb(143, 143, 143); */
+  border: 2px solid #2c365e;
   border-radius: 5px;
 }
 .screenshot {
+  padding: 0;
+  margin: 0;
   width: 100%;
+  height: 100%;
+  /* border: 2px solid #4d4ee3; */
+
   /* border-bottom: 1px solid rgb(143, 143, 143); */
-  border-radius: 5px;
+  border-radius: 3px;
   /* min-width: 500px;
   max-width: 900px; */
   /* width: 600px; */
