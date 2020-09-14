@@ -278,6 +278,15 @@
         </div>
       </section>
     </div>
+    <div v-if="isLoading" class="spinner">
+      <vue-simple-spinner
+        size="30"
+        line-size="4"
+        line-fg-color="#5B831E"
+        line-bg-color="#f1f3f8"
+        speed="1"
+      ></vue-simple-spinner>
+    </div>
   </div>
 </template>
 
@@ -292,6 +301,7 @@ export default {
     return {
       addIssueIsVisible: false,
       newIssueStatus: "To do",
+      isLoading: false,
     };
   },
   computed: {
@@ -375,13 +385,26 @@ export default {
     },
   },
   async mounted() {
-    this.getAllIssues();
+    this.isLoading = true;
+    await this.getAllIssues();
+    this.isLoading = false;
   },
   components: {
     AddIssue,
   },
 };
 </script>
+
+<style>
+.spinner {
+  z-index: 10;
+  left: 0;
+  margin-top: -50px;
+  position: fixed;
+  top: 50%;
+  width: 100%;
+}
+</style>
 
 <style scoped>
 /* block styles */
@@ -446,6 +469,8 @@ export default {
   width: 7px;
 }
 .section-insides::-webkit-scrollbar-thumb {
+  background-color: #4cec54;
+
   background-color: #bbcde5;
   border-radius: 10px;
 }

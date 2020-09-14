@@ -5,6 +5,18 @@ const axios = require("axios").create({
   baseURL: process.env.VUE_APP_API,
 });
 
+// // before a request is made start the nprogress
+// axios.interceptors.request.use(config => {
+//   NProgress.start();
+//   return config;
+// });
+
+// // before a response is returned stop nprogress
+// axios.interceptors.response.use(response => {
+//   NProgress.done();
+//   return response;
+// });
+
 // Get issues
 export async function getIssues(query: object) {
   const result = await axios.get(

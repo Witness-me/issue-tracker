@@ -82,6 +82,16 @@
           </td>
         </tr>
       </table>
+
+      <div v-if="isLoading" class="spinner">
+        <vue-simple-spinner
+          size="30"
+          line-size="4"
+          line-fg-color="#5B831E"
+          line-bg-color="#f1f3f8"
+          speed="1"
+        ></vue-simple-spinner>
+      </div>
     </div>
   </div>
 </template>
@@ -99,6 +109,7 @@ export default {
       addIssueIsVisible: false,
       commentsAreVisible: false,
       comment: "",
+      isLoading: false,
     };
   },
   computed: mapGetters(["allIssues", "issuesCount"]),
@@ -147,7 +158,9 @@ export default {
     },
   },
   async mounted() {
-    this.getAllIssues();
+    this.isLoading = true;
+    await this.getAllIssues();
+    this.isLoading = false;
   },
   components: {
     AddIssue,

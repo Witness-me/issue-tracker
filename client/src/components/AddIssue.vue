@@ -1,7 +1,12 @@
 <template>
   <div class="modal-background" @click="closePopup">
     <div class="modal-popup" @click.stop>
-      <img class="close-modal-icon" src="../assets/img/close.png" alt="Close" @click="closePopup" />
+      <img
+        class="close-modal-icon"
+        src="../assets/img/close.png"
+        alt="Close"
+        @click="closePopup"
+      />
       <h1 class="modal-header">Add issue</h1>
       <!-- error -->
       <div class="modal-error" v-if="error">
@@ -22,7 +27,12 @@
           <label for="to-do">To do</label>
         </div>
         <div>
-          <input type="radio" id="in-progress" value="In progress" v-model="issue.status" />
+          <input
+            type="radio"
+            id="in-progress"
+            value="In progress"
+            v-model="issue.status"
+          />
           <label for="in-progress">In progress</label>
         </div>
         <div>
@@ -66,9 +76,9 @@ export default {
         title: "",
         status: "To do",
         comments: "",
-        priority: "Medium"
+        priority: "Medium",
       },
-      error: false
+      error: false,
     };
   },
   props: ["newIssueStatus"],
@@ -83,11 +93,11 @@ export default {
     },
     closePopup() {
       this.$emit("closePopup");
-    }
+    },
   },
   mounted() {
     this.issue.status = this.newIssueStatus || "To do";
-  }
+  },
 };
 </script>
 
