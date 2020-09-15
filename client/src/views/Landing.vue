@@ -1,34 +1,43 @@
 <template>
   <div>
     <div class="landing-wrapper">
-      <div class="landing-container">
-        <h1 class="landing-title">Having troubles getting things done?</h1>
-        <h2 class="landing-title h2">Try out our issue tracking app!</h2>
-        <div class="landing-text-container">
-          <ul>
-            <li>Manage unlimited number of tasks</li>
-            <li>Easily categorise all your issues</li>
-            <li>Free. Always.</li>
-          </ul>
-        </div>
-        <!-- <img src="../assets/img/landing/Dashboard" alt=""> -->
-        <button class="login-button" @click="handleLogin()">Sign up / Log In</button>
+      <div class="landing">
+        <h1 class="landing__title">Having troubles getting things done?</h1>
+        <h2 class="landing__title landing__title_small">
+          Try out our issue tracking app!
+        </h2>
+        <ul class="landing__text">
+          <li>Manage unlimited number of tasks</li>
+          <li>Easily categorise all your issues</li>
+          <li>Free. Always.</li>
+        </ul>
+        <button class="landing__login-button" @click="handleLogin()">
+          Sign up / Log In
+        </button>
         <div class="slider">
           <Carousel
             :perPage="1"
             :centerMode="true"
             :autoplay="true"
-            :autoplayTimeout="5000"
+            :autoplayTimeout="4000"
             :loop="true"
             :paginationEnabled="false"
             :speed="1000"
           >
             <Slide>
               <!-- <img src="../assets/landing/AllIssues.png" alt="" /> -->
-              <img src="../assets/img/landing/Dashboard.png" alt class="screenshot" />
+              <img
+                src="../assets/img/landing/Dashboard.png"
+                alt
+                class="slider__screenshot"
+              />
             </Slide>
             <Slide>
-              <img src="../assets/img/landing/AllIssues.png" alt class="screenshot" />
+              <img
+                src="../assets/img/landing/AllIssues.png"
+                alt
+                class="slider__screenshot"
+              />
             </Slide>
           </Carousel>
         </div>
@@ -47,13 +56,13 @@ export default {
   methods: {
     handleLogin() {
       login();
-    }
+    },
   },
   components: {
     Carousel,
     Slide,
-    Footer
-  }
+    Footer,
+  },
 };
 </script>
 
@@ -72,7 +81,7 @@ export default {
   /* background-size: 10px 10px;
   background-image: radial-gradient(circle, #000000 0px, rgba(0, 0, 0, 0) 1px); */
 }
-.landing-container {
+.landing {
   position: relative;
   margin-left: auto;
   margin-right: auto;
@@ -90,22 +99,22 @@ export default {
   font-weight: 500;
   margin-bottom: 625px;
 }
-.landing-title {
+.landing__title {
   font-size: 34px;
   /* font-weight: 500; */
   /* padding-bottom: 20px; */
 }
-.h2 {
+.landing__title_small {
   font-size: 22px;
   padding: 10px 0;
 }
-li {
+.landing__text li {
   padding-bottom: 10px;
   font-size: 20px;
   font-weight: 400;
 }
 
-.login-button {
+.landing__login-button {
   position: absolute;
   top: 110px;
   right: 50px;
@@ -121,7 +130,7 @@ li {
   width: 200px;
   margin-right: 10px;
 }
-.login-button:hover {
+.landing__login-button:hover {
   color: #2c365e;
   background: #d9dff3;
   cursor: pointer;
@@ -140,7 +149,7 @@ li {
   border: 2px solid #2c365e;
   border-radius: 5px;
 }
-.screenshot {
+.slider__screenshot {
   padding: 0;
   margin: 0;
   width: 100%;

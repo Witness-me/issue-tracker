@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="home-wrapper">
     <Navbar v-on:switchTab="switchTab($event)" />
 
     <DeleteIssue
@@ -16,7 +16,6 @@
       v-bind:is="currentTab"
       v-on:openDeleteModal="openDeleteModal($event)"
       v-on:openEditModal="openEditModal($event)"
-      class="main"
     ></component>
   </div>
 </template>
@@ -68,14 +67,7 @@ export default {
 </script>
 
 <style>
-.main {
-  margin: 0;
-  /* min-height: calc(100vh - 80px); */
+.home-wrapper {
+  min-width: 850px;
 }
-/* .bottom-background {
-  position: relative;
-  height: 5px;
-  bottom: 0;
-  background: #bbcde5;
-} */
 </style>

@@ -1,283 +1,267 @@
 <template>
-  <div class="wrapper">
+  <div class="dashboard-wrapper">
+    <section class="dashboard-section">
+      <div class="section-header">
+        <div>
+          <h3 class="section-header__title">To do</h3>
+          <div class="section-header__issues-count">
+            <p v-if="statusToDoLength === 0">
+              You have not yet planned any tasks to do
+            </p>
+            <p v-else-if="statusToDoLength === 1">
+              You have 1 issue in your backlog
+            </p>
+            <p v-else>You have {{ statusToDoLength }} issues in your backlog</p>
+          </div>
+        </div>
+        <img
+          src="../assets/img/plus.png"
+          class="section-header__add-issue-button"
+          @click="openAddModal('To do')"
+          alt="Add issue"
+        />
+      </div>
+      <div class="section-content">
+        <div class="issue" v-for="issue in statusToDo" :key="issue._id">
+          <p class="issue__update-date">
+            Last updated at: {{ getStringFromDate(issue.updatedAt) }}
+          </p>
+          <p class="issue__title">{{ issue.title }}</p>
+          <p class="issue__comments" v-if="issue.comments">
+            {{ issue.comments }}
+          </p>
+          <div class="issue__last-line-container">
+            <div class="issue__priority">
+              <span>Priority:</span>
+              <span>
+                <svg class="issue__priority-circle" height="8" width="8">
+                  <circle
+                    v-if="issue.priority === 'High'"
+                    cx="4"
+                    cy="4"
+                    r="4"
+                    fill="#F52416"
+                  />
+                  <circle
+                    v-if="issue.priority === 'Medium'"
+                    cx="4"
+                    cy="4"
+                    r="4"
+                    fill="#EBBC00"
+                  />
+                  <circle
+                    v-if="issue.priority === 'Low'"
+                    cx="4"
+                    cy="4"
+                    r="4"
+                    fill="#37D000"
+                  />
+                </svg>
+              </span>
+            </div>
+            <div class="issue__icons-container">
+              <img
+                class="issue__modify-icon"
+                src="../assets/img/marker.png"
+                alt="Edit"
+                @click="openEditModal(issue)"
+              />
+              <img
+                class="issue__modify-icon"
+                src="../assets/img/delete.png"
+                alt="Delete"
+                @click="openDeleteModal(issue)"
+              />
+              <img
+                class="issue__modify-icon"
+                src="../assets/img/next.png"
+                alt="Move to current"
+                title="Move to current"
+                @click="moveToInProgress(issue)"
+              />
+              <img
+                class="issue__modify-icon"
+                src="../assets/img/tick.png"
+                alt="Mark as done"
+                title="Mark as done"
+                @click="moveToDone(issue)"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="dashboard-section">
+      <div class="section-header">
+        <div>
+          <h3 class="section-header__title">In progress</h3>
+          <div class="section-header__issues-count">
+            <p v-if="statusInProgressLength === 0">
+              High time to start working!
+            </p>
+            <p v-else-if="statusInProgressLength === 1">
+              Сurrently working on 1 issue
+            </p>
+            <p v-else>
+              Currently working on
+              {{ statusInProgressLength }} issues
+            </p>
+          </div>
+        </div>
+        <img
+          src="../assets/img/plus.png"
+          class="section-header__add-issue-button"
+          @click="openAddModal('In progress')"
+          alt="Delete"
+        />
+      </div>
+      <div class="section-content">
+        <div class="issue" v-for="issue in statusInProgress" :key="issue._id">
+          <p class="issue__update-date">
+            Last updated at: {{ getStringFromDate(issue.updatedAt) }}
+          </p>
+          <p class="issue__title">{{ issue.title }}</p>
+          <p class="issue__comments" v-if="issue.comments">
+            {{ issue.comments }}
+          </p>
+          <div class="issue__last-line-container">
+            <div class="issue__priority">
+              <span>Priority:</span>
+              <span>
+                <svg class="issue__priority-circle" height="8" width="8">
+                  <circle
+                    v-if="issue.priority === 'High'"
+                    cx="4"
+                    cy="4"
+                    r="4"
+                    fill="#F52416"
+                  />
+                  <circle
+                    v-if="issue.priority === 'Medium'"
+                    cx="4"
+                    cy="4"
+                    r="4"
+                    fill="#EBBC00"
+                  />
+                  <circle
+                    v-if="issue.priority === 'Low'"
+                    cx="4"
+                    cy="4"
+                    r="4"
+                    fill="#37D000"
+                  />
+                </svg>
+              </span>
+            </div>
+            <div class="issue__icons-container">
+              <img
+                class="issue__modify-icon"
+                src="../assets/img/marker.png"
+                alt="Edit"
+                @click="openEditModal(issue)"
+              />
+              <img
+                class="issue__modify-icon"
+                src="../assets/img/delete.png"
+                alt="Delete"
+                @click="openDeleteModal(issue)"
+              />
+              <img
+                class="issue__modify-icon"
+                src="../assets/img/tick.png"
+                alt="Mark as done"
+                title="Mark as done"
+                @click="moveToDone(issue)"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="dashboard-section">
+      <div class="section-header">
+        <div>
+          <h3 class="section-header__title">Done</h3>
+          <div class="section-header__issues-count">
+            <p v-if="statusDoneLength === 0">
+              You have not yet finished any tasks...
+            </p>
+            <p v-else-if="statusDoneLength === 1">
+              You have finished 1 task!
+            </p>
+            <p v-else>{{ statusDoneLength }} tasks finished. Keep it up!</p>
+          </div>
+        </div>
+        <img
+          src="../assets/img/plus.png"
+          class="section-header__add-issue-button"
+          @click="openAddModal('Done')"
+          alt="Add issue"
+        />
+      </div>
+      <div class="section-content">
+        <div class="issue" v-for="issue in statusDone" :key="issue._id">
+          <p class="issue__update-date">
+            Last updated at: {{ getStringFromDate(issue.updatedAt) }}
+          </p>
+          <p class="issue__title">{{ issue.title }}</p>
+          <p class="issue__comments" v-if="issue.comments">
+            {{ issue.comments }}
+          </p>
+          <div class="issue__last-line-container">
+            <div class="issue__priority">
+              <span>Priority:</span>
+              <span>
+                <svg class="issue__priority-circle" height="8" width="8">
+                  <circle
+                    v-if="issue.priority === 'High'"
+                    cx="4"
+                    cy="4"
+                    r="4"
+                    fill="#F52416"
+                  />
+                  <circle
+                    v-if="issue.priority === 'Medium'"
+                    cx="4"
+                    cy="4"
+                    r="4"
+                    fill="#EBBC00"
+                  />
+                  <circle
+                    v-if="issue.priority === 'Low'"
+                    cx="4"
+                    cy="4"
+                    r="4"
+                    fill="#37D000"
+                  />
+                </svg>
+              </span>
+            </div>
+            <div class="issue__icons-container">
+              <img
+                class="issue__modify-icon"
+                src="../assets/img/marker.png"
+                alt="Edit"
+                @click="openEditModal(issue)"
+              />
+              <img
+                class="issue__modify-icon"
+                src="../assets/img/delete.png"
+                alt="Delete"
+                @click="openDeleteModal(issue)"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
     <AddIssue
       v-if="addIssueIsVisible"
       :newIssueStatus="newIssueStatus"
       v-on:closePopup="popupAddIssue($event)"
     />
-    <div class="dashboard-container">
-      <section class="dashboard-section">
-        <div class="section-header-container">
-          <div>
-            <h3 class="section-header">To do</h3>
-            <div class="issues-count">
-              <p v-if="statusToDoLength === 0">
-                You have not yet planned any tasks to do
-              </p>
-              <p v-else-if="statusToDoLength === 1">
-                You have 1 issue in your backlog
-              </p>
-              <p v-else>
-                You have {{ statusToDoLength }} issues in your backlog
-              </p>
-            </div>
-          </div>
-          <div class="section-header-reverse">
-            <img
-              src="../assets/img/plus.png"
-              class="add-issue-button"
-              @click="openAddModal('To do')"
-              alt="Add issue"
-            />
-          </div>
-        </div>
-        <div class="section-insides">
-          <div
-            class="section-point"
-            v-for="issue in statusToDo"
-            v-bind:key="issue._id"
-          >
-            <p class="update-date">
-              Last updated at: {{ getStringFromDate(issue.updatedAt) }}
-            </p>
-            <p class="title">{{ issue.title }}</p>
-            <p class="comments" v-if="issue.comments">{{ issue.comments }}</p>
-            <div class="section-point-ending">
-              <div class="priority">
-                <span class="priority-block">Priority:</span>
-                <span class="priority-block">
-                  <svg class="priority-block" height="8" width="8">
-                    <circle
-                      v-if="issue.priority === 'High'"
-                      cx="4"
-                      cy="4"
-                      r="4"
-                      fill="#F52416"
-                    />
-                    <circle
-                      v-if="issue.priority === 'Medium'"
-                      cx="4"
-                      cy="4"
-                      r="4"
-                      fill="#EBBC00"
-                    />
-                    <circle
-                      v-if="issue.priority === 'Low'"
-                      cx="4"
-                      cy="4"
-                      r="4"
-                      fill="#37D000"
-                    />
-                  </svg>
-                </span>
-              </div>
-              <div class="section-point-ending-reverse">
-                <img
-                  class="dashboard-icon"
-                  src="../assets/img/marker.png"
-                  alt="Edit"
-                  @click="openEditModal(issue)"
-                />
-                <img
-                  class="dashboard-icon"
-                  src="../assets/img/delete.png"
-                  alt="Delete"
-                  @click="openDeleteModal(issue)"
-                />
-                <img
-                  class="dashboard-icon"
-                  src="../assets/img/next.png"
-                  alt="Move to current"
-                  title="Move to current"
-                  @click="moveToInProgress(issue)"
-                />
-                <img
-                  class="dashboard-icon"
-                  src="../assets/img/tick.png"
-                  alt="Mark as done"
-                  title="Mark as done"
-                  @click="moveToDone(issue)"
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="dashboard-section">
-        <div class="section-header-container">
-          <div>
-            <h3 class="section-header">In progress</h3>
-            <div class="issues-count">
-              <p v-if="statusInProgressLength === 0">
-                High time to start working!
-              </p>
-              <p v-else-if="statusInProgressLength === 1">
-                Сurrently working on 1 issue
-              </p>
-              <p v-else>
-                Currently working on
-                {{ statusInProgressLength }} issues
-              </p>
-            </div>
-          </div>
-          <div class="section-header-reverse">
-            <img
-              src="../assets/img/plus.png"
-              class="add-issue-button"
-              @click="openAddModal('In progress')"
-              alt="Delete"
-            />
-          </div>
-        </div>
-        <div class="section-insides">
-          <div
-            class="section-point"
-            v-for="issue in statusInProgress"
-            v-bind:key="issue._id"
-          >
-            <p class="update-date">
-              Last updated at: {{ getStringFromDate(issue.updatedAt) }}
-            </p>
-            <p class="title">{{ issue.title }}</p>
-            <p class="comments" v-if="issue.comments">{{ issue.comments }}</p>
-            <div class="section-point-ending">
-              <div class="priority">
-                <span class="priority-block">Priority:</span>
-                <span class="priority-block">
-                  <svg class="priority-block" height="8" width="8">
-                    <circle
-                      v-if="issue.priority === 'High'"
-                      cx="4"
-                      cy="4"
-                      r="4"
-                      fill="#F52416"
-                    />
-                    <circle
-                      v-if="issue.priority === 'Medium'"
-                      cx="4"
-                      cy="4"
-                      r="4"
-                      fill="#EBBC00"
-                    />
-                    <circle
-                      v-if="issue.priority === 'Low'"
-                      cx="4"
-                      cy="4"
-                      r="4"
-                      fill="#37D000"
-                    />
-                  </svg>
-                </span>
-              </div>
-              <div class="section-point-ending-reverse">
-                <img
-                  class="dashboard-icon"
-                  src="../assets/img/marker.png"
-                  alt="Edit"
-                  @click="openEditModal(issue)"
-                />
-                <img
-                  class="dashboard-icon"
-                  src="../assets/img/delete.png"
-                  alt="Delete"
-                  @click="openDeleteModal(issue)"
-                />
-                <img
-                  class="dashboard-icon"
-                  src="../assets/img/tick.png"
-                  alt="Mark as done"
-                  title="Mark as done"
-                  @click="moveToDone(issue)"
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="dashboard-section">
-        <div class="section-header-container">
-          <div>
-            <h3 class="section-header">Done</h3>
-            <div class="issues-count">
-              <p v-if="statusDoneLength === 0">
-                You have not yet finished any tasks...
-              </p>
-              <p v-else-if="statusDoneLength === 1">
-                You have finished 1 task!
-              </p>
-              <p v-else>{{ statusDoneLength }} tasks finished. Keep it up!</p>
-            </div>
-          </div>
-          <div class="section-header-reverse">
-            <img
-              src="../assets/img/plus.png"
-              class="add-issue-button"
-              @click="openAddModal('Done')"
-              alt="Add issue"
-            />
-          </div>
-        </div>
-        <div class="section-insides">
-          <div
-            class="section-point"
-            v-for="issue in statusDone"
-            v-bind:key="issue._id"
-          >
-            <p class="update-date">
-              Last updated at: {{ getStringFromDate(issue.updatedAt) }}
-            </p>
-            <p class="title">{{ issue.title }}</p>
-            <p class="comments" v-if="issue.comments">{{ issue.comments }}</p>
-            <div class="section-point-ending">
-              <div class="priority">
-                <span class="priority-block">Priority:</span>
-                <span class="priority-block">
-                  <svg class="priority-block" height="8" width="8">
-                    <circle
-                      v-if="issue.priority === 'High'"
-                      cx="4"
-                      cy="4"
-                      r="4"
-                      fill="#F52416"
-                    />
-                    <circle
-                      v-if="issue.priority === 'Medium'"
-                      cx="4"
-                      cy="4"
-                      r="4"
-                      fill="#EBBC00"
-                    />
-                    <circle
-                      v-if="issue.priority === 'Low'"
-                      cx="4"
-                      cy="4"
-                      r="4"
-                      fill="#37D000"
-                    />
-                  </svg>
-                </span>
-              </div>
-              <div class="section-point-ending-reverse">
-                <img
-                  class="dashboard-icon"
-                  src="../assets/img/marker.png"
-                  alt="Edit"
-                  @click="openEditModal(issue)"
-                />
-                <img
-                  class="dashboard-icon"
-                  src="../assets/img/delete.png"
-                  alt="Delete"
-                  @click="openDeleteModal(issue)"
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-    </div>
     <div v-if="isLoading" class="spinner">
       <vue-simple-spinner
         :size="30"
@@ -419,24 +403,10 @@ export default {
 </script>
 
 <style>
-.spinner {
-  z-index: 10;
-  left: 0;
-  margin-top: -50px;
-  position: fixed;
-  top: 50%;
-  width: 100%;
-}
-</style>
-
-<style scoped>
-/* block styles */
-.wrapper {
+.dashboard-wrapper {
   background: #f1f3f8;
+  width: 100%;
   min-height: calc(100vh - 40px);
-}
-
-.dashboard-container {
   display: flex;
   flex-wrap: nowrap;
   justify-content: center;
@@ -455,32 +425,38 @@ export default {
   padding: 8px;
   padding-top: 5px;
 }
-.section-header-container {
+.section-header {
   display: flex;
+  justify-content: space-between;
   padding-left: 10px;
   margin-bottom: 5px;
 }
-.section-header-reverse {
-  display: flex;
-  flex-grow: 10;
-  flex-direction: row-reverse;
-}
-.add-issue-button {
+.section-header__add-issue-button {
   height: 23px;
   width: 23px;
   display: flex;
   margin: auto 3px;
 }
-.add-issue-button:hover {
+.section-header__add-issue-button:hover {
   height: 25px;
   width: 25px;
   margin: auto 2px;
   cursor: pointer;
 }
-
-/* inside the section styles*/
-.section-insides {
-  max-height: calc(100vh - 153px);
+.section-header__title {
+  height: 20px;
+  line-height: 20px;
+  font-size: 15px;
+  font-weight: 400;
+  margin: 0;
+}
+.section-header__issues-count {
+  height: 15px;
+  line-height: 15px;
+  font-size: 11px;
+}
+.section-content {
+  max-height: calc(100vh - 140px);
   overflow-y: auto;
   color: #303030;
   /* sroll bars design (firefox) */
@@ -488,88 +464,73 @@ export default {
   scrollbar-color: #bbcde5 transparent;
 }
 /* sroll bars design (webkit) */
-.section-insides::-webkit-scrollbar {
+.section-content::-webkit-scrollbar {
   width: 7px;
 }
-.section-insides::-webkit-scrollbar-thumb {
-  background-color: #4cec54;
-
+.section-content::-webkit-scrollbar-thumb {
   background-color: #bbcde5;
   border-radius: 10px;
 }
 
-.section-point {
+/* points styles */
+.issue {
   border-radius: 3px;
-  /* background: #f1f3f8; */
   background: #f5f7f8;
   margin-bottom: 6px;
   padding: 5px 8px;
 }
-.section-header {
-  height: 20px;
-  line-height: 20px;
-  font-size: 15px;
-  font-weight: 400;
-  margin: 0;
-}
-.issues-count {
-  height: 15px;
-  line-height: 15px;
-  font-size: 11px;
-}
-
-/* points styles */
-.update-date {
+.issue__update-date {
   font-size: 10px;
   font-style: italic;
   text-align: right;
   color: #757474;
 }
-.title {
+.issue__title {
   font-size: 13px;
   font-weight: 500;
   padding: 7px 0;
 }
-.comments {
+.issue__comments {
   font-size: 12px;
   padding-bottom: 5px;
   font-style: italic;
 }
-.priority {
+.issue__last-line-container {
+  display: flex;
+  justify-content: space-between;
+  height: 17px;
+}
+.issue__priority {
   font-size: 10px;
   line-height: 17px;
   display: inline-block;
 }
-svg {
+.issue__priority-circle {
   margin: auto 3px;
 }
-.section-point-ending {
+.issue__icons-container {
   display: flex;
-  height: 17px;
 }
-.section-point-ending-reverse {
-  display: flex;
-  justify-content: flex-end;
-  flex-grow: 10;
-}
-.dashboard-icon {
+.issue__modify-icon {
   box-sizing: border-box;
   padding: 0;
   margin: 1px 5px;
   height: 15px;
   width: 15px;
 }
-.dashboard-icon:hover {
+.issue__modify-icon:hover {
   height: 17px;
   width: 17px;
   margin: 0 4px;
   cursor: pointer;
 }
 
-.high-priority {
-  background: #f1f3f8;
-}
-.low-priority {
-  background: #f1f3f8;
+.spinner {
+  z-index: 10;
+  left: 0;
+  margin-top: -50px;
+  position: fixed;
+  top: 50%;
+  width: 100%;
 }
 </style>

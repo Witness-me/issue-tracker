@@ -1,15 +1,15 @@
 <template>
   <transition v-on:enter="enter" v-on:leave="leave" appear>
     <div class="modal-background" @click="closePopup">
-      <div class="modal-popup" @click.stop>
+      <div class="modal comments-modal" @click.stop>
         <img
-          class="close-modal-icon"
+          class="modal__close-icon"
           src="../assets/img/close.png"
           alt="Close"
           @click="closePopup"
         />
-        <h1 class="modal-header">Comments</h1>
-        <div class="modal-content">
+        <h1 class="modal__title">Comments</h1>
+        <div class="modal__content">
           <p>{{ comment }}</p>
         </div>
       </div>
@@ -39,15 +39,12 @@ export default {
 </script>
 
 <style scoped>
-.modal-popup {
+.comments-modal {
   height: 280px;
   width: 520px;
 }
-.modal-content {
+.modal__content {
   text-align: center;
   font-size: 14px;
-  font-weight: 400;
-  height: 200px;
-  margin: 30px 10px;
 }
 </style>

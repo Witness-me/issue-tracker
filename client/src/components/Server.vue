@@ -1,22 +1,21 @@
 <template>
-  <div class="server-wrapper">
+  <div>
     <div class="navbar-wrapper">
       <router-link to="/home">
-        <img class="logo" src="../assets/img/bug.png" />
+        <img class="navbar__logo" src="../assets/img/bug.png" />
       </router-link>
 
-      <div class="navbar-pannel">
+      <div class="navbar__right-pannel">
         <router-link to="/home">
-          <button class="navbar-button">Back to Homepage</button>
+          <button class="navbar__button">Back to Homepage</button>
         </router-link>
       </div>
     </div>
-
-    <div class="main">
+    <div class="server-data">
       <div>
-        <h1 class="title">Server information</h1>
+        <h1 class="server-data__title">Server information</h1>
         <div
-          class="server-data"
+          class="server-data__issue"
           v-for="issue in allIssues"
           v-bind:key="issue._id"
         >
@@ -41,22 +40,19 @@ export default {
 </script>
 
 <style scoped>
-.server-wrapper {
-  /* text-align: center; */
-}
-.main {
+.server-data {
   text-align: center;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-.title {
+.server-data__title {
   font-size: 15px;
   font-weight: 500;
   padding-top: 20px;
   padding-bottom: 10px;
 }
-.server-data {
+.server-data__issue {
   font-size: 12px;
   margin-bottom: 7px;
 }

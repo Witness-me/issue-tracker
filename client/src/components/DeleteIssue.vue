@@ -1,21 +1,23 @@
 <template>
   <transition v-on:enter="enter" v-on:leave="leave" appear>
     <div class="modal-background" @click="closePopup()">
-      <div class="modal-popup" @click.stop>
+      <div class="modal delete-issue-modal" @click.stop>
         <img
-          class="close-modal-icon"
+          class="modal__close-icon"
           src="../assets/img/close.png"
           alt="Close"
           @click="closePopup"
         />
-        <h1 class="modal-header">Delete issue</h1>
+        <h1 class="modal__title">Delete issue</h1>
         <!-- input form -->
-        <div class="modal-content">
+        <div class="modal__content">
           <p>Are you sure that you want to permanently delete the issue?</p>
           <p>This cannot be undone.</p>
           <!-- button -->
         </div>
-        <button class="input-submit-button" @click="deleteIssue">Delete</button>
+        <button class="modal__submit-button" @click="deleteIssue">
+          Delete
+        </button>
       </div>
     </div>
   </transition>
@@ -49,18 +51,18 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.modal-popup {
+.delete-issue-modal {
   height: 250px;
   width: 500px;
 }
-.modal-content {
+.modal__content {
   text-align: center;
   font-size: 14px;
   font-weight: 500;
-  margin-top: 40px;
-  margin-bottom: 50px;
+  margin-top: 50px;
+  margin-bottom: 60px;
 }
-.modal-content p {
+.modal__content p {
   padding: 3px 0;
 }
 </style>

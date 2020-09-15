@@ -1,69 +1,79 @@
 <template>
-  <div class="wrapper">
-    <AddIssue v-if="addIssueIsVisible" v-on:closePopup="popupAddIssue($event)" />
-    <Comments
-      v-if="commentsAreVisible"
-      :comment="comment"
-      v-on:closePopup="openCommentsModal($event)"
-    />
+  <div class="allissues-wrapper">
     <div class="table-container">
       <div class="table-header">
-        <p class="counter">{{ `You currently have ${issuesCount} issues in total...` }}</p>
-        <button @click="popupAddIssue()" class="add-issue-button">Submit issue</button>
+        <p class="table-header__counter">
+          {{ `You currently have ${issuesCount} issues in total` }}
+        </p>
+        <button @click="popupAddIssue()" class="table-header__add-issue-button">
+          Submit issue
+        </button>
       </div>
       <table class="table">
-        <tr class="table-top-row">
-          <th class="title">Issue</th>
-          <th class="comments"></th>
-          <th class="mark-as-done"></th>
-          <th class="created-at">Created</th>
-          <th class="status">Status</th>
-          <th class="priority">Priority</th>
-          <th class="delete">Delete</th>
+        <tr class="table__top-row">
+          <th class="table__title">Issue</th>
+          <th class="table__comments"></th>
+          <th class="table__mark-as-done"></th>
+          <th class="table__created-at">Created</th>
+          <th class="table__status">Status</th>
+          <th class="table__priority">Priority</th>
+          <th class="table__delete">Delete</th>
         </tr>
-        <tr v-for="issue in allIssues" v-bind:key="issue._id" class="table-row">
-          <td @click="openEditModal(issue)" class="title">{{ issue.title }}</td>
-          <td class="comments">
+        <tr
+          v-for="issue in allIssues"
+          v-bind:key="issue._id"
+          class="table__row"
+        >
+          <td @click="openEditModal(issue)" class="table__title">
+            {{ issue.title }}
+          </td>
+          <td class="table__comments">
             <img
               v-if="issue.comments"
-              class="icon"
+              class="table__icon"
               src="../assets/img/comments.png"
               alt="See comments"
               title="See comments"
               @click="openCommentsModal(issue.comments)"
             />
           </td>
-          <td class="mark-as-done">
+          <td class="table__mark-as-done">
             <img
               v-if="issue.status !== 'Done'"
-              class="icon"
+              class="table__icon"
               src="../assets/img/tick2.png"
               alt="Mark as done"
               title="Mark as done"
               @click="moveToDone(issue)"
             />
           </td>
-          <td class="created-at">{{ getStringFromDate(issue.createdAt) }}</td>
+          <td class="table__created-at">
+            {{ getStringFromDate(issue.createdAt) }}
+          </td>
           <td>
             <div
-              class="status-div"
+              class="table__status-content"
               :class="{
-                'status-to-do': statusToDo(issue.status),
-                'status-in-progress': statusInProgress(issue.status),
-                'status-done': statusDone(issue.status),
+                'table__status-to-do': statusToDo(issue.status),
+                'table__status-in-progress': statusInProgress(issue.status),
+                'table__status-done': statusDone(issue.status),
               }"
-            >{{ issue.status }}</div>
+            >
+              {{ issue.status }}
+            </div>
           </td>
           <td
-            class="priority"
+            class="table__priority"
             :class="{
-              'high-priority':
+              'table__high-priority':
                 isHighPriority(issue.priority) && !statusDone(issue.status),
             }"
-          >{{ issue.priority }}</td>
-          <td class="delete">
+          >
+            {{ issue.priority }}
+          </td>
+          <td class="table__delete">
             <img
-              class="icon"
+              class="table__icon"
               src="../assets/img/delete.png"
               alt="Delete"
               @click="openDeleteModal(issue)"
@@ -71,16 +81,24 @@
           </td>
         </tr>
       </table>
-
-      <div v-if="isLoading" class="spinner">
-        <vue-simple-spinner
-          :size="30"
-          :line-size="4"
-          :speed="1"
-          line-fg-color="#5B831E"
-          line-bg-color="#f1f3f8"
-        ></vue-simple-spinner>
-      </div>
+    </div>
+    <AddIssue
+      v-if="addIssueIsVisible"
+      v-on:closePopup="popupAddIssue($event)"
+    />
+    <Comments
+      v-if="commentsAreVisible"
+      :comment="comment"
+      v-on:closePopup="openCommentsModal($event)"
+    />
+    <div v-if="isLoading" class="spinner">
+      <vue-simple-spinner
+        :size="30"
+        :line-size="4"
+        :speed="1"
+        line-fg-color="#5B831E"
+        line-bg-color="#f1f3f8"
+      ></vue-simple-spinner>
     </div>
   </div>
 </template>
@@ -98,7 +116,7 @@ export default {
       addIssueIsVisible: false,
       commentsAreVisible: false,
       comment: "",
-      isLoading: false
+      isLoading: false,
     };
   },
   computed: mapGetters(["allIssues", "issuesCount"]),
@@ -144,7 +162,7 @@ export default {
     },
     isLowPriority(priority) {
       return priority === "Low";
-    }
+    },
   },
   async mounted() {
     this.isLoading = true;
@@ -153,15 +171,14 @@ export default {
   },
   components: {
     AddIssue,
-    Comments
-  }
+    Comments,
+  },
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.wrapper {
-  min-width: 780px;
+.allissues-wrapper {
   width: 100%;
   margin: 0 auto;
   display: flex;
@@ -174,7 +191,7 @@ export default {
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  min-width: 780px;
+  min-width: 830px;
   max-width: 1200px;
   width: 90%;
 }
@@ -187,12 +204,12 @@ export default {
   height: 70px;
   padding: 20px;
 }
-.counter {
+.table-header__counter {
   font-size: 14px;
   font-weight: 500;
   font-style: italic;
 }
-.add-issue-button {
+.table-header__add-issue-button {
   border: 2px solid #2c365e;
   color: #2c365e;
   background: #d9dff3;
@@ -203,7 +220,7 @@ export default {
   width: 100px;
   margin-right: 10px;
 }
-.add-issue-button:hover {
+.table-header__add-issue-button:hover {
   background: #2c365e;
   color: #f1f3f8;
   cursor: pointer;
@@ -211,62 +228,58 @@ export default {
 
 /* table styles */
 .table {
-  min-width: 720px;
   width: 100%;
   color: #303030;
   margin-bottom: 30px;
-  margin-left: 10px;
-  margin-right: 10px;
   border-collapse: collapse;
 }
-.table-top-row {
+.table__top-row {
   border-bottom: 1px solid #3f4458;
   height: 40px;
   text-transform: uppercase;
   font-size: 11px;
   text-align: left;
-}
-th {
   font-weight: 700;
 }
-.table-row {
+.table__row {
   border-bottom: 1px dashed #3f4458;
   height: 40px;
   font-size: 12px;
-}
-td {
   font-weight: 500;
 }
+
 /* table columns styles */
-.title {
-  min-width: 395px;
+.table__title {
+  min-width: 370px;
   max-width: 800px;
   padding-left: 10px;
 }
-td.title {
+td.table__title {
   text-decoration: underline;
   font-size: 13px;
   font-weight: 500;
   padding: 5px 10px;
   color: #293874;
 }
-td.title:hover {
+td.table__title:hover {
   cursor: pointer;
 }
-.comments,
-.mark-as-done {
+.table__comments,
+.table__mark-as-done {
   width: 40px;
+  min-width: 40px;
   text-align: center;
 }
-.created-at {
+.table__created-at {
   width: 80px;
+  min-width: 80px;
   padding-left: 10px;
 }
-.status {
+.table__status {
   width: 100px;
   padding-left: 10px;
 }
-.status-div {
+.table__status-content {
   box-sizing: border-box;
   display: inline-block;
   height: 22px;
@@ -276,41 +289,38 @@ td.title:hover {
   padding-left: 10px;
   border-radius: 4px;
 }
-.status-to-do {
+.table__status-to-do {
   background: #ae7bdd;
 }
-.status-in-progress {
+.table__status-in-progress {
   background: #f55b2c;
 }
-.status-done {
+.table__status-done {
   background: #34dd42;
 }
-.priority {
+.table__priority {
   width: 70px;
+  min-width: 70px;
   padding-left: 10px;
 }
-.high-priority {
+.table__high-priority {
   font-weight: 700;
-  color: #000000;
+  color: black;
 }
-/* .medium-priority {
-}
-.low-priority {
-  font-weight: 400;
-} */
-.delete {
+.table__delete {
   width: 50px;
+  min-width: 50px;
   padding-left: 10px;
 }
-td.delete {
+td.table__delete {
   padding: 0;
   text-align: center;
 }
-.icon {
+.table__icon {
   height: 20px;
   width: 20px;
 }
-.icon:hover {
+.table__icon:hover {
   height: 22px;
   width: 22px;
   cursor: pointer;

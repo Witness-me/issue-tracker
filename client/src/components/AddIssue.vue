@@ -1,28 +1,28 @@
 <template>
   <transition v-on:enter="enter" v-on:leave="leave" appear>
     <div class="modal-background" @click="closePopup">
-      <div class="modal-popup" @click.stop>
+      <div class="modal modal_large" @click.stop>
         <img
-          class="close-modal-icon"
+          class="modal__close-icon"
           src="../assets/img/close.png"
           alt="Close"
           @click="closePopup"
         />
-        <h1 class="modal-header">Add issue</h1>
+        <h1 class="modal__title">Add issue</h1>
         <!-- error -->
-        <div class="modal-error" v-if="error">
+        <div class="modal__error" v-if="error">
           <p>Issue's title is required!</p>
         </div>
         <!-- title -->
         <textarea
+          class="modal__inputs modal__input-title"
           type="text"
-          class="input-title modal-inputs"
           v-model="issue.title"
           placeholder="Enter your issue here..."
           maxlength="200"
         />
         <!-- status -->
-        <div class="input-status">
+        <div class="modal__input-status">
           <div>
             <input
               type="radio"
@@ -47,27 +47,27 @@
           </div>
         </div>
         <!-- comments -->
-        <div class="input-form-container">
-          <label for="input-comments">Comments:</label>
+        <div class="modal__inputs-container">
+          <label for="modal__input-comments">Comments:</label>
           <textarea
             type="text"
-            class="input-comments modal-inputs"
+            class="modal__inputs modal__input-comments"
             v-model="issue.comments"
             placeholder="Enter your comments..."
             maxlength="600"
           />
         </div>
         <!-- prioriy -->
-        <div class="input-form-container input-priority-container">
-          <label for="input-priority">Priority:</label>
-          <select v-model="issue.priority" class="input-priority">
+        <div class="modal__inputs-container modal__input-priority-container">
+          <label for="modal__input-priority">Priority:</label>
+          <select v-model="issue.priority" class="modal__input-priority">
             <option value="High">High</option>
             <option value="Medium">Medium</option>
             <option value="Low">Low</option>
           </select>
         </div>
         <!-- buttons -->
-        <button class="input-submit-button" @click="addIssue">Add</button>
+        <button class="modal__submit-button" @click="addIssue">Add</button>
       </div>
     </div>
   </transition>
@@ -129,44 +129,46 @@ export default {
   justify-content: center;
   align-items: center;
 }
-.modal-popup {
+.modal {
   position: fixed;
-  width: 600px;
-  height: 360px;
   background: #f2f3f7;
   border: 2px #303030 solid;
   z-index: 15;
   text-align: center;
   border-radius: 4px;
 }
-.close-modal-icon {
+.modal_large {
+  width: 600px;
+  height: 360px;
+}
+.modal__close-icon {
   position: absolute;
   top: 10px;
   right: 10px;
   height: 23px;
   width: 23px;
 }
-.close-modal-icon:hover {
+.modal__close-icon:hover {
   top: 9px;
   right: 9px;
   height: 25px;
   width: 25px;
   cursor: pointer;
 }
-.modal-header {
+.modal__title {
   font-size: 16px;
   font-weight: 700;
   text-transform: uppercase;
   margin-top: 20px;
   margin-bottom: 10px;
 }
-.modal-error {
+.modal__error {
   color: #fd4646;
   font-size: 14px;
   font-weight: 500;
   margin-bottom: 5px;
 }
-.modal-inputs {
+.modal__inputs {
   box-sizing: border-box;
   background: #cdd9f5;
   color: #303030;
@@ -179,11 +181,11 @@ export default {
   font-family: "Roboto", sans-serif;
   border: 1px solid #2c365e;
 }
-.input-title {
+.modal__input-title {
   width: 530px;
   height: 65px;
 }
-.input-status {
+.modal__input-status {
   display: flex;
   justify-content: center;
   box-sizing: border-box;
@@ -191,27 +193,27 @@ export default {
   font-size: 14px;
   font-weight: 500;
 }
-.input-form-container {
+.modal__inputs-container {
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 14px;
   font-weight: 500;
 }
-.input-comments {
+.modal__input-comments {
   width: 430px;
   height: 80px;
 }
-.input-priority-container {
+.modal__input-priority-container {
   margin-top: 5px;
   margin-bottom: 20px;
 }
-.input-priority {
+.modal__input-priority {
   margin: 0 10px;
   background: #cdd9f5;
   border-radius: 1px;
 }
-.input-submit-button {
+.modal__submit-button {
   width: 100px;
   height: 30px;
   border: 2px solid #272f52;
@@ -224,7 +226,7 @@ export default {
   width: 100px;
   margin: 0;
 }
-.input-submit-button:hover {
+.modal__submit-button:hover {
   background: #2c365e;
   color: #f1f3f8;
   cursor: pointer;

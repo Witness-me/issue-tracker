@@ -1,26 +1,25 @@
 <template>
   <transition v-on:enter="enter" v-on:leave="leave" appear>
     <div class="modal-background" @click="closePopup">
-      <div class="modal-popup" @click.stop>
+      <div class="modal modal_large" @click.stop>
         <img
-          class="close-modal-icon"
+          class="modal__close-icon"
           src="../assets/img/close.png"
           alt="Close"
           @click="closePopup"
         />
-        <h1 class="modal-header">Edit issue</h1>
-        <!-- input form -->
+        <h1 class="modal__title">Edit issue</h1>
         <div class="input-form">
           <!-- title -->
           <textarea
             type="text"
-            class="input-title modal-inputs"
+            class="modal__inputs modal__input-title"
             v-model="issue.title"
             placeholder="Enter your issue here..."
             maxlength="200"
           />
           <!-- status -->
-          <div class="input-status">
+          <div class="modal__input-status">
             <div>
               <input
                 type="radio"
@@ -50,27 +49,27 @@
             </div>
           </div>
           <!-- comments -->
-          <div class="input-form-container">
-            <label for="input-comments">Comments:</label>
+          <div class="modal__inputs-container">
+            <label for="modal__input-comments">Comments:</label>
             <textarea
               type="text"
-              class="input-comments modal-inputs"
+              class="modal__inputs modal__input-comments"
               v-model="issue.comments"
               placeholder="Enter your comments..."
               maxlength="600"
             />
           </div>
           <!-- prioriy -->
-          <div class="input-form-container input-priority-container">
-            <label for="input-priority">Priority:</label>
-            <select v-model="issue.priority" class="input-priority">
+          <div class="modal__inputs-container modal__input-priority-container">
+            <label for="modal__input-priority">Priority:</label>
+            <select v-model="issue.priority" class="modal__input-priority">
               <option value="High">High</option>
               <option value="Medium">Medium</option>
               <option value="Low">Low</option>
             </select>
           </div>
           <!-- buttons -->
-          <button class="input-submit-button" @click="editIssue">Edit</button>
+          <button class="modal__submit-button" @click="editIssue">Edit</button>
         </div>
       </div>
     </div>
