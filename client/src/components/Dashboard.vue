@@ -200,8 +200,8 @@
           </p>
           <div class="issue__last-line-container">
             <div class="issue__priority">
-              <!--<span>Priority:</span>
-               <span>
+              <!-- <span>Priority:</span>
+              <span>
                 <svg class="issue__priority-circle" height="8" width="8">
                   <circle
                     v-if="issue.priority === 'High'"
@@ -497,11 +497,11 @@ export default {
   margin: auto 3px;
 }
 .issue__priority-status_high {
-  background: #fd3b2e;
+  background: #ff5044;
   font-weight: 500;
 }
 .issue__priority-status_medium {
-  background: #ebbc00;
+  background: #ffd632;
 }
 .issue__priority-status_low {
   background: #a4d166;

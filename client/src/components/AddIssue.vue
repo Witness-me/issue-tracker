@@ -210,6 +210,9 @@ export default {
 }
 .modal__input-priority {
   margin: 0 10px;
+  font-size: 13px;
+  font-weight: 500;
+  height: 20px;
   background: #cdd9f5;
   border-radius: 1px;
 }

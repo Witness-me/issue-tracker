@@ -2,26 +2,34 @@
   <div class="allissues-wrapper">
     <div class="table-container">
       <div class="table-header">
-        <p class="table-header__counter">
-          {{ `You currently have ${issuesCount} issues in total` }}
-        </p>
-        <div class="table-header__sorting-container">
-          <p>Sort by:</p>
-          <select v-model="sortBy" @change="sortIssues()" class="">
-            <option value="date-new-first">Date (Newest first)</option>
-            <option value="date-old-first">Date (Oldest first)</option>
-            <option value="priority-high-first">Priority (High to low)</option>
-            <option value="priority-low-first">Priority (Low to high)</option>
-            <option value="toDo-inProgress-done"
-              >Status (To do &#8680; In progress &#8680; Done)
-            </option>
-            <option value="inProgress-toDo-done"
-              >Status (In progress &#8680; To do &#8680; Done)
-            </option>
-            <option value="done-inProgress-toDo"
-              >Status (Done &#10140; In progress &#10140; To do)
-            </option>
-          </select>
+        <div>
+          <p class="table-header__counter">
+            {{ `You currently have ${issuesCount} issues in total` }}
+          </p>
+          <div class="table-header__sorting-container">
+            <span>Sort by: </span>
+            <select
+              v-model="sortBy"
+              @change="sortIssues()"
+              class="table-header__sorting-issues"
+            >
+              <option value="date-new-first">Date (Newest first)</option>
+              <option value="date-old-first">Date (Oldest first)</option>
+              <option value="priority-high-first"
+                >Priority (High to low)</option
+              >
+              <option value="priority-low-first">Priority (Low to high)</option>
+              <option value="toDo-inProgress-done"
+                >Status (To do &#8680; In progress &#8680; Done)
+              </option>
+              <option value="inProgress-toDo-done"
+                >Status (In progress &#8680; To do &#8680; Done)
+              </option>
+              <option value="done-inProgress-toDo"
+                >Status (Done &#10140; In progress &#10140; To do)
+              </option>
+            </select>
+          </div>
         </div>
         <button @click="popupAddIssue()" class="table-header__add-issue-button">
           Submit issue
@@ -278,14 +286,28 @@ export default {
   align-items: center;
   box-sizing: border-box;
   width: 100%;
-  height: 70px;
-  padding: 20px;
+  height: 90px;
+  padding: 30px 30px 10px 30px;
 }
 .table-header__counter {
   font-size: 14px;
   font-weight: 500;
-  font-style: italic;
+  padding-bottom: 5px;
 }
+.table-header__sorting-container {
+  padding-top: 5px;
+  font-size: 14px;
+  font-weight: 500;
+}
+.table-header__sorting-issues {
+  height: 27px;
+  width: 300px;
+  font-size: 14px;
+  font-weight: 500;
+  background: #d9dff3;
+  border-radius: 1px;
+}
+
 .table-header__add-issue-button {
   border: 2px solid #2c365e;
   color: #2c365e;
@@ -295,7 +317,6 @@ export default {
   height: 30px;
   line-height: 20px;
   width: 100px;
-  margin-right: 10px;
 }
 .table-header__add-issue-button:hover {
   background: #2c365e;
