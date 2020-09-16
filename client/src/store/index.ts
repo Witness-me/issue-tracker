@@ -36,15 +36,5 @@ export default new Vuex.Store({
     statusDone(state) {
       return state.issues.filter(issue => issue.status === "Done");
     },
-    // Get issues by priority
-    highPriority(state) {
-      return state.issues.filter(issue => issue.priority === "High");
-    },
-    mediumPriority(state) {
-      return state.issues.filter(issue => issue.priority === "Medium");
-    },
-    lowPriority(state) {
-      return state.issues.filter(issue => issue.priority === "Low");
-    },
   },
 });

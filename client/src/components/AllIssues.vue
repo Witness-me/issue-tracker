@@ -38,7 +38,7 @@
           <th class="table__delete">Delete</th>
         </tr>
         <tr
-          v-for="issue in allIssues"
+          v-for="issue in sortedIssues"
           v-bind:key="issue._id"
           class="table__row"
         >
@@ -72,9 +72,11 @@
             <div
               class="table__status-content"
               :class="{
-                'table__status-to-do': statusToDo(issue.status),
-                'table__status-in-progress': statusInProgress(issue.status),
-                'table__status-done': statusDone(issue.status),
+                'table__status-to-do': statusToDoIssue(issue.status),
+                'table__status-in-progress': statusInProgressIssue(
+                  issue.status
+                ),
+                'table__status-done': statusDoneIssue(issue.status),
               }"
             >
               {{ issue.status }}
@@ -84,7 +86,8 @@
             class="table__priority"
             :class="{
               'table__high-priority':
-                isHighPriority(issue.priority) && !statusDone(issue.status),
+                isHighPriority(issue.priority) &&
+                !statusDoneIssue(issue.status),
             }"
           >
             {{ issue.priority }}
@@ -109,15 +112,6 @@
       :comment="comment"
       v-on:closePopup="openCommentsModal($event)"
     />
-    <div v-if="isLoading" class="spinner">
-      <vue-simple-spinner
-        :size="30"
-        :line-size="4"
-        :speed="1"
-        line-fg-color="#5B831E"
-        line-bg-color="#f1f3f8"
-      ></vue-simple-spinner>
-    </div>
   </div>
 </template>
 
@@ -142,16 +136,28 @@ export default {
     ...mapGetters([
       "allIssues",
       "issuesCount",
-      "highPriority",
-      "mediumPriority",
-      "lowPriority",
+      "statusToDo",
+      "statusInProgress",
+      "statusDone",
     ]),
     sortedIssues() {
-      return this.allIssues;
+      return this.sortIssues();
+    },
+
+    // Get issues by priority
+    highPriority(state) {
+      return this.allIssues.filter(issue => issue.priority === "High");
+    },
+    mediumPriority(state) {
+      return this.allIssues.filter(issue => issue.priority === "Medium");
+    },
+    lowPriority(state) {
+      return this.allIssues.filter(issue => issue.priority === "Low");
     },
   },
   methods: {
     ...mapActions(["getAllIssues", "deleteIssue"]),
+
     getStringFromDate(date) {
       return getStringFromDate(date);
     },
@@ -172,13 +178,13 @@ export default {
     },
 
     // Get issue status
-    statusToDo(status) {
+    statusToDoIssue(status) {
       return status === "To do";
     },
-    statusInProgress(status) {
+    statusInProgressIssue(status) {
       return status === "In progress";
     },
-    statusDone(status) {
+    statusDoneIssue(status) {
       return status === "Done";
     },
 
@@ -195,49 +201,50 @@ export default {
 
     // Implement sorting issues
     sortIssues() {
+      this.isLoading = true;
       switch (this.sortBy) {
         case "date-new-first":
-          this.sortByDateNewFirst();
-          break;
+          return this.sortByDateNewFirst();
         case "date-old-first":
-          this.sortByDateOldFirst();
-          break;
+          return this.sortByDateOldFirst();
         case "priority-high-first":
-          this.sortByDateNewFirst();
-          this.sortByPriorityHighFirst();
-          break;
+          return this.sortByPriorityHighFirst();
         case "priority-low-first":
-          console.log(2);
-          break;
+          return this.sortByPriorityLowFirst();
         case "toDo-inProgress-done":
-          console.log(2);
-          break;
+          return this.toDoInProgressDone();
         case "inProgress-toDo-done":
-          console.log(2);
-          break;
+          return this.inProgressToDoDone();
         case "done-inProgress-toDo":
-          console.log(2);
-          break;
+          return this.doneInProgressToDo();
       }
     },
     sortByDateNewFirst() {
-      this.allIssues.sort((a, b) => b.createdAt - a.createdAt);
+      return this.allIssues.sort((a, b) => b.createdAt - a.createdAt);
     },
     sortByDateOldFirst() {
-      this.allIssues.sort((a, b) => a.createdAt - b.createdAt);
+      return this.allIssues.sort((a, b) => a.createdAt - b.createdAt);
     },
     sortByPriorityHighFirst() {
-      this.allIssues = null;
-      // this.highPriority.concat(
-      //   this.mediumPriority,
-      //   this.lowPriority
-      // );
+      this.sortByDateNewFirst();
+      return this.highPriority.concat(this.mediumPriority, this.lowPriority);
     },
-  },
-  async mounted() {
-    this.isLoading = true;
-    await this.getAllIssues();
-    this.isLoading = false;
+    sortByPriorityLowFirst() {
+      this.sortByDateNewFirst();
+      return this.lowPriority.concat(this.mediumPriority, this.highPriority);
+    },
+    toDoInProgressDone() {
+      this.sortByDateNewFirst();
+      return this.statusToDo.concat(this.statusInProgress, this.statusDone);
+    },
+    inProgressToDoDone() {
+      this.sortByDateNewFirst();
+      return this.statusInProgress.concat(this.statusToDo, this.statusDone);
+    },
+    doneInProgressToDo() {
+      this.sortByDateNewFirst();
+      return this.statusDone.concat(this.statusInProgress, this.statusToDo);
+    },
   },
   components: {
     AddIssue,
