@@ -5,13 +5,15 @@
         <div>
           <h3 class="section-header__title">To do</h3>
           <div class="section-header__issues-count">
-            <p v-if="statusToDoLength === 0">
+            <p v-if="statusToDoIssuesLength === 0">
               You have not yet planned any tasks to do
             </p>
-            <p v-else-if="statusToDoLength === 1">
+            <p v-else-if="statusToDoIssuesLength === 1">
               You have 1 issue in your backlog
             </p>
-            <p v-else>You have {{ statusToDoLength }} issues in your backlog</p>
+            <p v-else>
+              You have {{ statusToDoIssuesLength }} issues in your backlog
+            </p>
           </div>
         </div>
         <img
@@ -22,7 +24,7 @@
         />
       </div>
       <div class="section-content">
-        <div class="issue" v-for="issue in statusToDo" :key="issue._id">
+        <div class="issue" v-for="issue in statusToDoIssues" :key="issue._id">
           <p class="issue__update-date">
             Last updated at: {{ getStringFromDate(issue.updatedAt) }}
           </p>
@@ -87,15 +89,15 @@
         <div>
           <h3 class="section-header__title">In progress</h3>
           <div class="section-header__issues-count">
-            <p v-if="statusInProgressLength === 0">
+            <p v-if="statusInProgressIssuesLength === 0">
               High time to start working!
             </p>
-            <p v-else-if="statusInProgressLength === 1">
+            <p v-else-if="statusInProgressIssuesLength === 1">
               Сurrently working on 1 issue
             </p>
             <p v-else>
               Currently working on
-              {{ statusInProgressLength }} issues
+              {{ statusInProgressIssuesLength }} issues
             </p>
           </div>
         </div>
@@ -107,7 +109,11 @@
         />
       </div>
       <div class="section-content">
-        <div class="issue" v-for="issue in statusInProgress" :key="issue._id">
+        <div
+          class="issue"
+          v-for="issue in statusInProgressIssues"
+          :key="issue._id"
+        >
           <p class="issue__update-date">
             Last updated at: {{ getStringFromDate(issue.updatedAt) }}
           </p>
@@ -165,13 +171,15 @@
         <div>
           <h3 class="section-header__title">Done</h3>
           <div class="section-header__issues-count">
-            <p v-if="statusDoneLength === 0">
+            <p v-if="statusDoneIssuesLength === 0">
               You have not yet finished any tasks...
             </p>
-            <p v-else-if="statusDoneLength === 1">
+            <p v-else-if="statusDoneIssuesLength === 1">
               You have finished 1 task!
             </p>
-            <p v-else>{{ statusDoneLength }} tasks finished. Keep it up!</p>
+            <p v-else>
+              {{ statusDoneIssuesLength }} tasks finished. Keep it up!
+            </p>
           </div>
         </div>
         <img
@@ -182,7 +190,7 @@
         />
       </div>
       <div class="section-content">
-        <div class="issue" v-for="issue in statusDone" :key="issue._id">
+        <div class="issue" v-for="issue in statusDoneIssues" :key="issue._id">
           <p class="issue__update-date">
             Last updated at: {{ getStringFromDate(issue.updatedAt) }}
           </p>
@@ -192,8 +200,8 @@
           </p>
           <div class="issue__last-line-container">
             <div class="issue__priority">
-              <span>Priority:</span>
-              <span>
+              <!--<span>Priority:</span>
+               <span>
                 <svg class="issue__priority-circle" height="8" width="8">
                   <circle
                     v-if="issue.priority === 'High'"
@@ -217,7 +225,7 @@
                     fill="#37D000"
                   />
                 </svg>
-              </span>
+              </span> -->
             </div>
             <div class="issue__icons-container">
               <img
@@ -277,38 +285,33 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["allIssues"]),
-    statusToDo() {
-      const todoIssues = this.allIssues.filter(
-        issue => issue.status === "To do"
-      );
-      this.sortByUpdateTime(todoIssues);
+    ...mapGetters([
+      "allIssues",
+      "statusToDo",
+      "statusInProgress",
+      "statusDone",
+    ]),
+    statusToDoIssues() {
+      const todoIssues = this.sortByUpdateTime(this.statusToDo);
       return this.sortByPriority(todoIssues);
     },
-
-    statusToDoLength() {
-      return this.statusToDo.length;
+    statusToDoIssuesLength() {
+      return this.statusToDoIssues.length;
     },
 
-    statusInProgress() {
-      const issuesInProgress = this.allIssues.filter(
-        issue => issue.status === "In progress"
-      );
-      this.sortByUpdateTime(issuesInProgress);
+    statusInProgressIssues() {
+      const issuesInProgress = this.sortByUpdateTime(this.statusInProgress);
       return this.sortByPriority(issuesInProgress);
     },
-    statusInProgressLength() {
-      return this.statusInProgress.length;
+    statusInProgressIssuesLength() {
+      return this.statusInProgressIssues.length;
     },
 
-    statusDone() {
-      const issuesDone = this.allIssues.filter(
-        issue => issue.status === "Done"
-      );
-      return this.sortByUpdateTime(issuesDone);
+    statusDoneIssues() {
+      return this.sortByUpdateTime(this.statusDone);
     },
-    statusDoneLength() {
-      return this.statusDone.length;
+    statusDoneIssuesLength() {
+      return this.statusDoneIssues.length;
     },
   },
   methods: {

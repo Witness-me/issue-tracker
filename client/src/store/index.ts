@@ -26,5 +26,25 @@ export default new Vuex.Store({
     issuesCount(state) {
       return state.issues.length;
     },
+    // Get issues by status
+    statusToDo(state) {
+      return state.issues.filter(issue => issue.status === "To do");
+    },
+    statusInProgress(state) {
+      return state.issues.filter(issue => issue.status === "In progress");
+    },
+    statusDone(state) {
+      return state.issues.filter(issue => issue.status === "Done");
+    },
+    // Get issues by priority
+    highPriority(state) {
+      return state.issues.filter(issue => issue.priority === "High");
+    },
+    mediumPriority(state) {
+      return state.issues.filter(issue => issue.priority === "Medium");
+    },
+    lowPriority(state) {
+      return state.issues.filter(issue => issue.priority === "Low");
+    },
   },
 });

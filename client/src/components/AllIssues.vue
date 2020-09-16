@@ -5,6 +5,24 @@
         <p class="table-header__counter">
           {{ `You currently have ${issuesCount} issues in total` }}
         </p>
+        <div class="table-header__sorting-container">
+          <p>Sort by:</p>
+          <select v-model="sortBy" @change="sortIssues()" class="">
+            <option value="date-new-first">Date (Newest first)</option>
+            <option value="date-old-first">Date (Oldest first)</option>
+            <option value="priority-high-first">Priority (High to low)</option>
+            <option value="priority-low-first">Priority (Low to high)</option>
+            <option value="toDo-inProgress-done"
+              >Status (To do &#8680; In progress &#8680; Done)
+            </option>
+            <option value="inProgress-toDo-done"
+              >Status (In progress &#8680; To do &#8680; Done)
+            </option>
+            <option value="done-inProgress-toDo"
+              >Status (Done &#10140; In progress &#10140; To do)
+            </option>
+          </select>
+        </div>
         <button @click="popupAddIssue()" class="table-header__add-issue-button">
           Submit issue
         </button>
@@ -117,14 +135,28 @@ export default {
       commentsAreVisible: false,
       comment: "",
       isLoading: false,
+      sortBy: "date-new-first",
     };
   },
-  computed: mapGetters(["allIssues", "issuesCount"]),
+  computed: {
+    ...mapGetters([
+      "allIssues",
+      "issuesCount",
+      "highPriority",
+      "mediumPriority",
+      "lowPriority",
+    ]),
+    sortedIssues() {
+      return this.allIssues;
+    },
+  },
   methods: {
     ...mapActions(["getAllIssues", "deleteIssue"]),
     getStringFromDate(date) {
       return getStringFromDate(date);
     },
+
+    // Modal windows
     popupAddIssue() {
       this.addIssueIsVisible = !this.addIssueIsVisible;
     },
@@ -139,7 +171,7 @@ export default {
       this.commentsAreVisible = !this.commentsAreVisible;
     },
 
-    // Issue status
+    // Get issue status
     statusToDo(status) {
       return status === "To do";
     },
@@ -153,15 +185,53 @@ export default {
     async moveToDone(issue) {
       issue.status = "Done";
       await api.editIssue(issue);
-      // await this.$store.dispatch("getAllIssues");
+      await this.$store.dispatch("getAllIssues");
     },
 
-    // Issue priority
+    // Get issue priority (for bold text)
     isHighPriority(priority) {
       return priority === "High";
     },
-    isLowPriority(priority) {
-      return priority === "Low";
+
+    // Implement sorting issues
+    sortIssues() {
+      switch (this.sortBy) {
+        case "date-new-first":
+          this.sortByDateNewFirst();
+          break;
+        case "date-old-first":
+          this.sortByDateOldFirst();
+          break;
+        case "priority-high-first":
+          this.sortByDateNewFirst();
+          this.sortByPriorityHighFirst();
+          break;
+        case "priority-low-first":
+          console.log(2);
+          break;
+        case "toDo-inProgress-done":
+          console.log(2);
+          break;
+        case "inProgress-toDo-done":
+          console.log(2);
+          break;
+        case "done-inProgress-toDo":
+          console.log(2);
+          break;
+      }
+    },
+    sortByDateNewFirst() {
+      this.allIssues.sort((a, b) => b.createdAt - a.createdAt);
+    },
+    sortByDateOldFirst() {
+      this.allIssues.sort((a, b) => a.createdAt - b.createdAt);
+    },
+    sortByPriorityHighFirst() {
+      this.allIssues = null;
+      // this.highPriority.concat(
+      //   this.mediumPriority,
+      //   this.lowPriority
+      // );
     },
   },
   async mounted() {
