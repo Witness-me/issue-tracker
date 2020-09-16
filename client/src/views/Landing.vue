@@ -97,7 +97,7 @@ export default {
   height: 300px;
   padding: 30px 40px;
   font-weight: 500;
-  margin-bottom: 625px;
+  margin-bottom: 475px;
 }
 .landing__title {
   font-size: 34px;
@@ -146,7 +146,7 @@ export default {
   /* width: 410px; */
   padding: 0;
   margin-right: 5px;
-  border: 2px solid #2c365e;
+  border: 1px solid #2c365e;
   border-radius: 5px;
 }
 .slider__screenshot {
