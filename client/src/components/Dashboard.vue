@@ -33,31 +33,21 @@
           <div class="issue__last-line-container">
             <div class="issue__priority">
               <span>Priority:</span>
-              <span>
-                <svg class="issue__priority-circle" height="8" width="8">
-                  <circle
-                    v-if="issue.priority === 'High'"
-                    cx="4"
-                    cy="4"
-                    r="4"
-                    fill="#F52416"
-                  />
-                  <circle
-                    v-if="issue.priority === 'Medium'"
-                    cx="4"
-                    cy="4"
-                    r="4"
-                    fill="#EBBC00"
-                  />
-                  <circle
-                    v-if="issue.priority === 'Low'"
-                    cx="4"
-                    cy="4"
-                    r="4"
-                    fill="#37D000"
-                  />
-                </svg>
-              </span>
+              <span
+                v-if="issue.priority === 'High'"
+                class="issue__priority-status issue__priority-status_high"
+                >High</span
+              >
+              <span
+                v-else-if="issue.priority === 'Medium'"
+                class="issue__priority-status issue__priority-status_medium"
+                >Medium</span
+              >
+              <span
+                v-else
+                class="issue__priority-status issue__priority-status_low"
+                >Low</span
+              >
             </div>
             <div class="issue__icons-container">
               <img
@@ -128,31 +118,21 @@
           <div class="issue__last-line-container">
             <div class="issue__priority">
               <span>Priority:</span>
-              <span>
-                <svg class="issue__priority-circle" height="8" width="8">
-                  <circle
-                    v-if="issue.priority === 'High'"
-                    cx="4"
-                    cy="4"
-                    r="4"
-                    fill="#F52416"
-                  />
-                  <circle
-                    v-if="issue.priority === 'Medium'"
-                    cx="4"
-                    cy="4"
-                    r="4"
-                    fill="#EBBC00"
-                  />
-                  <circle
-                    v-if="issue.priority === 'Low'"
-                    cx="4"
-                    cy="4"
-                    r="4"
-                    fill="#37D000"
-                  />
-                </svg>
-              </span>
+              <span
+                v-if="issue.priority === 'High'"
+                class="issue__priority-status issue__priority-status_high"
+                >High</span
+              >
+              <span
+                v-else-if="issue.priority === 'Medium'"
+                class="issue__priority-status issue__priority-status_medium"
+                >Medium</span
+              >
+              <span
+                v-else
+                class="issue__priority-status issue__priority-status_low"
+                >Low</span
+              >
             </div>
             <div class="issue__icons-container">
               <img
@@ -505,23 +485,41 @@ export default {
   line-height: 17px;
   display: inline-block;
 }
+.issue__priority-status {
+  padding: 1px 5px;
+  margin-left: 3px;
+  border-radius: 3px;
+}
 .issue__priority-circle {
   margin: auto 3px;
 }
+.issue__priority-status_high {
+  background: #fd3b2e;
+  font-weight: 500;
+}
+.issue__priority-status_medium {
+  background: #ebbc00;
+}
+.issue__priority-status_low {
+  background: #a4d166;
+}
+
 .issue__icons-container {
   display: flex;
 }
 .issue__modify-icon {
   box-sizing: border-box;
   padding: 0;
-  margin: 1px 5px;
+  margin: 1px 9px;
+  margin-right: 1px;
   height: 15px;
   width: 15px;
 }
 .issue__modify-icon:hover {
   height: 17px;
   width: 17px;
-  margin: 0 4px;
+  margin: 0 8px;
+  margin-right: 0;
   cursor: pointer;
 }
 
