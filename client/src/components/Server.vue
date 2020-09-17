@@ -2,7 +2,7 @@
   <div>
     <div class="navbar-wrapper">
       <router-link to="/home">
-        <img class="navbar__logo" src="../assets/img/bug.png" />
+        <img class="navbar__logo" src="../assets/icons/bug.png" />
       </router-link>
 
       <div class="navbar__right-pannel">

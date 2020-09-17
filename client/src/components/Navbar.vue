@@ -1,6 +1,6 @@
 <template>
   <div class="navbar-wrapper">
-    <img class="navbar__logo" src="../assets/img/bug.png" />
+    <img class="navbar__logo" src="../assets/icons/bug.png" />
     <button class="navbar__button" @click="switchTab('Dashboard')">
       Dashboard
     </button>

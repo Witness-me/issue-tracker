@@ -4,7 +4,7 @@
       <div class="modal delete-issue-modal" @click.stop>
         <img
           class="modal__close-icon"
-          src="../assets/img/close.png"
+          src="../assets/icons/close.png"
           alt="Close"
           @click="closePopup"
         />

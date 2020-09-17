@@ -25,16 +25,15 @@
             :speed="1000"
           >
             <Slide>
-              <!-- <img src="../assets/landing/AllIssues.png" alt="" /> -->
               <img
-                src="../assets/img/landing/Dashboard.png"
+                src="../assets/landing/Dashboard.png"
                 alt
                 class="slider__screenshot"
               />
             </Slide>
             <Slide>
               <img
-                src="../assets/img/landing/AllIssues.png"
+                src="../assets/landing/AllIssues.png"
                 alt
                 class="slider__screenshot"
               />
@@ -101,8 +100,6 @@ export default {
 }
 .landing__title {
   font-size: 34px;
-  /* font-weight: 500; */
-  /* padding-bottom: 20px; */
 }
 .landing__title_small {
   font-size: 22px;

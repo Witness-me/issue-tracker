@@ -46,6 +46,10 @@ export function getTokenExpirationDate(encodedToken: string) {
   return date;
 }
 
+export function getAccessToken() {
+  return localStorage.getItem(ACCESS_TOKEN_KEY);
+}
+
 export function isTokenExpired(token: string) {
   // const decodedToken = decode(token);
   // if (!decodedToken.exp) return true;
@@ -62,7 +66,7 @@ export function isTokenExpired(token: string) {
 
 export function isLoggedIn() {
   const idToken = getIdToken();
-  return !!idToken && !isTokenExpired(idToken);
+  return !!idToken && !isTokenExpired(getAccessToken());
 }
 
 export function requireAuth(to: any, from: any, next: any) {
@@ -74,10 +78,6 @@ export function requireAuth(to: any, from: any, next: any) {
   } else {
     next();
   }
-}
-
-export function getAccessToken() {
-  return localStorage.getItem(ACCESS_TOKEN_KEY);
 }
 
 function clearIdToken() {

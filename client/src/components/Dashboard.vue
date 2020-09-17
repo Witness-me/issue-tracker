@@ -17,7 +17,7 @@
           </div>
         </div>
         <img
-          src="../assets/img/plus.png"
+          src="../assets/icons/plus.png"
           class="section-header__add-issue-button"
           @click="openAddModal('To do')"
           alt="Add issue"
@@ -54,26 +54,26 @@
             <div class="issue__icons-container">
               <img
                 class="issue__modify-icon"
-                src="../assets/img/marker.png"
+                src="../assets/icons/marker.png"
                 alt="Edit"
                 @click="openEditModal(issue)"
               />
               <img
                 class="issue__modify-icon"
-                src="../assets/img/delete.png"
+                src="../assets/icons/delete.png"
                 alt="Delete"
                 @click="openDeleteModal(issue)"
               />
               <img
                 class="issue__modify-icon"
-                src="../assets/img/next.png"
+                src="../assets/icons/next.png"
                 alt="Move to current"
                 title="Move to current"
                 @click="moveToInProgress(issue)"
               />
               <img
                 class="issue__modify-icon"
-                src="../assets/img/tick.png"
+                src="../assets/icons/tick.png"
                 alt="Mark as done"
                 title="Mark as done"
                 @click="moveToDone(issue)"
@@ -102,7 +102,7 @@
           </div>
         </div>
         <img
-          src="../assets/img/plus.png"
+          src="../assets/icons/plus.png"
           class="section-header__add-issue-button"
           @click="openAddModal('In progress')"
           alt="Delete"
@@ -143,19 +143,19 @@
             <div class="issue__icons-container">
               <img
                 class="issue__modify-icon"
-                src="../assets/img/marker.png"
+                src="../assets/icons/marker.png"
                 alt="Edit"
                 @click="openEditModal(issue)"
               />
               <img
                 class="issue__modify-icon"
-                src="../assets/img/delete.png"
+                src="../assets/icons/delete.png"
                 alt="Delete"
                 @click="openDeleteModal(issue)"
               />
               <img
                 class="issue__modify-icon"
-                src="../assets/img/tick.png"
+                src="../assets/icons/tick.png"
                 alt="Mark as done"
                 title="Mark as done"
                 @click="moveToDone(issue)"
@@ -183,7 +183,7 @@
           </div>
         </div>
         <img
-          src="../assets/img/plus.png"
+          src="../assets/icons/plus.png"
           class="section-header__add-issue-button"
           @click="openAddModal('Done')"
           alt="Add issue"
@@ -230,13 +230,13 @@
             <div class="issue__icons-container">
               <img
                 class="issue__modify-icon"
-                src="../assets/img/marker.png"
+                src="../assets/icons/marker.png"
                 alt="Edit"
                 @click="openEditModal(issue)"
               />
               <img
                 class="issue__modify-icon"
-                src="../assets/img/delete.png"
+                src="../assets/icons/delete.png"
                 alt="Delete"
                 @click="openDeleteModal(issue)"
               />
@@ -263,12 +263,13 @@
 </template>
 
 <script>
-// import {
-//   isLoggedIn,
-//   getIdToken,
-//   getTokenExpirationDate,
-//   isTokenExpired,
-// } from "../utils/auth";
+import {
+  isLoggedIn,
+  getIdToken,
+  getAccessToken,
+  getTokenExpirationDate,
+  isTokenExpired,
+} from "../utils/auth";
 import { getStringFromDate } from "../utils/dates";
 import { mapGetters, mapActions } from "vuex";
 import AddIssue from "./AddIssue.vue";
@@ -361,7 +362,7 @@ export default {
   },
   async mounted() {
     this.isLoading = true;
-
+    console.log(getAccessToken());
     // console.log(isLoggedIn());
     // console.log("isTokenExpired", isTokenExpired(this.token));
     // console.log(getTokenExpirationDate(this.token));

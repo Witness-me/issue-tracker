@@ -23,7 +23,7 @@
                 >Status (To do &#8680; In progress &#8680; Done)
               </option>
               <option value="inProgress-toDo-done"
-                >Status (In progress &#8680; To do &#8680; Done)
+                >Status (In progress &#10140; To do &#10140; Done)
               </option>
               <option value="done-inProgress-toDo"
                 >Status (Done &#10140; In progress &#10140; To do)
@@ -57,7 +57,7 @@
             <img
               v-if="issue.comments"
               class="table__icon"
-              src="../assets/img/comments.png"
+              src="../assets/icons/comments.png"
               alt="See comments"
               title="See comments"
               @click="openCommentsModal(issue.comments)"
@@ -67,7 +67,7 @@
             <img
               v-if="issue.status !== 'Done'"
               class="table__icon"
-              src="../assets/img/tick2.png"
+              src="../assets/icons/tick2.png"
               alt="Mark as done"
               title="Mark as done"
               @click="moveToDone(issue)"
@@ -103,7 +103,7 @@
           <td class="table__delete">
             <img
               class="table__icon"
-              src="../assets/img/delete.png"
+              src="../assets/icons/delete.png"
               alt="Delete"
               @click="openDeleteModal(issue)"
             />
@@ -300,12 +300,14 @@ export default {
   font-weight: 500;
 }
 .table-header__sorting-issues {
-  height: 27px;
+  height: 30px;
   width: 300px;
   font-size: 14px;
   font-weight: 500;
   background: #d9dff3;
-  border-radius: 1px;
+  border-radius: 2px;
+  margin-left: 5px;
+  padding: 5px;
 }
 
 .table-header__add-issue-button {
@@ -317,6 +319,7 @@ export default {
   height: 30px;
   line-height: 20px;
   width: 100px;
+  border-radius: 2px;
 }
 .table-header__add-issue-button:hover {
   background: #2c365e;
