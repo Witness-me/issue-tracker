@@ -1,5 +1,4 @@
 import * as mongoose from "mongoose";
-import { Request } from "express";
 const Schema = mongoose.Schema;
 
 // Create Issue schema
@@ -14,14 +13,7 @@ const issueSchema = new Schema({
 });
 const Issue = mongoose.model("issue", issueSchema);
 
-// Get all issues
-// export async function getAllIssues() {
-//   console.log("getting all issues...");
-//   const AllIssues = await Issue.find({});
-//   return AllIssues;
-// }
-
-// Find issues by parameter
+// Find issues for the current user
 export async function getIssues(query: object) {
   console.log("getting issues for user...");
   const issueFound = await Issue.find(query);
@@ -30,8 +22,8 @@ export async function getIssues(query: object) {
 
 // Add issue
 export async function addIssue(issue: any) {
-  console.log("adding issues...");
-  let entry = await new Issue({
+  console.log("adding issue...");
+  await new Issue({
     title: issue.title,
     status: issue.status,
     createdAt: new Date(),
@@ -40,7 +32,6 @@ export async function addIssue(issue: any) {
     priority: issue.priority,
     userId: issue.userId,
   }).save();
-  return entry;
 }
 
 // Update issue
@@ -49,8 +40,7 @@ export async function updateIssue(issues: any) {
   const filter = { _id: issues._id };
   const update = issues;
   update.updatedAt = new Date();
-  const result = await Issue.findOneAndUpdate(filter, update);
-  if (!result) throw new Error(`Failed to find or update message`);
+  await Issue.findOneAndUpdate(filter, update);
 }
 
 // Delete issue

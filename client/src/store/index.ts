@@ -15,7 +15,7 @@ export default new Vuex.Store({
   },
   actions: {
     async getAllIssues(ctx) {
-      const issues = await api.getIssues({});
+      const issues = await api.getIssues();
       ctx.commit("updateIssues", issues);
     },
   },
@@ -26,6 +26,7 @@ export default new Vuex.Store({
     issuesCount(state) {
       return state.issues.length;
     },
+
     // Get issues by status
     statusToDo(state) {
       return state.issues.filter(issue => issue.status === "To do");

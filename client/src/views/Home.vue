@@ -21,6 +21,7 @@
 </template>
 
 <script>
+require("dotenv").config();
 import Navbar from "../components/Navbar.vue";
 import AllIssues from "../components/AllIssues.vue";
 import Dashboard from "../components/Dashboard.vue";

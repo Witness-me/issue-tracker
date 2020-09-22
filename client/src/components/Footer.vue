@@ -1,19 +1,19 @@
 <template>
   <div class="footer">
-    <a href="mailto:vladislavnikolaenko@gmail.com">
+    <a href="mailto:vladislavnikolaenko@gmail.com" target="_blank">
       <img
         class="footer__contact-icon"
         src="https://img.icons8.com/fluent-systems-regular/48/000000/email.png"
       />
     </a>
 
-    <a href="https://github.com/winess-me">
+    <a href="https://github.com/winess-me" target="_blank">
       <img
         class="footer__contact-icon"
         src="https://img.icons8.com/material-outlined/48/000000/github.png"
       />
     </a>
-    <a href="https://t.me/witness_me">
+    <a href="https://t.me/witness_me" target="_blank">
       <img
         class="footer__contact-icon"
         src="https://img.icons8.com/ios/50/000000/telegram-app.png"

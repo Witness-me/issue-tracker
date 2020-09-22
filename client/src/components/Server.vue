@@ -30,7 +30,6 @@
 import { mapGetters, mapActions } from "vuex";
 export default {
   name: "Server",
-
   computed: mapGetters(["allIssues"]),
   methods: mapActions(["getAllIssues"]),
   async mounted() {
@@ -45,6 +44,8 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+  background: #f1f3f8;
+  margin-bottom: 20px;
 }
 .server-data__title {
   font-size: 15px;
@@ -54,6 +55,6 @@ export default {
 }
 .server-data__issue {
   font-size: 12px;
-  margin-bottom: 7px;
+  margin: 5px 10px;
 }
 </style>

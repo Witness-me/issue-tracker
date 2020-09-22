@@ -3,6 +3,3 @@ export function getStringFromDate(date: Date) {
     date.getMonth() + 1 < 10 ? `0${date.getMonth() + 1}` : date.getMonth() + 1
   }/${date.getFullYear()}`;
 }
-// export function getToday() {
-//   return getStringFromDate(new Date());
-// }

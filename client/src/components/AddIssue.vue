@@ -66,7 +66,7 @@
             <option value="Low">Low</option>
           </select>
         </div>
-        <!-- buttons -->
+        <!-- button -->
         <button class="modal__submit-button" @click="addIssue">Add</button>
       </div>
     </div>

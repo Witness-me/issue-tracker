@@ -68,7 +68,7 @@
               <option value="Low">Low</option>
             </select>
           </div>
-          <!-- buttons -->
+          <!-- button -->
           <button class="modal__submit-button" @click="editIssue">Edit</button>
         </div>
       </div>
@@ -99,7 +99,6 @@ export default {
       leave(el, done);
     },
   },
-
   props: ["issue"],
 };
 </script>

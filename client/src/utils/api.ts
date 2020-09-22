@@ -1,29 +1,14 @@
-// import request from "request";
 import { getAccessToken, getUserId } from "./auth";
 
 const axios = require("axios").create({
   baseURL: process.env.VUE_APP_API,
 });
 
-// // before a request is made start the nprogress
-// axios.interceptors.request.use(config => {
-//   NProgress.start();
-//   return config;
-// });
-
-// // before a response is returned stop nprogress
-// axios.interceptors.response.use(response => {
-//   NProgress.done();
-//   return response;
-// });
-
 // Get issues
-export async function getIssues(query: object) {
-  const result = await axios.get(
-    "/home",
-    { headers: { Authorization: `Bearer ${getAccessToken()}` } },
-    query
-  );
+export async function getIssues() {
+  const result = await axios.get("/home", {
+    headers: { Authorization: `Bearer ${getAccessToken()}` },
+  });
   const data = result.data;
   const issues = data.map((issue: any) => ({
     ...issue,

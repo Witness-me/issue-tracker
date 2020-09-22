@@ -4,15 +4,8 @@
   </div>
 </template>
 
-<script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
-import Home from "./views/Home.vue";
-
-@Component({
-  components: {
-    Home,
-  },
-})
+<script>
+import { Vue } from "vue-property-decorator";
 export default class App extends Vue {}
 </script>
 
@@ -28,12 +21,7 @@ body {
   -moz-box-sizing: border-box;
   box-sizing: border-box;
   background: #f1f3f8;
-  color: #303030;
   margin: 0;
-  height: 100%;
-  min-height: 100%;
-  min-height: 100vh;
-  min-width: 780px;
   overflow-wrap: break-word;
   word-break: break-word;
 }

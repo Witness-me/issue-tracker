@@ -19,10 +19,10 @@
             :perPage="1"
             :centerMode="true"
             :autoplay="true"
-            :autoplayTimeout="4000"
+            :autoplayTimeout="5000"
             :loop="true"
             :paginationEnabled="false"
-            :speed="1000"
+            :speed="1500"
           >
             <Slide>
               <img
@@ -71,14 +71,7 @@ export default {
   height: 100%;
   min-width: 930px;
   box-sizing: border-box;
-  /* background: #fff4b3; */
-  /* background: #fdf9de; */
   background: #fff;
-
-  /* background: #e3e2e6; */
-
-  /* background-size: 10px 10px;
-  background-image: radial-gradient(circle, #000000 0px, rgba(0, 0, 0, 0) 1px); */
 }
 .landing {
   position: relative;
@@ -140,7 +133,6 @@ export default {
   min-width: 500px;
   max-width: 1000px;
   background: #f1f3f8;
-  /* width: 410px; */
   padding: 0;
   margin-right: 5px;
   border: 1px solid #2c365e;
@@ -151,14 +143,6 @@ export default {
   margin: 0;
   width: 100%;
   height: 100%;
-  /* border: 2px solid #4d4ee3; */
-
-  /* border-bottom: 1px solid rgb(143, 143, 143); */
   border-radius: 3px;
-  /* min-width: 500px;
-  max-width: 900px; */
-  /* width: 600px; */
-  /* height: 300px; */
-  /* width: auto; */
 }
 </style>

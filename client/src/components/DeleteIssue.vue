@@ -9,11 +9,9 @@
           @click="closePopup"
         />
         <h1 class="modal__title">Delete issue</h1>
-        <!-- input form -->
         <div class="modal__content">
           <p>Are you sure that you want to permanently delete the issue?</p>
           <p>This cannot be undone.</p>
-          <!-- button -->
         </div>
         <button class="modal__submit-button" @click="deleteIssue">
           Delete
@@ -49,7 +47,6 @@ export default {
 };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .delete-issue-modal {
   height: 250px;

@@ -200,7 +200,7 @@
           </p>
           <div class="issue__last-line-container">
             <div class="issue__priority">
-              <!-- <span>Priority:</span>
+              <span>Priority:</span>
               <span>
                 <svg class="issue__priority-circle" height="8" width="8">
                   <circle
@@ -208,24 +208,24 @@
                     cx="4"
                     cy="4"
                     r="4"
-                    fill="#F52416"
+                    fill="#ff5044"
                   />
                   <circle
                     v-if="issue.priority === 'Medium'"
                     cx="4"
                     cy="4"
                     r="4"
-                    fill="#EBBC00"
+                    fill="#fac801"
                   />
                   <circle
                     v-if="issue.priority === 'Low'"
                     cx="4"
                     cy="4"
                     r="4"
-                    fill="#37D000"
+                    fill="#a4d166"
                   />
                 </svg>
-              </span> -->
+              </span>
             </div>
             <div class="issue__icons-container">
               <img
@@ -263,13 +263,6 @@
 </template>
 
 <script>
-import {
-  isLoggedIn,
-  getIdToken,
-  getAccessToken,
-  getTokenExpirationDate,
-  isTokenExpired,
-} from "../utils/auth";
 import { getStringFromDate } from "../utils/dates";
 import { mapGetters, mapActions } from "vuex";
 import AddIssue from "./AddIssue.vue";
@@ -281,8 +274,6 @@ export default {
       addIssueIsVisible: false,
       newIssueStatus: "To do",
       isLoading: false,
-      // token:
-      //   "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Il9HTld3TkE2LXpDcy1YcmJhWHlGMiJ9.eyJpc3MiOiJodHRwczovL3dpdG5lc3MtbWUuZXUuYXV0aDAuY29tLyIsInN1YiI6Imdvb2dsZS1vYXV0aDJ8MTA1NzM0NjkzMDA3NDkyMzI0NjA4IiwiYXVkIjoiRncyWkVsN0g2NkF2S2Zyd1FFMUUyMExka2RsMFJvMXUiLCJpYXQiOjE2MDAwNjY0OTgsImV4cCI6MTYwMDEwMjQ5OCwiYXRfaGFzaCI6InJNLVVsY0EtOUZ4ajNlNDlYMG5tR2ciLCJub25jZSI6IjRFUlppTTFqcUpGeHlBbDRsSm81dTVTMm5vOXBCSU5VIn0.Am2x2pj8wg4fphQ7ZP7VAMotGY4n-VnVxE8p3FrkXvSZEaGurWbNCYFjN-4epryPPhdi9eNsIJcsfzGGWvlfu79rY2C2dKJ90u4j7Yu7IwN8fI98_lmevKq3E6V9iAohJsu6Z_BdrY5qQtxGeIEnomKjuuUQuLtt-o6bIxF59ieZHIC9GknxGbi8RG5tG9PvYEneNJbwoImwSLzm8DvmMUo2W_bqXX2gecjot0LdQ8ZGBCs5Z8XU4Rt4TIboARaVt7gGziKcfWnvMpErts5DQZ-F19esFCC0qxRThX0wKBRF5FgX0iYmpjUN0TB9gLp9hpDDNCDG52o40mSeYqEvDg",
     };
   },
   computed: {
@@ -318,12 +309,11 @@ export default {
   methods: {
     ...mapActions(["getAllIssues", "deleteIssue"]),
 
-    // date
     getStringFromDate(date) {
       return getStringFromDate(date);
     },
 
-    // opening modals
+    // Modals
     openAddModal(status = "To do") {
       this.newIssueStatus = status;
       this.popupAddIssue();
@@ -338,7 +328,7 @@ export default {
       this.$emit("openEditModal", issue);
     },
 
-    // move to different section
+    // Move to different section (alter status)
     async moveToInProgress(issue) {
       issue.status = "In progress";
       await api.editIssue(issue);
@@ -349,7 +339,8 @@ export default {
       await api.editIssue(issue);
       await this.$store.dispatch("getAllIssues");
     },
-    // sorting
+
+    // Sorting issues
     sortByPriority(array) {
       const highPriority = array.filter(issue => issue.priority === "High");
       const mediumPriority = array.filter(issue => issue.priority === "Medium");
@@ -362,21 +353,6 @@ export default {
   },
   async mounted() {
     this.isLoading = true;
-    console.log(getAccessToken());
-    // console.log(isLoggedIn());
-    // console.log("isTokenExpired", isTokenExpired(this.token));
-    // console.log(getTokenExpirationDate(this.token));
-    // const date = new Date(0);
-    // console.log(date);
-    // console.log(date.setUTCSeconds(1600073698));
-
-    // const tokenExpTime = 1600073698;
-    // console.log(tokenExpTime * 1000);
-
-    // const date = new Date();
-    // const currentTimestamp = date.setUTCSeconds(0);
-    // console.log(currentTimestamp);
-
     await this.getAllIssues();
     this.isLoading = false;
   },
@@ -443,11 +419,12 @@ export default {
   max-height: calc(100vh - 140px);
   overflow-y: auto;
   color: #303030;
-  /* sroll bars design (firefox) */
+  /* Sroll bars design (firefox) */
   scrollbar-width: thin;
   scrollbar-color: #bbcde5 transparent;
 }
-/* sroll bars design (webkit) */
+
+/* Sroll bars design (webkit) */
 .section-content::-webkit-scrollbar {
   width: 7px;
 }
@@ -456,7 +433,7 @@ export default {
   border-radius: 10px;
 }
 
-/* points styles */
+/* Points styles */
 .issue {
   border-radius: 3px;
   background: #f5f7f8;
@@ -502,7 +479,7 @@ export default {
   font-weight: 500;
 }
 .issue__priority-status_medium {
-  background: #ffd632;
+  background: #fac801;
 }
 .issue__priority-status_low {
   background: #a4d166;

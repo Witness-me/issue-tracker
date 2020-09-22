@@ -23,10 +23,10 @@
                 >Status (To do &#8680; In progress &#8680; Done)
               </option>
               <option value="inProgress-toDo-done"
-                >Status (In progress &#10140; To do &#10140; Done)
+                >Status (In progress &#8680; To do &#8680; Done)
               </option>
               <option value="done-inProgress-toDo"
-                >Status (Done &#10140; In progress &#10140; To do)
+                >Status (Done &#8680; In progress &#8680; To do)
               </option>
             </select>
           </div>
@@ -136,7 +136,6 @@ export default {
       addIssueIsVisible: false,
       commentsAreVisible: false,
       comment: "",
-      isLoading: false,
       sortBy: "date-new-first",
     };
   },
@@ -209,7 +208,6 @@ export default {
 
     // Implement sorting issues
     sortIssues() {
-      this.isLoading = true;
       switch (this.sortBy) {
         case "date-new-first":
           return this.sortByDateNewFirst();
@@ -261,7 +259,6 @@ export default {
 };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .allissues-wrapper {
   width: 100%;
@@ -327,7 +324,6 @@ export default {
   cursor: pointer;
 }
 
-/* table styles */
 .table {
   width: 100%;
   color: #303030;
@@ -349,7 +345,6 @@ export default {
   font-weight: 500;
 }
 
-/* table columns styles */
 .table__title {
   min-width: 370px;
   max-width: 800px;
