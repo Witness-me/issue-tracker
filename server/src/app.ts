@@ -4,10 +4,11 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const routes = require("./controllers/issues");
+const history = require("connect-history-api-fallback");
 import { connectDb } from "./models";
 
 const app = express();
-
+app.use(history());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
@@ -19,5 +20,9 @@ connectDb().then(async () => {
     console.log("server running on port " + port);
   });
 });
+
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(__dirname));
+}
 
 app.use("/api", routes);

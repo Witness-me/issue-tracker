@@ -6,7 +6,7 @@ const ACCESS_TOKEN_KEY = "access_token";
 
 const CLIENT_ID = "Fw2ZEl7H66AvKfrwQE1E20Ldkdl0Ro1u";
 const CLIENT_AUTH0_DOMAIN = "witness-me.eu.auth0.com";
-const VUE_APP_DOMAINURL = "http://localhost:8080";
+const VUE_APP_DOMAINURL = "https://issue-tracker-wm.herokuapp.com";
 const REDIRECT = VUE_APP_DOMAINURL + "/callback";
 const SCOPE = "user";
 const AUDIENCE = "issue-tracker";
