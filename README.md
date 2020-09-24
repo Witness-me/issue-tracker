@@ -2,7 +2,7 @@
 
 This app is my personal programming project that helped me learn new technologies and demonstrate my skills as a developer.  
 
-Its functionality includes adding, editing and deleting entries as well as categorising and sorting them. Just try it yourself and get the first-hand experience - it is availible [here](https://issue-tracker-wm.herokuapp.com). 
+Its functionality includes adding, editing and deleting entries as well as categorizing and sorting them. Just try it yourself and get the first-hand experience - it is availible [here](https://issue-tracker-wm.herokuapp.com). 
 
 ### The list of technologies used for development includes:
 
